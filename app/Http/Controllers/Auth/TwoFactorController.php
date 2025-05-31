@@ -14,7 +14,7 @@ class TwoFactorController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        // Middleware is defined in routes/web.php
     }
 
     /**

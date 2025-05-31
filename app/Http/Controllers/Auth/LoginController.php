@@ -37,10 +37,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        // Only apply middleware when not in testing environment
-        if (!app()->environment('testing')) {
-            $this->middleware('guest')->except('logout');
-        }
+        // Middleware is defined in routes/web.php
     }
 
     /**
