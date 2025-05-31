@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="300" fill="#E5E7EB"/>
+  <rect x="50" y="50" width="300" height="200" fill="#0EA5E9" opacity="0.8"/>
+  <rect x="100" y="80" width="200" height="120" rx="5" fill="#FFFFFF"/>
+  <rect x="120" y="100" width="160" height="80" rx="5" fill="#0EA5E9" opacity="0.3"/>
+  <circle cx="140" cy="140" r="10" fill="#0EA5E9"/>
+  <circle cx="180" cy="140" r="10" fill="#0EA5E9"/>
+  <circle cx="220" cy="140" r="10" fill="#0EA5E9"/>
+  <circle cx="260" cy="140" r="10" fill="#0EA5E9"/>
+  <text x="200" y="240" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Digital Marketing Laboratory Equipment</text>
+</svg>

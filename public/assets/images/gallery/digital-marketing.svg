@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="300" fill="#E5E7EB"/>
+  <rect x="50" y="50" width="300" height="200" fill="#4F46E5" opacity="0.8"/>
+  <rect x="100" y="80" width="200" height="120" rx="5" fill="#FFFFFF"/>
+  <circle cx="150" cy="120" r="30" fill="#4F46E5" opacity="0.3"/>
+  <circle cx="250" cy="120" r="30" fill="#4F46E5" opacity="0.3"/>
+  <path d="M140 110L160 130M160 110L140 130" stroke="#4F46E5" stroke-width="3"/>
+  <path d="M240 110L260 130M260 110L240 130" stroke="#4F46E5" stroke-width="3"/>
+  <path d="M170 150C170 150 180 170 200 170C220 170 230 150 230 150" stroke="#4F46E5" stroke-width="3"/>
+  <rect x="100" y="220" width="200" height="30" rx="5" fill="#FFFFFF"/>
+  <text x="200" y="240" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#4F46E5" text-anchor="middle">Digital Marketing Workshop</text>
+</svg>

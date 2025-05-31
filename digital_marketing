@@ -1,0 +1,96 @@
+Act as a senior software developer. Using the attached documentation as your primary reference, design and develop a dynamic and elegant Web Platform.
+Build a modern, responsive, and elegant web platform modeled after the structure and aesthetics of https://digimarkt.aamusted.edu.gh. The system should include a secure Admin Dashboard/Portal and must enforce user authentication for accessing sensitive content, especially downloadable documents under “Deliverables and Milestones.”
+
+
+Theme colors: Use gradient green, and black, and white colors.
+
+🔧 Technical Implementation
+1. Frontend Architecture
+Technologies:
+
+HTML5
+
+Tailwind CSS
+
+JavaScript (Alpine.js/Vue.js as needed)
+
+Key Features:
+
+Mobile-first responsive design optimized for various screen sizes
+
+Modular, component-based structure to ensure maintainability and scalability
+
+Progressive Web App (PWA) capabilities for native-like experience
+
+Cross-browser compatibility (Chrome, Firefox, Safari, Edge)
+
+Accessibility compliance (WCAG standards – keyboard navigation, screen reader support)
+
+2.   Backend Architecture
+Framework:
+
+PHP Laravel Framework
+
+Architectural Patterns:
+
+MVC (Model-View-Controller) for organized code structure
+
+RESTful API for frontend-backend communication (optional API access for third-party integrations)
+
+Service Layer for business logic abstraction
+
+Repository Pattern for clean and flexible data access
+
+Event-Driven Architecture for features like notifications, background jobs, and logs
+
+3. Database Design
+Engine: MySQL
+Key Design Considerations:
+
+Optimized, normalized schema for data integrity
+
+Use of indexed queries to improve performance
+
+Stored procedures for reusable logic
+
+Transaction management for data consistency
+
+Data partitioning for large-scale data performance
+
+🔐 Security Implementation
+6. Authentication System
+Role-Based Access Control (RBAC) for different user types (Admin, User, Guest, etc.)
+
+Two-Factor Authentication (2FA) via email or OTP
+
+Enforced password strength and rotation policies
+
+Robust session management
+
+Login attempt throttling to prevent brute force attacks
+
+6.2 Data Protection
+Data encryption at rest and SSL/TLS encryption in transit
+
+Regular backups with automated scheduling
+
+Data retention and deletion policies in compliance with privacy regulations
+
+GDPR compliance for personal data handling
+
+6.3 API Security
+API Key Authentication for secure access3 Application Security
+Input validation and sanitization across all user inputs
+
+Cross-Site Scripting (XSS) protection
+
+Cross-Site Request Forgery (CSRF) protection
+
+SQL Injection prevention with parameterized queries
+
+API security using token-based authentication (e.g., Laravel Sanctum or Passport)
+
+🔒 Access Control for Deliverables
+All downloadable files under "Deliverables and Milestones" must be restricted to authenticated users with appropriate roles.
+
+Admins can manage document visibility and access levels via the Admin Portal.

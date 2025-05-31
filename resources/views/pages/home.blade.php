@@ -1,0 +1,731 @@
+@extends('layouts.app')
+
+@section('title', 'Home')
+
+@section('content')
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden bg-gradient-to-br from-indigo-900 via-purple-800 to-indigo-700 py-24 md:py-32">
+        <!-- Animated Background Elements -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
+            <div class="absolute top-[10%] left-[5%] w-64 h-64 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+            <div class="absolute top-[20%] right-[10%] w-72 h-72 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+            <div class="absolute bottom-[10%] left-[20%] w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-12 md:mb-0">
+                    <span class="inline-block px-4 py-1 bg-white bg-opacity-20 backdrop-blur-sm text-white rounded-full text-sm font-medium mb-6">EU Co-funded Project</span>
+                    <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-6">
+                        Digital <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-300">Marketing</span> in TVET
+                    </h1>
+                    <p class="text-xl text-white text-opacity-90 mb-6 max-w-xl">
+                        Towards Digital Marketing in Technical and Vocational Education and Training (DigiMarkt) in Ghana Project, co-funded by the European Union, with a total funding of €394,185.00
+                    </p>
+                    <p class="text-lg text-white text-opacity-80 mb-10 max-w-xl">
+                        Empowering training providers and learners to enhance their digital readiness for Technical and Vocational Education and Training (TVET).
+                    </p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                        <a href="{{ route('milestones') }}" class="px-8 py-4 bg-gradient-to-r from-teal-400 to-cyan-500 text-white font-semibold rounded-xl hover:from-teal-500 hover:to-cyan-600 transition-all duration-300 inline-block text-center shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                            <span class="flex items-center justify-center">
+                                <span>Project Milestones</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
+                        </a>
+                        <a href="{{ route('deliverables') }}" class="px-8 py-4 bg-transparent border-2 border-white text-white font-semibold rounded-xl hover:bg-white hover:text-indigo-800 transition-all duration-300 inline-block text-center transform hover:-translate-y-1">
+                            <span class="flex items-center justify-center">
+                                <span>View Deliverables</span>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+                <div class="md:w-1/2 relative">
+                    <div class="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-3xl blur-lg opacity-30 transform rotate-3"></div>
+                    <div class="relative z-10 rounded-2xl shadow-2xl transform -rotate-2 hover:rotate-0 transition-transform duration-500 bg-white p-6">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Project Partners</h3>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                Steinbeis Beratungszentrum (SRZ), Germany
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                Slovak University of Agriculture, Slovakia
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                AAMUSTED, Ghana
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                Bolgatanga Technical University (BTU), Ghana
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                Cape-Coast Technical University (CCTU), Ghana
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-20 bg-white relative overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-5 z-0">
+            <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239C92AC" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">Platform Impact</h2>
+                <div class="w-20 h-1 bg-gradient-to-r from-indigo-500 to-purple-600 mx-auto mb-4"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto">Our growing community and expanding resources</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="p-8 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                    <div class="flex items-center justify-center w-16 h-16 mx-auto mb-6 rounded-full bg-indigo-100 text-indigo-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </div>
+                    <div class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-indigo-600 to-purple-600 mb-2 text-center">{{ $stats['users'] }}</div>
+                    <div class="text-gray-600 text-center font-medium">Active Users</div>
+                </div>
+                
+                <div class="p-8 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                    <div class="flex items-center justify-center w-16 h-16 mx-auto mb-6 rounded-full bg-teal-100 text-teal-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                    </div>
+                    <div class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-teal-500 to-cyan-500 mb-2 text-center">{{ $stats['documents'] }}</div>
+                    <div class="text-gray-600 text-center font-medium">Resources</div>
+                </div>
+                
+                <div class="p-8 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                    <div class="flex items-center justify-center w-16 h-16 mx-auto mb-6 rounded-full bg-purple-100 text-purple-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+                        </svg>
+                    </div>
+                    <div class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-purple-500 to-pink-500 mb-2 text-center">{{ $stats['downloads'] }}</div>
+                    <div class="text-gray-600 text-center font-medium">Downloads</div>
+                </div>
+                
+                <div class="p-8 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                    <div class="flex items-center justify-center w-16 h-16 mx-auto mb-6 rounded-full bg-blue-100 text-blue-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                        </svg>
+                    </div>
+                    <div class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-blue-500 to-indigo-500 mb-2 text-center">{{ $stats['categories'] }}</div>
+                    <div class="text-gray-600 text-center font-medium">Categories</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-24 bg-gradient-to-b from-white to-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-20">
+                <span class="inline-block px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium mb-4">POWERFUL FEATURES</span>
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Elevate Your Digital Marketing</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-600 mx-auto mb-6"></div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Our platform provides comprehensive resources and cutting-edge tools designed for modern digital marketing professionals.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Feature 1 -->
+                <div class="group bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-100 rounded-full -mr-16 -mt-16 opacity-50 group-hover:opacity-80 transition-opacity duration-300"></div>
+                    <div class="relative z-10">
+                        <div class="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl w-16 h-16 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-indigo-600 transition-colors duration-300">Comprehensive Resources</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            Access a wide range of digital marketing resources, guides, templates, and best practices to enhance your marketing strategy and drive results.
+                        </p>
+                        <a href="#" class="text-indigo-600 font-medium inline-flex items-center group-hover:text-indigo-800 transition-colors duration-300">
+                            Learn more
+                            <svg class="w-4 h-4 ml-2 group-hover:ml-3 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="group bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-teal-100 rounded-full -mr-16 -mt-16 opacity-50 group-hover:opacity-80 transition-opacity duration-300"></div>
+                    <div class="relative z-10">
+                        <div class="bg-gradient-to-r from-teal-500 to-cyan-500 rounded-2xl w-16 h-16 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-teal-600 transition-colors duration-300">Secure Document Access</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            Securely access and download important deliverables and milestones with our authenticated system featuring two-factor authentication protection.
+                        </p>
+                        <a href="#" class="text-teal-600 font-medium inline-flex items-center group-hover:text-teal-800 transition-colors duration-300">
+                            Learn more
+                            <svg class="w-4 h-4 ml-2 group-hover:ml-3 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="group bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-purple-100 rounded-full -mr-16 -mt-16 opacity-50 group-hover:opacity-80 transition-opacity duration-300"></div>
+                    <div class="relative z-10">
+                        <div class="bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl w-16 h-16 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-purple-600 transition-colors duration-300">Advanced Analytics</h3>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            Powerful admin tools to manage users, track content performance, and analyze platform usage with detailed interactive analytics dashboards.
+                        </p>
+                        <a href="#" class="text-purple-600 font-medium inline-flex items-center group-hover:text-purple-800 transition-colors duration-300">
+                            Learn more
+                            <svg class="w-4 h-4 ml-2 group-hover:ml-3 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Resources Section -->
+    <section class="py-24 bg-gray-50 relative overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute -top-24 -right-24 w-96 h-96 bg-indigo-100 rounded-full opacity-30 z-0"></div>
+        <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-teal-100 rounded-full opacity-30 z-0"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <span class="inline-block px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-medium mb-4">FRESH CONTENT</span>
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Latest Digital Marketing Resources</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mb-6"></div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Explore our most recent digital marketing resources, guides, and deliverables to stay ahead of the curve.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                @foreach($latestDocuments as $document)
+                <div class="group bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-gray-100">
+                    <div class="h-48 bg-gradient-to-br from-indigo-500 to-purple-600 relative overflow-hidden">
+                        @if($document->thumbnail)
+                            <img src="{{ asset($document->thumbnail) }}" alt="{{ $document->title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        @else
+                            <div class="flex items-center justify-center h-full">
+                                <svg class="w-16 h-16 text-white opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                </svg>
+                            </div>
+                        @endif
+                        <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent">
+                            <div class="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm text-white rounded-full text-xs font-medium">
+                                {{ $document->category ? $document->category->name : 'Uncategorized' }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-indigo-600 transition-colors duration-300">{{ $document->title }}</h3>
+                        <p class="text-gray-600 mb-6 line-clamp-3">{{ Str::limit($document->description, 120) }}</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-500 flex items-center">
+                                <svg class="w-4 h-4 mr-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                </svg>
+                                {{ $document->created_at->format('M d, Y') }}
+                            </span>
+                            <a href="{{ route('documents.show', $document) }}" class="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-medium transition-colors duration-300">
+                                View Resource
+                                <svg class="w-4 h-4 ml-1 group-hover:ml-2 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+                @if(count($latestDocuments) === 0)
+                    <div class="col-span-3 text-center py-8">
+                        <p class="text-gray-600">No documents available at the moment.</p>
+                    </div>
+                @endif
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="{{ route('deliverables') }}" class="px-6 py-3 bg-primary-dark text-white font-semibold rounded-md hover:bg-primary transition-colors inline-block">
+                    View All Resources
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="py-24 bg-white relative overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-50 to-white z-0"></div>
+        <div class="absolute -bottom-16 -right-16 w-64 h-64 bg-indigo-50 rounded-full opacity-70 z-0"></div>
+        <div class="absolute top-32 -left-16 w-48 h-48 bg-teal-50 rounded-full opacity-70 z-0"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mb-4">EXPLORE BY TOPIC</span>
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Digital Marketing Categories</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-indigo-600 mx-auto mb-6"></div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Discover specialized resources tailored to different aspects of your digital marketing strategy.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                @foreach($categories as $category)
+                    <div class="group relative bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 overflow-hidden">
+                        <!-- Background Shape -->
+                        <div class="absolute top-0 right-0 w-32 h-32 rounded-full opacity-10 z-0 transform translate-x-8 -translate-y-8 group-hover:opacity-20 transition-opacity duration-300"
+                            style="background: linear-gradient(45deg, 
+                                {{ $category['icon'] === 'share' ? '#6366f1, #a855f7' : '' }}
+                                {{ $category['icon'] === 'search' ? '#0ea5e9, #06b6d4' : '' }}
+                                {{ $category['icon'] === 'document-text' ? '#8b5cf6, #d946ef' : '' }}
+                                {{ $category['icon'] === 'mail' ? '#14b8a6, #0ea5e9' : '' }}
+                            );"
+                        ></div>
+                        
+                        <div class="relative z-10">
+                            <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transform group-hover:scale-110 transition-transform duration-300"
+                                style="background: linear-gradient(135deg, 
+                                    {{ $category['icon'] === 'share' ? '#6366f1, #a855f7' : '' }}
+                                    {{ $category['icon'] === 'search' ? '#0ea5e9, #06b6d4' : '' }}
+                                    {{ $category['icon'] === 'document-text' ? '#8b5cf6, #d946ef' : '' }}
+                                    {{ $category['icon'] === 'mail' ? '#14b8a6, #0ea5e9' : '' }}
+                                );"
+                            >
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    @if($category['icon'] === 'share')
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path>
+                                    @elseif($category['icon'] === 'search')
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                    @elseif($category['icon'] === 'document-text')
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                    @elseif($category['icon'] === 'mail')
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                    @endif
+                                </svg>
+                            </div>
+                            
+                            <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-indigo-600 transition-colors duration-300">{{ $category['name'] }}</h3>
+                            <p class="text-gray-600 mb-6 line-clamp-3">
+                                {{ $category['description'] }}
+                            </p>
+                            
+                            <a href="{{ route('resources', ['category' => $category['name']]) }}" 
+                                class="inline-flex items-center font-medium transition-all duration-300"
+                                style="color: {{ $category['icon'] === 'share' ? '#6366f1' : '' }}
+                                        {{ $category['icon'] === 'search' ? '#0ea5e9' : '' }}
+                                        {{ $category['icon'] === 'document-text' ? '#8b5cf6' : '' }}
+                                        {{ $category['icon'] === 'mail' ? '#14b8a6' : '' }}">
+                                Browse Resources
+                                <svg class="w-4 h-4 ml-1 group-hover:ml-2 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-indigo-50 to-transparent opacity-70 z-0"></div>
+        <div class="absolute -top-10 left-1/4 w-32 h-32 bg-purple-100 rounded-full opacity-50 z-0 blur-xl"></div>
+        <div class="absolute top-40 right-1/4 w-40 h-40 bg-teal-100 rounded-full opacity-50 z-0 blur-xl"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <span class="inline-block px-3 py-1 bg-teal-100 text-teal-800 rounded-full text-sm font-medium mb-4">TESTIMONIALS</span>
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">What Our Users Say</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-teal-500 to-cyan-500 mx-auto mb-6"></div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Hear from digital marketing professionals who have transformed their strategies using our platform.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                @foreach($testimonials as $testimonial)
+                    <div class="group bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 relative overflow-hidden">
+                        <!-- Quote Icon -->
+                        <div class="absolute -top-2 -right-2 text-gray-100 opacity-30 z-0">
+                            <svg class="w-24 h-24" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                            </svg>
+                        </div>
+                        
+                        <div class="relative z-10">
+                            <p class="text-gray-700 italic mb-8 leading-relaxed text-lg">
+                                "{{ $testimonial['content'] }}"
+                            </p>
+                            
+                            <div class="flex items-center">
+                                <div class="relative">
+                                    <div class="absolute inset-0 rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 blur-sm opacity-70 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                    <img src="{{ $testimonial['avatar'] }}" alt="{{ $testimonial['name'] }}" class="w-16 h-16 rounded-full border-2 border-white relative z-10 object-cover">
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-lg font-bold text-gray-900 group-hover:text-teal-600 transition-colors duration-300">{{ $testimonial['name'] }}</h4>
+                                    <p class="text-gray-600">{{ $testimonial['position'] }}, {{ $testimonial['company'] }}</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 flex">
+                                @for($i = 0; $i < 5; $i++)
+                                    <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                    </svg>
+                                @endfor
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-24 bg-gradient-to-br from-indigo-50 via-white to-purple-50 relative overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-b from-indigo-100 to-transparent opacity-40 z-0"></div>
+        <div class="absolute bottom-0 left-0 w-1/3 h-full bg-gradient-to-t from-purple-100 to-transparent opacity-40 z-0"></div>
+        <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-pink-100 rounded-full blur-3xl opacity-30 z-0"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-5xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden">
+                <div class="flex flex-col md:flex-row">
+                    <!-- Left Side: Content -->
+                    <div class="md:w-3/5 p-12 md:p-16">
+                        <span class="inline-block px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium mb-6">NEWSLETTER</span>
+                        <h2 class="text-4xl font-bold text-gray-900 mb-6">Stay Updated with Digital Marketing Trends</h2>
+                        <div class="w-20 h-1 bg-gradient-to-r from-indigo-500 to-purple-600 mb-8"></div>
+                        <p class="text-lg text-gray-600 mb-10 leading-relaxed">
+                            Subscribe to our newsletter and get the latest insights, tips, and resources delivered straight to your inbox. Be the first to know about new marketing strategies and industry trends.
+                        </p>
+                        
+                        <form action="#" method="POST" class="space-y-4">
+                            @csrf
+                            <div class="flex flex-col space-y-2">
+                                <label for="newsletter-name" class="text-sm font-medium text-gray-700">Your Name</label>
+                                <input type="text" id="newsletter-name" name="name" placeholder="John Doe" class="px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300">
+                            </div>
+                            
+                            <div class="flex flex-col space-y-2">
+                                <label for="newsletter-email" class="text-sm font-medium text-gray-700">Email Address</label>
+                                <input type="email" id="newsletter-email" name="email" placeholder="john@example.com" required class="px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300">
+                            </div>
+                            
+                            <div class="flex items-start mt-6">
+                                <div class="flex items-center h-5">
+                                    <input id="newsletter-consent" name="consent" type="checkbox" class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" required>
+                                </div>
+                                <div class="ml-3 text-sm">
+                                    <label for="newsletter-consent" class="text-gray-600">I agree to receive marketing emails and can unsubscribe at any time</label>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="w-full mt-6 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center">
+                                Subscribe Now
+                                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 12h15"></path>
+                                </svg>
+                            </button>
+                        </form>
+                        
+                        <p class="text-sm text-gray-500 mt-6">
+                            We respect your privacy and will never share your information. Unsubscribe with one click at any time.
+                        </p>
+                    </div>
+                    
+                    <!-- Right Side: Illustration -->
+                    <div class="md:w-2/5 bg-gradient-to-br from-indigo-500 to-purple-600 p-12 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-full opacity-20">
+                            <svg class="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <pattern id="newsletter-grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                                        <path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" stroke-width="0.5"/>
+                                    </pattern>
+                                </defs>
+                                <rect width="100" height="100" fill="url(#newsletter-grid)" />
+                            </svg>
+                        </div>
+                        <div class="relative z-10 text-center">
+                            <svg class="w-32 h-32 mx-auto text-white opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                            <h3 class="text-2xl font-bold text-white mt-6">Weekly Insights</h3>
+                            <p class="text-indigo-100 mt-2 max-w-xs mx-auto">Join over 10,000 marketers receiving our weekly digital marketing tips</p>
+                            
+                            <div class="mt-10 flex flex-col space-y-3">
+                                <div class="flex items-center text-white">
+                                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>Industry trends</span>
+                                </div>
+                                <div class="flex items-center text-white">
+                                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>Exclusive resources</span>
+                                </div>
+                                <div class="flex items-center text-white">
+                                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <span>Actionable tips</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Two-Factor Authentication Promotion -->
+    <section class="py-24 bg-gradient-to-r from-indigo-900 via-purple-800 to-indigo-700 relative overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
+            <div class="absolute -top-10 -right-10 w-72 h-72 bg-white opacity-5 rounded-full"></div>
+            <div class="absolute bottom-10 left-10 w-40 h-40 bg-white opacity-5 rounded-full"></div>
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-white opacity-5 rounded-full"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-5xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden">
+                <div class="flex flex-col md:flex-row">
+                    <!-- Left Side: Image/Illustration -->
+                    <div class="md:w-2/5 bg-gradient-to-br from-indigo-500 to-purple-600 p-10 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-full h-full opacity-20">
+                            <svg class="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                                        <path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" stroke-width="0.5"/>
+                                    </pattern>
+                                </defs>
+                                <rect width="100" height="100" fill="url(#grid)" />
+                            </svg>
+                        </div>
+                        <div class="relative z-10 text-center">
+                            <svg class="w-32 h-32 mx-auto text-white opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                            </svg>
+                            <h3 class="text-2xl font-bold text-white mt-6">Secure Your Account</h3>
+                            <p class="text-indigo-100 mt-2">Protection against unauthorized access</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Right Side: Content -->
+                    <div class="md:w-3/5 p-10 md:p-12">
+                        <div class="flex items-center mb-6">
+                            <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center mr-4">
+                                <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                </svg>
+                            </div>
+                            <h3 class="text-3xl font-bold text-gray-900">Enhanced Security with Two-Factor Authentication</h3>
+                        </div>
+                        
+                        <p class="text-gray-600 text-lg mb-8 leading-relaxed">
+                            We've implemented Two-Factor Authentication to provide an additional layer of security for your account. This extra step helps protect your sensitive information and ensures that only you can access your account, even if your password is compromised.
+                        </p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <svg class="w-5 h-5 text-indigo-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-700">Protects against unauthorized access</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <svg class="w-5 h-5 text-indigo-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-700">Simple setup process</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <svg class="w-5 h-5 text-indigo-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-700">Works with authenticator apps</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <svg class="w-5 h-5 text-indigo-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-gray-700">Secure recovery options</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <a href="{{ route('profile') }}" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                            Enable 2FA Now
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 bg-gray-50 relative overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 bg-gradient-to-br from-indigo-50 to-purple-50 opacity-70 z-0"></div>
+        <div class="absolute -top-24 -right-24 w-96 h-96 bg-indigo-200 rounded-full opacity-20 blur-3xl z-0"></div>
+        <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-purple-200 rounded-full opacity-20 blur-3xl z-0"></div>
+        
+        <!-- Decorative Elements -->
+        <div class="absolute top-1/4 right-1/4 w-8 h-8 bg-indigo-400 rounded-full opacity-20 z-0"></div>
+        <div class="absolute bottom-1/3 left-1/3 w-12 h-12 bg-purple-400 rounded-full opacity-20 z-0"></div>
+        <div class="absolute top-1/2 left-1/5 w-6 h-6 bg-pink-400 rounded-full opacity-20 z-0"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-6xl mx-auto">
+                <div class="bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-700 rounded-3xl p-2 shadow-2xl transform hover:scale-[1.01] transition-all duration-300">
+                    <div class="bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-700 rounded-2xl overflow-hidden">
+                        <div class="relative p-12 md:p-16 overflow-hidden">
+                            <!-- Background Pattern -->
+                            <div class="absolute inset-0 opacity-10">
+                                <svg class="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <pattern id="cta-grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                                            <path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" stroke-width="0.5"/>
+                                        </pattern>
+                                    </defs>
+                                    <rect width="100" height="100" fill="url(#cta-grid)" />
+                                </svg>
+                            </div>
+                            
+                            <!-- Floating Elements -->
+                            <div class="absolute top-10 right-10 w-32 h-32 bg-white opacity-5 rounded-full blur-md"></div>
+                            <div class="absolute bottom-10 left-10 w-24 h-24 bg-white opacity-5 rounded-full blur-md"></div>
+                            
+                            <div class="flex flex-col lg:flex-row items-center justify-between relative z-10">
+                                <div class="lg:w-3/5 mb-10 lg:mb-0 lg:pr-16">
+                                    <span class="inline-block px-3 py-1 bg-white bg-opacity-20 text-white rounded-full text-sm font-medium mb-6">START TODAY</span>
+                                    <h2 class="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">Ready to Transform Your Digital Marketing Strategy?</h2>
+                                    <div class="w-24 h-1 bg-white opacity-50 mb-8"></div>
+                                    <p class="text-xl text-white opacity-90 mb-10 leading-relaxed">
+                                        Join thousands of marketers who have already elevated their skills and strategies with our premium resources, tools, and expert guidance.
+                                    </p>
+                                    
+                                    <div class="flex flex-wrap gap-4 mb-8">
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 rounded-full bg-white bg-opacity-20 flex items-center justify-center mr-3">
+                                                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                                </svg>
+                                            </div>
+                                            <span class="text-white">Premium Resources</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 rounded-full bg-white bg-opacity-20 flex items-center justify-center mr-3">
+                                                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                                </svg>
+                                            </div>
+                                            <span class="text-white">Expert Guidance</span>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <div class="w-10 h-10 rounded-full bg-white bg-opacity-20 flex items-center justify-center mr-3">
+                                                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                                </svg>
+                                            </div>
+                                            <span class="text-white">Community Access</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="lg:w-2/5">
+                                    <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-2xl p-8 border border-white border-opacity-20 shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+                                        <h3 class="text-2xl font-bold text-white mb-6 text-center">Get Started Now</h3>
+                                        <div class="space-y-4 mb-6">
+                                            <div class="flex items-center">
+                                                <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center mr-3">
+                                                    <svg class="w-4 h-4 text-indigo-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                                    </svg>
+                                                </div>
+                                                <span class="text-white">Instant access to all resources</span>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center mr-3">
+                                                    <svg class="w-4 h-4 text-indigo-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                                    </svg>
+                                                </div>
+                                                <span class="text-white">Regular strategy updates</span>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center mr-3">
+                                                    <svg class="w-4 h-4 text-indigo-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                                    </svg>
+                                                </div>
+                                                <span class="text-white">Priority support</span>
+                                            </div>
+                                        </div>
+                                        <a href="{{ route('register') }}" class="block w-full px-8 py-4 bg-white text-indigo-700 font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 text-center">
+                                            Create Free Account
+                                        </a>
+                                        <p class="text-white text-opacity-80 text-sm text-center mt-4">No credit card required</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+@endsection
