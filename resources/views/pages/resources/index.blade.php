@@ -23,8 +23,8 @@
                     All Resources
                 </a>
                 @foreach($categories as $category)
-                    <a href="{{ route('resources', ['category' => $category]) }}" class="px-4 py-2 rounded-full {{ request('category') == $category ? 'bg-primary text-white' : 'bg-white text-gray-700 hover:bg-gray-100' }} font-medium transition-colors">
-                        {{ $category }}
+                    <a href="{{ route('resources', ['category' => $category['name']]) }}" class="px-4 py-2 rounded-full {{ request('category') == $category['name'] ? 'bg-primary text-white' : 'bg-white text-gray-700 hover:bg-gray-100' }} font-medium transition-colors">
+                        {{ $category['name'] }} ({{ $category['count'] }})
                     </a>
                 @endforeach
             </div>
@@ -36,9 +36,9 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     @foreach($resources as $resource)
                         <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow">
-                            @if($resource->image_path)
+                            @if($resource->thumbnail_path)
                                 <div class="h-48 overflow-hidden">
-                                    <img src="{{ asset('storage/' . $resource->image_path) }}" alt="{{ $resource->title }}" class="w-full h-full object-cover">
+                                    <img src="{{ asset('storage/' . $resource->thumbnail_path) }}" alt="{{ $resource->title }}" class="w-full h-full object-cover">
                                 </div>
                             @else
                                 <div class="h-48 bg-gray-200 flex items-center justify-center">
@@ -61,14 +61,24 @@
                                     {{ Str::limit($resource->description, 100) }}
                                 </p>
                                 <div class="flex items-center justify-between">
-                                    <a href="{{ route('resources.show', $resource->id) }}" class="text-primary-dark hover:text-primary font-medium inline-flex items-center">
-                                        Read More
-                                        <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                                        </svg>
-                                    </a>
+                                    <div class="flex space-x-3">
+                                        <a href="{{ route('resources.show', $resource->id) }}" class="text-primary-dark hover:text-primary font-medium inline-flex items-center">
+                                            Read More
+                                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                            </svg>
+                                        </a>
+                                        @if($resource->file_path)
+                                        <a href="{{ route('resources.download', $resource->id) }}" class="text-green-600 hover:text-green-800 font-medium inline-flex items-center">
+                                            Download
+                                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                            </svg>
+                                        </a>
+                                        @endif
+                                    </div>
                                     <div class="text-sm text-gray-500">
-                                        {{ $resource->views }} {{ Str::plural('view', $resource->views) }}
+                                        {{ $resource->download_count ?? 0 }} {{ Str::plural('download', $resource->download_count ?? 0) }}
                                     </div>
                                 </div>
                             </div>

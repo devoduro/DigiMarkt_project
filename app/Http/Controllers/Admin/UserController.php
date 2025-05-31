@@ -16,7 +16,12 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('admin');
+        $this->middleware(function ($request, $next) {
+            if (auth()->user()->role !== 'admin') {
+                return redirect()->route('home')->with('error', 'You do not have permission to access this area.');
+            }
+            return $next($request);
+        });
     }
 
     /**

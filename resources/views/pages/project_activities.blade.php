@@ -73,12 +73,12 @@
                                             <div></div>
                                         @endif
                                         
-                                        <div class="flex items-center">
-                                            <svg class="w-5 h-5 text-red-500 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+                                        <a href="#" class="text-indigo-600 hover:text-indigo-800 text-sm">
+                                            <span>Read more</span>
+                                            <svg class="w-4 h-4 inline-block ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                                             </svg>
-                                            <span class="text-gray-600">{{ $announcement['likes'] }}</span>
-                                        </div>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -123,22 +123,10 @@
                                             <p class="text-gray-500 text-sm mb-4">{{ $activity['date'] }}</p>
                                             <p class="text-gray-700 mb-6">{{ $activity['description'] }}</p>
                                             
-                                            @if(count($activity['images']) > 0)
-                                                <div class="grid grid-cols-2 gap-2">
-                                                    @foreach(array_slice($activity['images'], 0, 2) as $image)
-                                                        <div class="rounded-lg overflow-hidden bg-gray-100 aspect-w-16 aspect-h-9">
-                                                            <img src="{{ asset('assets/images/' . $image) }}" alt="{{ $activity['title'] }}" class="w-full h-full object-cover hover:opacity-90 transition-opacity duration-300">
-                                                        </div>
-                                                    @endforeach
+                                            @if(isset($activity['image']))
+                                                <div class="rounded-lg overflow-hidden bg-gray-100 aspect-w-16 aspect-h-9">
+                                                    <img src="{{ $activity['image'] }}" alt="{{ $activity['title'] }}" class="w-full h-full object-cover hover:opacity-90 transition-opacity duration-300">
                                                 </div>
-                                                
-                                                @if(count($activity['images']) > 2)
-                                                    <div class="mt-2 text-center">
-                                                        <a href="#" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">
-                                                            View all {{ count($activity['images']) }} photos
-                                                        </a>
-                                                    </div>
-                                                @endif
                                             @endif
                                         </div>
                                     </div>

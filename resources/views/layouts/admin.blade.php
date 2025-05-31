@@ -53,18 +53,62 @@
             <nav class="mt-10">
                 <a class="flex items-center px-6 py-2 mt-4 text-gray-100 hover:bg-primary-dark hover:text-white"
                    href="{{ route('admin.dashboard') }}">
+                    <i class="fas fa-tachometer-alt w-5 h-5 text-center"></i>
                     <span class="mx-3">Dashboard</span>
                 </a>
+                
+                
+    <!-- Project Activities -->
+    <a class="flex items-center px-6 py-2 mt-4 text-gray-100 hover:bg-primary-dark hover:text-white"
+    href="{{ route('admin.resources.index') }}">
+    <i class="fas fa-book-open w-5 h-5 text-center"></i>
+        <span class="mx-3">Digital Resources</span>
+ </a>
+
+
+
+
+
+
+
+     <!-- Project Activities -->
+     <a class="flex items-center px-6 py-2 mt-4 text-gray-100 hover:bg-primary-dark hover:text-white"
+     href="{{ route('admin.deliverables.index') }}">
+     <i class="fas fa-file-alt w-5 h-5 text-center"></i>
+     <span class="mx-3">Documents</span>
+  </a>
+
+
+
+      <!-- Project Activities -->
+      <a class="flex items-center px-6 py-2 mt-4 text-gray-100 hover:bg-primary-dark hover:text-white"
+      href="{{ route('admin.milestones.index') }}">
+      <i class="fas fa-flag-checkered w-5 h-5 text-center"></i>
+      <span class="mx-3">Project Milestones</span>
+   </a>
+
+
+
+
+
+                <!-- Project Activities -->
                 <a class="flex items-center px-6 py-2 mt-4 text-gray-100 hover:bg-primary-dark hover:text-white"
-                   href="{{ route('admin.users') }}">
+                   href="{{ route('admin.activities.index') }}">
+                    <i class="fas fa-calendar-alt w-5 h-5 text-center"></i>
+                    <span class="mx-3">Project Activities</span>
+                </a>
+                
+                <!-- User Management -->
+                <a class="flex items-center px-6 py-2 mt-4 text-gray-100 hover:bg-primary-dark hover:text-white"
+                   href="{{ route('admin.users.index') }}">
+                    <i class="fas fa-users w-5 h-5 text-center"></i>
                     <span class="mx-3">Users</span>
                 </a>
+                
+                <!-- Settings -->
                 <a class="flex items-center px-6 py-2 mt-4 text-gray-100 hover:bg-primary-dark hover:text-white"
-                   href="{{ route('admin.documents') }}">
-                    <span class="mx-3">Documents</span>
-                </a>
-                <a class="flex items-center px-6 py-2 mt-4 text-gray-100 hover:bg-primary-dark hover:text-white"
-                   href="{{ route('admin.settings') }}">
+                   href="{{ route('admin.dashboard') }}">
+                    <i class="fas fa-cog w-5 h-5 text-center"></i>
                     <span class="mx-3">Settings</span>
                 </a>
             </nav>
@@ -92,7 +136,7 @@
                             </button>
 
                             <div x-show="dropdownOpen" @click.away="dropdownOpen = false" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1">
-                                <a href="{{ route('admin.profile') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+                                <a href="{{ route('profile') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Logout</button>

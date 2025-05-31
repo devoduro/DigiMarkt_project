@@ -15,7 +15,12 @@ class DeliverableManagementController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('admin');
+        $this->middleware(function ($request, $next) {
+            if (auth()->user()->role !== 'admin') {
+                return redirect()->route('home')->with('error', 'You do not have permission to access this area.');
+            }
+            return $next($request);
+        });
     }
 
     /**
@@ -75,35 +80,95 @@ class DeliverableManagementController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        // Log the incoming request data for debugging
+        logger()->info('Deliverable creation request data:', $request->all());
+        
+        // Validate with conditional rules for new category
+        $rules = [
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'category' => 'required|string',
-            'document' => 'required|file|max:10240', // 10MB max
-            'is_public' => 'boolean',
-        ]);
+            'file' => 'required|file|max:10240', // 10MB max
+            'access_level' => 'required|string|in:public,registered,admin',
+            // Remove boolean validation for is_published as checkboxes send 'on' not true/false
+            'is_published' => 'sometimes',
+        ];
+        
+        // Add category validation based on selection
+        if ($request->category === 'new') {
+            $rules['new_category'] = 'required|string|max:50';
+        } else {
+            $rules['category'] = 'required|string|max:50';
+        }
+        
+        try {
+            $validated = $request->validate($rules);
+            logger()->info('Validation passed');
+            
+            // Store the file
+            $file = $request->file('file');
+            if (!$file) {
+                throw new \Exception('File upload is missing');
+            }
+            
+            logger()->info('File details:', [
+                'original_name' => $file->getClientOriginalName(),
+                'mime_type' => $file->getMimeType(),
+                'size' => $file->getSize(),
+                'error' => $file->getError()
+            ]);
+            
+            $fileName = $file->getClientOriginalName();
+            $filePath = $file->store('documents', 'public'); // Store in public disk for accessibility
+            
+            if (!$filePath) {
+                throw new \Exception('Failed to store the file');
+            }
+            
+            logger()->info('File stored at: ' . $filePath);
+            
+            $fileSize = $file->getSize();
+            $fileType = $file->getMimeType();
 
-        // Store the file
-        $file = $request->file('document');
-        $fileName = $file->getClientOriginalName();
-        $filePath = $file->store('documents');
-        $fileSize = $file->getSize();
-        $fileType = $file->getMimeType();
+            // Determine the category (existing or new)
+            $category = $request->category;
+            if ($request->category === 'new' && $request->filled('new_category')) {
+                $category = $request->new_category;
+                logger()->info('Using new category: ' . $category);
+            } else {
+                logger()->info('Using existing category: ' . $category);
+            }
+            
+            // Create the document record
+            $document = Document::create([
+                'title' => $request->title,
+                'description' => $request->description,
+                'file_path' => $filePath,
+                'file_name' => $fileName,
+                'file_size' => $fileSize,
+                'file_type' => $fileType,
+                'category' => $category,
+                'access_level' => $request->access_level,
+                // Convert checkbox 'on' value to boolean true
+                'is_published' => $request->has('is_published'),
+                'uploaded_by' => auth()->id(),
+            ]);
+            
+            logger()->info('Document created with ID: ' . $document->id);
 
-        // Create the document record
-        Document::create([
-            'title' => $request->title,
-            'description' => $request->description,
-            'file_path' => $filePath,
-            'file_name' => $fileName,
-            'file_size' => $fileSize,
-            'file_type' => $fileType,
-            'category' => $request->category,
-            'is_public' => $request->has('is_public'),
-            'uploaded_by' => auth()->id(),
-        ]);
-
-        return redirect()->route('admin.deliverables.index')->with('success', 'Deliverable uploaded successfully.');
+            return redirect()->route('admin.deliverables.index')->with('success', 'Deliverable uploaded successfully.');
+        } catch (\Exception $e) {
+            // Log the error with detailed information
+            logger()->error('Error creating deliverable: ' . $e->getMessage(), [
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            
+            // Return with error message
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Failed to upload deliverable: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -118,44 +183,82 @@ class DeliverableManagementController extends Controller
     /**
      * Update the specified deliverable in storage.
      */
-    public function update(Request $request, Document $deliverable)
+    public function update(Request $request, $id)
     {
-        $request->validate([
+        // Find the document
+        $document = Document::findOrFail($id);
+        
+        // Validate with conditional rules for new category
+        $rules = [
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'category' => 'required|string',
-            'document' => 'nullable|file|max:10240', // 10MB max
-            'is_public' => 'boolean',
-        ]);
-
-        $data = [
-            'title' => $request->title,
-            'description' => $request->description,
-            'category' => $request->category,
-            'is_public' => $request->has('is_public'),
+            'file' => 'nullable|file|max:10240', // 10MB max, optional on update
+            'access_level' => 'required|string|in:public,registered,admin',
+            // Remove boolean validation for is_published as checkboxes send 'on' not true/false
+            'is_published' => 'sometimes',
         ];
-
-        // If a new file is uploaded, update the file info
-        if ($request->hasFile('document')) {
-            // Delete the old file
-            Storage::delete($deliverable->file_path);
-
-            // Store the new file
-            $file = $request->file('document');
-            $fileName = $file->getClientOriginalName();
-            $filePath = $file->store('documents');
-            $fileSize = $file->getSize();
-            $fileType = $file->getMimeType();
-
-            $data['file_path'] = $filePath;
-            $data['file_name'] = $fileName;
-            $data['file_size'] = $fileSize;
-            $data['file_type'] = $fileType;
+        
+        // Add category validation based on selection
+        if ($request->category === 'new') {
+            $rules['new_category'] = 'required|string|max:50';
+        } else {
+            $rules['category'] = 'required|string|max:50';
         }
+        
+        $validated = $request->validate($rules);
 
-        $deliverable->update($data);
+        try {
+            // Determine the category (existing or new)
+            $category = $request->category;
+            if ($request->category === 'new' && $request->filled('new_category')) {
+                $category = $request->new_category;
+            }
+            
+            $data = [
+                'title' => $request->title,
+                'description' => $request->description,
+                'category' => $category,
+                'access_level' => $request->access_level,
+                // Convert checkbox 'on' value to boolean true
+                'is_published' => $request->has('is_published'),
+            ];
 
-        return redirect()->route('admin.deliverables.index')->with('success', 'Deliverable updated successfully.');
+            // If a new file is uploaded, update the file info
+            if ($request->hasFile('file')) {
+                // Delete the old file
+                if (Storage::disk('public')->exists($document->file_path)) {
+                    Storage::disk('public')->delete($document->file_path);
+                }
+
+                // Store the new file
+                $file = $request->file('file');
+                $fileName = $file->getClientOriginalName();
+                $filePath = $file->store('documents', 'public'); // Store in public disk for accessibility
+                $fileSize = $file->getSize();
+                $fileType = $file->getMimeType();
+
+                $data['file_path'] = $filePath;
+                $data['file_name'] = $fileName;
+                $data['file_size'] = $fileSize;
+                $data['file_type'] = $fileType;
+            }
+
+            $document->update($data);
+
+            return redirect()->route('admin.deliverables.index')->with('success', 'Deliverable updated successfully.');
+        } catch (\Exception $e) {
+            // Log the error with detailed information
+            logger()->error('Error updating deliverable: ' . $e->getMessage(), [
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            
+            // Return with error message
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Failed to update deliverable: ' . $e->getMessage());
+        }
     }
 
     /**

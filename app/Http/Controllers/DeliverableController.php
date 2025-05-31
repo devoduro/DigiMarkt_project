@@ -78,26 +78,35 @@ class DeliverableController extends Controller
      */
     public function download(Document $deliverable)
     {
-        // Check if the user can access this document
-        if (!$deliverable->isAccessibleBy(auth()->user())) {
-            abort(403, 'You do not have permission to download this document.');
+        try {
+            // Check if the user can access this document
+            if (!$deliverable->isAccessibleBy(auth()->user())) {
+                abort(403, 'You do not have permission to download this document.');
+            }
+
+            // Check if file exists before proceeding
+            if (!Storage::exists($deliverable->file_path)) {
+                throw new \Exception('File not found');
+            }
+
+            // Record the download
+            Download::create([
+                'user_id' => auth()->id(),
+                'document_id' => $deliverable->id,
+                'ip_address' => request()->ip(),
+                'user_agent' => request()->userAgent(),
+            ]);
+
+            // Return the file for download
+            return Storage::download(
+                $deliverable->file_path,
+                $deliverable->file_name,
+                [
+                    'Content-Type' => $deliverable->file_type,
+                ]
+            );
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'The file could not be found or accessed.');
         }
-
-        // Record the download
-        Download::create([
-            'user_id' => auth()->id(),
-            'document_id' => $deliverable->id,
-            'ip_address' => request()->ip(),
-            'user_agent' => request()->userAgent(),
-        ]);
-
-        // Return the file for download
-        return Storage::download(
-            $deliverable->file_path,
-            $deliverable->file_name,
-            [
-                'Content-Type' => $deliverable->file_type,
-            ]
-        );
     }
 }

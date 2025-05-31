@@ -75,6 +75,88 @@
             </div>
         </div>
         
+        <!-- Project Milestones -->
+        <div class="max-w-5xl mx-auto mb-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Project Milestones</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-indigo-500 to-primary-dark mx-auto mb-6"></div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Key milestones and deliverables throughout the project lifecycle.
+                </p>
+            </div>
+            
+            <div class="space-y-8">
+                @foreach($milestones as $milestone)
+                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-xl font-bold text-gray-900">{{ $milestone['title'] }}</h3>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium 
+                            @if($milestone['status'] == 'Completed') bg-green-100 text-green-800
+                            @elseif($milestone['status'] == 'In Progress') bg-blue-100 text-blue-800
+                            @else bg-yellow-100 text-yellow-800 @endif">
+                            {{ $milestone['status'] }}
+                        </span>
+                    </div>
+                    
+                    <p class="text-gray-600 mb-4">{{ $milestone['description'] }}</p>
+                    <p class="text-gray-500 text-sm mb-4">{{ $milestone['date'] }}</p>
+                    
+                    <div class="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+                        <div class="h-2.5 rounded-full 
+                            @if($milestone['status'] == 'Completed') bg-green-600
+                            @elseif($milestone['status'] == 'In Progress') bg-blue-600
+                            @else bg-yellow-600 @endif" 
+                            style="width: {{ $milestone['completion'] }}%"></div>
+                    </div>
+                    
+                    @if(count($milestone['deliverables']) > 0)
+                    <div class="mt-6">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Deliverables</h4>
+                        <div class="space-y-3">
+                            @foreach($milestone['deliverables'] as $deliverable)
+                            <div class="flex items-start p-3 bg-gray-50 rounded-lg">
+                                <div class="flex-shrink-0 mr-3">
+                                    @if(isset($deliverable['completed']) && $deliverable['completed'])
+                                    <svg class="w-6 h-6 text-green-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    @else
+                                    <svg class="w-6 h-6 text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    @endif
+                                </div>
+                                <div class="flex-1">
+                                    <h5 class="font-medium text-gray-900">{{ $deliverable['title'] }}</h5>
+                                    @if(isset($deliverable['description']))
+                                    <p class="text-sm text-gray-600 mt-1">{{ $deliverable['description'] }}</p>
+                                    @endif
+                                </div>
+                                @if(isset($deliverable['file_path']) && $deliverable['file_path'] && !$deliverable['restricted'])
+                                <a href="{{ $deliverable['file_path'] }}" class="inline-flex items-center px-3 py-1 bg-indigo-50 text-indigo-700 rounded-md text-sm hover:bg-indigo-100 transition-colors duration-200">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                    </svg>
+                                    Download
+                                </a>
+                                @elseif(isset($deliverable['restricted']) && $deliverable['restricted'])
+                                <span class="inline-flex items-center px-3 py-1 bg-gray-100 text-gray-600 rounded-md text-sm">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                                    </svg>
+                                    Restricted
+                                </span>
+                                @endif
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    @endif
+                </div>
+                @endforeach
+            </div>
+        </div>
+        
         <!-- Partners -->
         <div class="max-w-5xl mx-auto mb-16">
             <div class="text-center mb-12">

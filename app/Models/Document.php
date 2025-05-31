@@ -24,6 +24,8 @@ class Document extends Model
         'file_type',
         'category',
         'is_public',
+        'access_level',
+        'is_published',
         'uploaded_by',
     ];
 
@@ -36,6 +38,7 @@ class Document extends Model
     {
         return [
             'is_public' => 'boolean',
+            'is_published' => 'boolean',
             'file_size' => 'integer',
         ];
     }
@@ -61,22 +64,37 @@ class Document extends Model
      */
     public function isAccessibleBy(?User $user): bool
     {
-        // Public documents are accessible by anyone
-        if ($this->is_public) {
-            return true;
+        // Only published documents are accessible
+        if (!$this->is_published) {
+            return $user && $user->isAdmin();
         }
-
-        // If no user is provided, document is not accessible
-        if (!$user) {
-            return false;
+        
+        // Check access level
+        switch ($this->access_level) {
+            case 'public':
+                return true;
+                
+            case 'registered':
+                return $user !== null;
+                
+            case 'admin':
+                return $user && $user->isAdmin();
+                
+            default:
+                // Fallback to old logic for backward compatibility
+                if ($this->is_public) {
+                    return true;
+                }
+                
+                if (!$user) {
+                    return false;
+                }
+                
+                if ($user->isAdmin()) {
+                    return true;
+                }
+                
+                return true;
         }
-
-        // Admins can access all documents
-        if ($user->isAdmin()) {
-            return true;
-        }
-
-        // Document is accessible by authenticated users
-        return true;
     }
 }

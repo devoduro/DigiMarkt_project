@@ -213,6 +213,79 @@
         </div>
     </section>
 
+    <!-- Featured Project Activities Section -->
+    <section class="py-24 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute -top-24 -right-24 w-96 h-96 bg-purple-100 rounded-full opacity-30 z-0"></div>
+        <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-indigo-100 rounded-full opacity-30 z-0"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <span class="inline-block px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-medium mb-4">PROJECT UPDATES</span>
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Featured Project Activities</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mb-6"></div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Stay updated with the latest activities and events from the DigiMarkt project
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                @forelse($featuredActivities as $activity)
+                    <div class="group bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden">
+                        <!-- Activity Image -->
+                        <div class="relative h-56 overflow-hidden">
+                            @if($activity->images->isNotEmpty())
+                                <img src="{{ asset('storage/' . $activity->images->first()->image_path) }}" 
+                                    alt="{{ $activity->title }}" 
+                                    class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                            @else
+                                <div class="w-full h-full bg-gradient-to-br from-purple-400 to-indigo-600 flex items-center justify-center">
+                                    <svg class="w-16 h-16 text-white opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                            @endif
+                            <div class="absolute top-4 right-4 bg-white bg-opacity-90 backdrop-filter backdrop-blur-sm rounded-lg px-3 py-1 text-sm font-semibold {{ $activity->status === 'Completed' ? 'text-green-600' : ($activity->status === 'In Progress' ? 'text-blue-600' : 'text-orange-600') }}">
+                                {{ $activity->status }}
+                            </div>
+                        </div>
+                        
+                        <!-- Activity Content -->
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors duration-300">{{ $activity->title }}</h3>
+                            <p class="text-gray-500 text-sm mb-4">{{ $activity->date }}</p>
+                            <p class="text-gray-600 mb-6 line-clamp-3">{{ $activity->description }}</p>
+                            <a href="{{ route('project.activities') }}" class="text-purple-600 font-medium inline-flex items-center group-hover:text-purple-800 transition-colors duration-300">
+                                Read more
+                                <svg class="w-4 h-4 ml-2 group-hover:ml-3 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-span-3 text-center py-12">
+                        <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                        <p class="text-xl text-gray-500">No project activities available yet.</p>
+                    </div>
+                @endforelse
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="{{ route('project.activities') }}" class="inline-block px-8 py-4 bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-semibold rounded-xl hover:from-purple-600 hover:to-indigo-700 transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl">
+                    <span class="flex items-center justify-center">
+                        <span>View All Project Activities</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </section>
+    
     <!-- Latest Resources Section -->
     <section class="py-24 bg-gray-50 relative overflow-hidden">
         <!-- Background Elements -->
@@ -282,8 +355,98 @@
         </div>
     </section>
 
-    <!-- Categories Section -->
+    <!-- Project Milestones Section -->
     <section class="py-24 bg-white relative overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute -top-24 -left-24 w-96 h-96 bg-green-100 rounded-full opacity-30 z-0"></div>
+        <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-emerald-100 rounded-full opacity-30 z-0"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <span class="inline-block px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium mb-4">PROJECT PROGRESS</span>
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Upcoming Project Milestones</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-green-500 to-emerald-500 mx-auto mb-6"></div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Track our progress and upcoming deliverables in the DigiMarkt project
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                @forelse($upcomingMilestones as $milestone)
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 group border border-gray-100">
+                        <div class="p-1 bg-gradient-to-r from-green-500 to-emerald-500"></div>
+                        <div class="p-6">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="inline-block px-3 py-1 rounded-full text-sm font-medium {{ $milestone->status === 'completed' ? 'bg-green-100 text-green-800' : ($milestone->status === 'in-progress' ? 'bg-blue-100 text-blue-800' : 'bg-amber-100 text-amber-800') }}">
+                                    {{ ucfirst($milestone->status) }}
+                                </span>
+                                <span class="text-gray-500 text-sm">{{ $milestone->date }}</span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2 group-hover:text-green-600 transition-colors duration-300">{{ $milestone->title }}</h3>
+                            <p class="text-gray-600 mb-4 line-clamp-3">{{ $milestone->description }}</p>
+                            
+                            <div class="mb-6">
+                                <div class="flex justify-between text-sm text-gray-600 mb-1">
+                                    <span>Completion</span>
+                                    <span>{{ $milestone->completion_percentage }}%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                    <div class="h-2.5 rounded-full {{ $milestone->status === 'completed' ? 'bg-green-600' : 'bg-gradient-to-r from-green-500 to-emerald-500' }}" style="width: {{ $milestone->completion_percentage }}%"></div>
+                                </div>
+                            </div>
+                            
+                            @if($milestone->deliverables->isNotEmpty())
+                                <div class="mb-4">
+                                    <h4 class="text-sm font-semibold text-gray-700 mb-2">Deliverables:</h4>
+                                    <ul class="space-y-1">
+                                        @foreach($milestone->deliverables->take(2) as $deliverable)
+                                            <li class="text-sm text-gray-600 flex items-center">
+                                                <svg class="w-4 h-4 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                </svg>
+                                                {{ $deliverable->title }}
+                                            </li>
+                                        @endforeach
+                                        @if($milestone->deliverables->count() > 2)
+                                            <li class="text-sm text-gray-500 italic">+ {{ $milestone->deliverables->count() - 2 }} more</li>
+                                        @endif
+                                    </ul>
+                                </div>
+                            @endif
+                            
+                            <a href="{{ route('milestones') }}" class="text-green-600 font-medium inline-flex items-center group-hover:text-green-800 transition-colors duration-300">
+                                View details
+                                <svg class="w-4 h-4 ml-2 group-hover:ml-3 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-span-3 text-center py-12">
+                        <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                        <p class="text-xl text-gray-500">No upcoming milestones available yet.</p>
+                    </div>
+                @endforelse
+            </div>
+            
+            <div class="text-center mt-12">
+                <a href="{{ route('milestones') }}" class="inline-block px-8 py-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white font-semibold rounded-xl hover:from-green-600 hover:to-emerald-600 transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl">
+                    <span class="flex items-center justify-center">
+                        <span>View All Project Milestones</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="py-24 bg-gray-50 relative overflow-hidden">
         <!-- Background Elements -->
         <div class="absolute inset-0 bg-gradient-to-b from-gray-50 to-white z-0"></div>
         <div class="absolute -bottom-16 -right-16 w-64 h-64 bg-indigo-50 rounded-full opacity-70 z-0"></div>
@@ -414,105 +577,7 @@
         </div>
     </section>
 
-    <!-- Newsletter Section -->
-    <section class="py-24 bg-gradient-to-br from-indigo-50 via-white to-purple-50 relative overflow-hidden">
-        <!-- Background Elements -->
-        <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-b from-indigo-100 to-transparent opacity-40 z-0"></div>
-        <div class="absolute bottom-0 left-0 w-1/3 h-full bg-gradient-to-t from-purple-100 to-transparent opacity-40 z-0"></div>
-        <div class="absolute top-1/4 left-1/4 w-64 h-64 bg-pink-100 rounded-full blur-3xl opacity-30 z-0"></div>
-        
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="max-w-5xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden">
-                <div class="flex flex-col md:flex-row">
-                    <!-- Left Side: Content -->
-                    <div class="md:w-3/5 p-12 md:p-16">
-                        <span class="inline-block px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium mb-6">NEWSLETTER</span>
-                        <h2 class="text-4xl font-bold text-gray-900 mb-6">Stay Updated with Digital Marketing Trends</h2>
-                        <div class="w-20 h-1 bg-gradient-to-r from-indigo-500 to-purple-600 mb-8"></div>
-                        <p class="text-lg text-gray-600 mb-10 leading-relaxed">
-                            Subscribe to our newsletter and get the latest insights, tips, and resources delivered straight to your inbox. Be the first to know about new marketing strategies and industry trends.
-                        </p>
-                        
-                        <form action="#" method="POST" class="space-y-4">
-                            @csrf
-                            <div class="flex flex-col space-y-2">
-                                <label for="newsletter-name" class="text-sm font-medium text-gray-700">Your Name</label>
-                                <input type="text" id="newsletter-name" name="name" placeholder="John Doe" class="px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300">
-                            </div>
-                            
-                            <div class="flex flex-col space-y-2">
-                                <label for="newsletter-email" class="text-sm font-medium text-gray-700">Email Address</label>
-                                <input type="email" id="newsletter-email" name="email" placeholder="john@example.com" required class="px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300">
-                            </div>
-                            
-                            <div class="flex items-start mt-6">
-                                <div class="flex items-center h-5">
-                                    <input id="newsletter-consent" name="consent" type="checkbox" class="h-4 w-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500" required>
-                                </div>
-                                <div class="ml-3 text-sm">
-                                    <label for="newsletter-consent" class="text-gray-600">I agree to receive marketing emails and can unsubscribe at any time</label>
-                                </div>
-                            </div>
-                            
-                            <button type="submit" class="w-full mt-6 px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 flex items-center justify-center">
-                                Subscribe Now
-                                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 12h15"></path>
-                                </svg>
-                            </button>
-                        </form>
-                        
-                        <p class="text-sm text-gray-500 mt-6">
-                            We respect your privacy and will never share your information. Unsubscribe with one click at any time.
-                        </p>
-                    </div>
-                    
-                    <!-- Right Side: Illustration -->
-                    <div class="md:w-2/5 bg-gradient-to-br from-indigo-500 to-purple-600 p-12 flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute top-0 left-0 w-full h-full opacity-20">
-                            <svg class="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <pattern id="newsletter-grid" width="10" height="10" patternUnits="userSpaceOnUse">
-                                        <path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" stroke-width="0.5"/>
-                                    </pattern>
-                                </defs>
-                                <rect width="100" height="100" fill="url(#newsletter-grid)" />
-                            </svg>
-                        </div>
-                        <div class="relative z-10 text-center">
-                            <svg class="w-32 h-32 mx-auto text-white opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
-                            </svg>
-                            <h3 class="text-2xl font-bold text-white mt-6">Weekly Insights</h3>
-                            <p class="text-indigo-100 mt-2 max-w-xs mx-auto">Join over 10,000 marketers receiving our weekly digital marketing tips</p>
-                            
-                            <div class="mt-10 flex flex-col space-y-3">
-                                <div class="flex items-center text-white">
-                                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                    </svg>
-                                    <span>Industry trends</span>
-                                </div>
-                                <div class="flex items-center text-white">
-                                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                    </svg>
-                                    <span>Exclusive resources</span>
-                                </div>
-                                <div class="flex items-center text-white">
-                                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                    </svg>
-                                    <span>Actionable tips</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
+   
     <!-- Two-Factor Authentication Promotion -->
     <section class="py-24 bg-gradient-to-r from-indigo-900 via-purple-800 to-indigo-700 relative overflow-hidden">
         <!-- Background Elements -->
@@ -522,112 +587,8 @@
             <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-white opacity-5 rounded-full"></div>
         </div>
         
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="max-w-5xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden">
-                <div class="flex flex-col md:flex-row">
-                    <!-- Left Side: Image/Illustration -->
-                    <div class="md:w-2/5 bg-gradient-to-br from-indigo-500 to-purple-600 p-10 flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute top-0 left-0 w-full h-full opacity-20">
-                            <svg class="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                                <defs>
-                                    <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
-                                        <path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" stroke-width="0.5"/>
-                                    </pattern>
-                                </defs>
-                                <rect width="100" height="100" fill="url(#grid)" />
-                            </svg>
-                        </div>
-                        <div class="relative z-10 text-center">
-                            <svg class="w-32 h-32 mx-auto text-white opacity-90" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                            </svg>
-                            <h3 class="text-2xl font-bold text-white mt-6">Secure Your Account</h3>
-                            <p class="text-indigo-100 mt-2">Protection against unauthorized access</p>
-                        </div>
-                    </div>
-                    
-                    <!-- Right Side: Content -->
-                    <div class="md:w-3/5 p-10 md:p-12">
-                        <div class="flex items-center mb-6">
-                            <div class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center mr-4">
-                                <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-                                </svg>
-                            </div>
-                            <h3 class="text-3xl font-bold text-gray-900">Enhanced Security with Two-Factor Authentication</h3>
-                        </div>
-                        
-                        <p class="text-gray-600 text-lg mb-8 leading-relaxed">
-                            We've implemented Two-Factor Authentication to provide an additional layer of security for your account. This extra step helps protect your sensitive information and ensures that only you can access your account, even if your password is compromised.
-                        </p>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                            <div class="flex items-start">
-                                <div class="flex-shrink-0 mt-1">
-                                    <svg class="w-5 h-5 text-indigo-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                    </svg>
-                                </div>
-                                <div class="ml-3">
-                                    <p class="text-gray-700">Protects against unauthorized access</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div class="flex-shrink-0 mt-1">
-                                    <svg class="w-5 h-5 text-indigo-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                    </svg>
-                                </div>
-                                <div class="ml-3">
-                                    <p class="text-gray-700">Simple setup process</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div class="flex-shrink-0 mt-1">
-                                    <svg class="w-5 h-5 text-indigo-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                    </svg>
-                                </div>
-                                <div class="ml-3">
-                                    <p class="text-gray-700">Works with authenticator apps</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start">
-                                <div class="flex-shrink-0 mt-1">
-                                    <svg class="w-5 h-5 text-indigo-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                    </svg>
-                                </div>
-                                <div class="ml-3">
-                                    <p class="text-gray-700">Secure recovery options</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <a href="{{ route('profile') }}" class="inline-flex items-center px-8 py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
-                            Enable 2FA Now
-                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+         
 
-    <!-- CTA Section -->
-    <section class="py-24 bg-gray-50 relative overflow-hidden">
-        <!-- Background Elements -->
-        <div class="absolute inset-0 bg-gradient-to-br from-indigo-50 to-purple-50 opacity-70 z-0"></div>
-        <div class="absolute -top-24 -right-24 w-96 h-96 bg-indigo-200 rounded-full opacity-20 blur-3xl z-0"></div>
-        <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-purple-200 rounded-full opacity-20 blur-3xl z-0"></div>
-        
-        <!-- Decorative Elements -->
-        <div class="absolute top-1/4 right-1/4 w-8 h-8 bg-indigo-400 rounded-full opacity-20 z-0"></div>
-        <div class="absolute bottom-1/3 left-1/3 w-12 h-12 bg-purple-400 rounded-full opacity-20 z-0"></div>
-        <div class="absolute top-1/2 left-1/5 w-6 h-6 bg-pink-400 rounded-full opacity-20 z-0"></div>
-        
         <div class="container mx-auto px-4 relative z-10">
             <div class="max-w-6xl mx-auto">
                 <div class="bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-700 rounded-3xl p-2 shadow-2xl transform hover:scale-[1.01] transition-all duration-300">
@@ -727,5 +688,12 @@
                 </div>
             </div>
         </div>
+
+
+
+
+
     </section>
+
+   
 @endsection

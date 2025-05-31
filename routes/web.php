@@ -21,7 +21,9 @@ use App\Http\Controllers\Admin\DeliverableManagementController;
 // Public routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
-Route::get('/resources', [ResourceController::class, 'index'])->name('resources');
+Route::get('/resources', [HomeController::class, 'resources'])->name('resources');
+Route::get('/resources/{id}', [HomeController::class, 'resourceShow'])->name('resources.show');
+Route::get('/resources/{id}/download', [HomeController::class, 'resourceDownload'])->name('resources.download');
 Route::get('/milestones', [HomeController::class, 'milestones'])->name('milestones');
 Route::get('/project-activities', [HomeController::class, 'projectActivities'])->name('project.activities');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
@@ -64,17 +66,48 @@ Route::middleware(['auth', 'verified', \App\Http\Middleware\EnsureTwoFactorAuthe
 });
 
 // Admin routes (require admin role)
-Route::middleware(['auth', 'verified', \App\Http\Middleware\EnsureTwoFactorAuthenticated::class, 'admin'])->prefix('admin')->name('admin.')->group(function () {
-    // Admin dashboard
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
-    // User management
-    Route::resource('users', UserController::class);
-    Route::put('/users/{user}/activate', [UserController::class, 'activate'])->name('users.activate');
-    Route::put('/users/{user}/deactivate', [UserController::class, 'deactivate'])->name('users.deactivate');
-    
-    // Deliverable management
-    Route::resource('deliverables', DeliverableManagementController::class);
-    Route::post('/deliverables/{deliverable}/publish', [DeliverableManagementController::class, 'publish'])->name('deliverables.publish');
-    Route::post('/deliverables/{deliverable}/unpublish', [DeliverableManagementController::class, 'unpublish'])->name('deliverables.unpublish');
+Route::prefix('admin')->name('admin.')->group(function () {
+    // Apply auth and verified middleware to all routes in this group
+    Route::middleware(['auth', 'verified'])->group(function () {
+        // Check for admin role manually in a controller
+        // Admin dashboard
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        
+        // User management
+        Route::resource('users', UserController::class);
+        Route::put('/users/{user}/activate', [UserController::class, 'activate'])->name('users.activate');
+        Route::put('/users/{user}/deactivate', [UserController::class, 'deactivate'])->name('users.deactivate');
+        
+        // Deliverable management
+        Route::resource('deliverables', DeliverableManagementController::class);
+        Route::post('/deliverables/{deliverable}/publish', [DeliverableManagementController::class, 'publish'])->name('deliverables.publish');
+        Route::post('/deliverables/{deliverable}/unpublish', [DeliverableManagementController::class, 'unpublish'])->name('deliverables.unpublish');
+        
+        // Digital Marketing Resource management
+        Route::resource('resources', \App\Http\Controllers\Admin\ResourceController::class);
+        Route::post('/resources/{resource}/toggle-featured', [\App\Http\Controllers\Admin\ResourceController::class, 'toggleFeatured'])->name('resources.toggle-featured');
+        Route::post('/resources/{resource}/toggle-published', [\App\Http\Controllers\Admin\ResourceController::class, 'togglePublished'])->name('resources.toggle-published');
+        Route::get('/resources/{resource}/download', [\App\Http\Controllers\Admin\ResourceController::class, 'download'])->name('resources.download');
+        
+        // Project Milestone management
+        Route::resource('milestones', \App\Http\Controllers\Admin\MilestoneController::class);
+        Route::post('/milestones/{milestone}/toggle-featured', [\App\Http\Controllers\Admin\MilestoneController::class, 'toggleFeatured'])->name('milestones.toggle-featured');
+        Route::post('/milestones/reorder', [\App\Http\Controllers\Admin\MilestoneController::class, 'reorder'])->name('milestones.reorder');
+        
+        // Milestone Deliverables management
+        Route::get('/milestones/{milestone}/deliverables', [\App\Http\Controllers\Admin\MilestoneDeliverableController::class, 'index'])->name('milestones.deliverables.index');
+        Route::get('/milestones/{milestone}/deliverables/create', [\App\Http\Controllers\Admin\MilestoneDeliverableController::class, 'create'])->name('milestones.deliverables.create');
+        Route::post('/milestones/{milestone}/deliverables', [\App\Http\Controllers\Admin\MilestoneDeliverableController::class, 'store'])->name('milestones.deliverables.store');
+        Route::get('/milestones/{milestone}/deliverables/{deliverable}/edit', [\App\Http\Controllers\Admin\MilestoneDeliverableController::class, 'edit'])->name('milestones.deliverables.edit');
+        Route::put('/milestones/{milestone}/deliverables/{deliverable}', [\App\Http\Controllers\Admin\MilestoneDeliverableController::class, 'update'])->name('milestones.deliverables.update');
+        Route::delete('/milestones/{milestone}/deliverables/{deliverable}', [\App\Http\Controllers\Admin\MilestoneDeliverableController::class, 'destroy'])->name('milestones.deliverables.destroy');
+        Route::post('/milestones/{milestone}/deliverables/{deliverable}/toggle-completed', [\App\Http\Controllers\Admin\MilestoneDeliverableController::class, 'toggleCompleted'])->name('milestones.deliverables.toggle-completed');
+        
+        // Project Activity management
+        Route::resource('activities', \App\Http\Controllers\Admin\ProjectActivityController::class);
+        Route::post('/activities/{activity}/toggle-featured', [\App\Http\Controllers\Admin\ProjectActivityController::class, 'toggleFeatured'])->name('activities.toggle-featured');
+        Route::post('/activities/{activity}/images', [\App\Http\Controllers\Admin\ProjectActivityController::class, 'storeImage'])->name('activities.images.store');
+        Route::delete('/activities/{activity}/images/{image}', [\App\Http\Controllers\Admin\ProjectActivityController::class, 'destroyImage'])->name('activities.images.destroy');
+        Route::post('/activities/{activity}/images/{image}/set-primary', [\App\Http\Controllers\Admin\ProjectActivityController::class, 'setPrimaryImage'])->name('activities.images.set-primary');
+    });
 });

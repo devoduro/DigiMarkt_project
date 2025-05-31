@@ -29,10 +29,9 @@
                 </div>
                 <div class="mb-2 flex items-center">
                     <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                     </svg>
-                    {{ $resource->views }} {{ Str::plural('view', $resource->views) }}
+                    {{ $resource->download_count ?? 0 }} {{ Str::plural('download', $resource->download_count ?? 0) }}
                 </div>
             </div>
         </div>
@@ -47,11 +46,28 @@
                     <img src="{{ asset('storage/' . $resource->image_path) }}" alt="{{ $resource->title }}" class="w-full h-auto">
                 </div>
             @endif
+            
+            @if($resource->file_path)
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden mb-8">
+                    <div class="p-6">
+                        <h2 class="text-xl font-semibold text-gray-900 mb-4">Download Resource</h2>
+                        <p class="text-gray-600 mb-4">
+                            This resource includes a downloadable file. Click the button below to download.
+                        </p>
+                        <a href="{{ route('resources.download', $resource->id) }}" class="inline-flex items-center px-4 py-2 bg-primary text-white font-semibold rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                            </svg>
+                            Download File
+                        </a>
+                    </div>
+                </div>
+            @endif
 
             <div class="bg-white rounded-lg shadow-sm overflow-hidden mb-8">
                 <div class="p-6">
                     <div class="prose max-w-none text-gray-600">
-                        {!! $resource->content !!}
+                        {!! nl2br(e($resource->description)) !!}
                     </div>
                 </div>
             </div>
