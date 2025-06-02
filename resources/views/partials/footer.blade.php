@@ -1,8 +1,8 @@
 <footer class="bg-gray-900 text-white">
     <div class="container mx-auto px-4 py-12">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <!-- Project Info -->
-            <div class="col-span-3 md:col-span-1">
+            <div class="col-span-1 md:col-span-2 lg:col-span-1">
                 <h2 class="text-2xl font-bold mb-4 text-gradient-primary">DigiMarkt</h2>
                 <p class="text-gray-300 mb-4">Digital Marketing Skills for TVET Institutions in Ghana</p>
                 <div class="flex items-center mb-4 bg-blue-900 p-3 rounded-lg">
@@ -32,7 +32,7 @@
             </div>
 
             <!-- Quick Links -->
-            <div class="col-span-1">
+            <div class="col-span-1 md:col-span-1">
                 <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
                 <ul class="space-y-2">
                     <li><a href="{{ route('home') }}" class="text-gray-300 hover:text-white">Home</a></li>
@@ -45,7 +45,7 @@
             </div>
 
             <!-- Partner Institutions -->
-            <div class="col-span-1">
+            <div class="col-span-1 md:col-span-1">
                 <h3 class="text-lg font-semibold mb-4">Partner Institutions</h3>
                 <ul class="space-y-2">
                     <li><a href="https://www.steinbeis.de" target="_blank" rel="noopener" class="text-gray-300 hover:text-white">Steinbeis (Germany)</a></li>
@@ -57,7 +57,7 @@
             </div>
 
             <!-- Contact Info -->
-            <div class="col-span-1">
+            <div class="col-span-1 md:col-span-1">
                 <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
                 <ul class="space-y-2">
                     <li class="flex items-start">
@@ -84,7 +84,7 @@
         </div>
 
         <div class="border-t border-gray-800 mt-8 pt-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 w-full">
                 <div>
                     <h4 class="text-md font-semibold text-white mb-3">EU Funding Disclaimer</h4>
                     <p class="text-sm text-gray-400">This project has been funded with support from the European Commission. This publication reflects the views only of the author, and the Commission cannot be held responsible for any use which may be made of the information contained therein.</p>

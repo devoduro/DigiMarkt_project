@@ -39,7 +39,7 @@
     
     @yield('styles')
 </head>
-<body class="bg-gray-100 min-h-screen" x-data="{ sidebarOpen: false }">
+<body class="bg-gray-100 min-h-screen" x-data="{ sidebarOpen: window.innerWidth >= 1024 }" @resize.window="sidebarOpen = window.innerWidth >= 1024">
     <div class="flex h-screen bg-gray-100">
         <!-- Sidebar -->
         <div class="fixed inset-y-0 left-0 z-30 w-64 overflow-y-auto bg-gray-900 lg:translate-x-0 lg:static lg:inset-0 transition duration-300 ease-in-out"

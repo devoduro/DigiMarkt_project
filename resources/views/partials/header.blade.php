@@ -1,4 +1,4 @@
-<header class="bg-white shadow">
+<header class="bg-white shadow" x-data="mobileMenu">
     <div class="container mx-auto px-4 py-4">
         <div class="flex justify-between items-center">
             <!-- Logo -->
@@ -10,7 +10,7 @@
 
             <!-- Mobile menu button -->
             <div class="flex md:hidden">
-                <button type="button" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600" aria-label="toggle menu" x-data="{ open: false }" @click="open = !open">
+                <button type="button" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600" aria-label="toggle menu" @click="toggle">
                     <svg viewBox="0 0 24 24" class="h-6 w-6 fill-current">
                         <path fill-rule="evenodd" d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path>
                     </svg>
@@ -54,7 +54,7 @@
         </div>
         
         <!-- Mobile Navigation -->
-        <div x-data="{ open: false }" x-show="open" class="md:hidden mt-4">
+        <div x-show="open" class="md:hidden mt-4" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 transform scale-95" x-transition:enter-end="opacity-100 transform scale-100" x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100 transform scale-100" x-transition:leave-end="opacity-0 transform scale-95" @click.away="close">
             <nav class="flex flex-col space-y-2">
                 <a href="{{ route('home') }}" class="text-gray-700 hover:text-primary-dark py-2">Home</a>
                 <a href="{{ route('about') }}" class="text-gray-700 hover:text-primary-dark py-2">About</a>

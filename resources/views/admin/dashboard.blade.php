@@ -138,110 +138,6 @@
         </div>
     </div>
 
-    <!-- Resource Metrics Row -->    
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-        <!-- Resources Card -->
-        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-            <div class="p-5">
-                <div class="flex justify-between items-center mb-3">
-                    <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Resources</h2>
-                    <div class="p-2 rounded-lg bg-purple-50">
-                        <svg class="h-6 w-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                        </svg>
-                    </div>
-                </div>
-                <div class="flex items-baseline">
-                    <p class="text-3xl font-bold text-gray-900">{{ $totalResources }}</p>
-                    <p class="ml-2 text-sm font-medium text-green-500 flex items-center">
-                        <span class="px-2 py-0.5 bg-green-100 text-green-800 rounded-full text-xs">
-                            {{ $publishedResources }} published
-                        </span>
-                    </p>
-                </div>
-                <div class="mt-1 text-xs text-gray-500">{{ $resourceDownloads }} total downloads</div>
-            </div>
-            <div class="bg-gray-50 px-5 py-3">
-                <a href="{{ route('admin.resources.index') }}" class="text-purple-600 hover:text-purple-800 text-sm font-medium flex items-center justify-between">
-                    Manage resources
-                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                </a>
-            </div>
-        </div>
-        
-        <!-- Milestones Card -->
-        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-            <div class="p-5">
-                <div class="flex justify-between items-center mb-3">
-                    <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Milestones</h2>
-                    <div class="p-2 rounded-lg bg-amber-50">
-                        <svg class="h-6 w-6 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
-                        </svg>
-                    </div>
-                </div>
-                <div class="flex items-baseline">
-                    <p class="text-3xl font-bold text-gray-900">{{ $totalMilestones }}</p>
-                    <div class="ml-2 flex space-x-1">
-                        <span class="px-2 py-0.5 bg-green-100 text-green-800 rounded-full text-xs">
-                            {{ $completedMilestones }} completed
-                        </span>
-                    </div>
-                </div>
-                <div class="mt-3">
-                    <div class="flex justify-between text-xs text-gray-500 mb-1">
-                        <span>Completion</span>
-                        <span>{{ $milestoneCompletionRate }}%</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-2">
-                        <div class="bg-amber-500 h-2 rounded-full" style="width: {{ $milestoneCompletionRate }}%"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="bg-gray-50 px-5 py-3">
-                <a href="{{ route('admin.milestones.index') }}" class="text-amber-600 hover:text-amber-800 text-sm font-medium flex items-center justify-between">
-                    Manage milestones
-                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                </a>
-            </div>
-        </div>
-        
-        <!-- Project Activities Card -->
-        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
-            <div class="p-5">
-                <div class="flex justify-between items-center mb-3">
-                    <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wider">Project Activities</h2>
-                    <div class="p-2 rounded-lg bg-teal-50">
-                        <svg class="h-6 w-6 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                        </svg>
-                    </div>
-                </div>
-                <div class="flex items-baseline">
-                    <p class="text-3xl font-bold text-gray-900">{{ $totalActivities }}</p>
-                    <p class="ml-2 text-sm font-medium text-green-500 flex items-center">
-                        <span class="px-2 py-0.5 bg-teal-100 text-teal-800 rounded-full text-xs">
-                            {{ $featuredActivities }} featured
-                        </span>
-                    </p>
-                </div>
-                <div class="mt-1 text-xs text-gray-500">Latest activity: {{ $recentActivities->isNotEmpty() ? \Carbon\Carbon::parse($recentActivities->first()['date'])->format('M d, Y') : 'None' }}</div>
-            </div>
-            <div class="bg-gray-50 px-5 py-3">
-                <a href="{{ route('project.activities') }}" class="text-teal-600 hover:text-teal-800 text-sm font-medium flex items-center justify-between">
-                    View activities
-                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
-                </a>
-            </div>
-        </div>
-    </div>
-
     <!-- Analytics Charts Row -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
         <!-- Downloads Chart -->
@@ -325,81 +221,9 @@
         </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-        <!-- Recent Activities -->
-        <div class="bg-white rounded-xl shadow-md overflow-hidden col-span-1">
-            <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center">
-                <h2 class="text-lg font-semibold text-gray-900">Recent Activities</h2>
-                <a href="{{ route('project.activities') }}" class="text-sm text-teal-600 hover:text-teal-800 font-medium">View All</a>
-            </div>
-            <div class="divide-y divide-gray-100">
-                @if(isset($recentActivities) && $recentActivities->count() > 0)
-                    @foreach($recentActivities as $activity)
-                    <div class="px-6 py-4">
-                        <div class="flex items-center">
-                            <div class="flex-shrink-0 h-10 w-10 rounded-md overflow-hidden bg-gray-100">
-                                @if($activity['image'])
-                                    <img src="{{ $activity['image'] }}" alt="{{ $activity['title'] }}" class="h-10 w-10 object-cover">
-                                @else
-                                    <div class="h-10 w-10 flex items-center justify-center bg-teal-100 text-teal-500">
-                                        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                        </svg>
-                                    </div>
-                                @endif
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="text-sm font-medium text-gray-900">{{ $activity['title'] }}</h3>
-                                <p class="text-xs text-gray-500">{{ \Carbon\Carbon::parse($activity['date'])->format('M d, Y') }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                @else
-                    <div class="px-6 py-4 text-center text-gray-500 text-sm">
-                        No recent activities found
-                    </div>
-                @endif
-            </div>
-        </div>
-
-        <!-- Resource Categories -->
-        <div class="bg-white rounded-xl shadow-md overflow-hidden col-span-1">
-            <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center">
-                <h2 class="text-lg font-semibold text-gray-900">Resource Categories</h2>
-                <a href="{{ route('admin.resources.index') }}" class="text-sm text-purple-600 hover:text-purple-800 font-medium">View All</a>
-            </div>
-            <div class="divide-y divide-gray-100">
-                @if(isset($resourcesByCategory) && $resourcesByCategory->count() > 0)
-                    @foreach($resourcesByCategory as $category)
-                    <div class="px-6 py-4">
-                        <div class="flex justify-between items-center">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0 h-8 w-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-500">
-                                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
-                                    </svg>
-                                </div>
-                                <div class="ml-3">
-                                    <p class="text-sm font-medium text-gray-900">{{ $category->category ?: 'Uncategorized' }}</p>
-                                </div>
-                            </div>
-                            <div class="text-sm font-semibold text-gray-500">
-                                {{ $category->count }} resources
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                @else
-                    <div class="px-6 py-4 text-center text-gray-500 text-sm">
-                        No categories found
-                    </div>
-                @endif
-            </div>
-        </div>
-
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <!-- Recent Users -->
-        <div class="bg-white rounded-xl shadow-md overflow-hidden col-span-1">
+        <div class="bg-white rounded-xl shadow-md overflow-hidden">
             <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center">
                 <h2 class="text-lg font-semibold text-gray-900">Recent Users</h2>
                 <a href="{{ route('admin.users.index') }}" class="text-sm text-blue-600 hover:text-blue-800 font-medium">View All</a>
@@ -447,9 +271,7 @@
                 @endif
             </div>
         </div>
-    </div>
 
-    <div class="grid grid-cols-1 gap-6 mb-8">
         <!-- Recent Downloads -->
         <div class="bg-white rounded-xl shadow-md overflow-hidden">
             <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center">
