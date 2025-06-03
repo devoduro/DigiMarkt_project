@@ -4,11 +4,19 @@
 document.addEventListener('alpine:init', () => {
     Alpine.data('mobileMenu', () => ({
         open: false,
+        activeDropdown: null,
         toggle() {
             this.open = !this.open;
         },
         close() {
             this.open = false;
+            this.activeDropdown = null;
+        },
+        toggleDropdown(name) {
+            this.activeDropdown = this.activeDropdown === name ? null : name;
+        },
+        isDropdownOpen(name) {
+            return this.activeDropdown === name;
         }
     }));
 

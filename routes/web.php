@@ -28,8 +28,10 @@ Route::get('/milestones', [HomeController::class, 'milestones'])->name('mileston
 Route::get('/project-activities', [HomeController::class, 'projectActivities'])->name('project.activities');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
+Route::get('/management-board', [\App\Http\Controllers\ManagementBoardController::class, 'index'])->name('management.board');
 Route::get('/terms', [HomeController::class, 'terms'])->name('terms');
 Route::get('/privacy', [HomeController::class, 'privacy'])->name('privacy');
+Route::get('/deliverables', [HomeController::class, 'deliverables'])->name('deliverables');
 
 // Authentication routes (Laravel's built-in auth)
 Auth::routes(['verify' => true]); // Enable email verification
@@ -59,10 +61,14 @@ Route::middleware(['auth', 'verified', \App\Http\Middleware\EnsureTwoFactorAuthe
     Route::post('/profile/two-factor', [ProfileController::class, 'enableTwoFactor'])->name('profile.two-factor.enable');
     Route::delete('/profile/two-factor', [ProfileController::class, 'disableTwoFactor'])->name('profile.two-factor.disable');
     
-    // Deliverables (protected content)
-    Route::get('/deliverables', [DeliverableController::class, 'index'])->name('deliverables');
-    Route::get('/deliverables/{deliverable}', [DeliverableController::class, 'show'])->name('deliverables.show');
-    Route::get('/deliverables/{deliverable}/download', [DeliverableController::class, 'download'])->name('deliverables.download');
+    // Deliverables - authenticated downloads only
+    Route::get('/deliverables/{id}/download', [HomeController::class, 'documentDownload'])->name('deliverables.download');
+
+    // Protected deliverable routes
+    Route::middleware(['auth', 'verified'])->group(function () {
+        Route::get('/deliverables/manage', [DeliverableController::class, 'index'])->name('deliverables.manage');
+        Route::get('/deliverables/detail/{deliverable}', [DeliverableController::class, 'show'])->name('deliverables.show');
+    });
 });
 
 // Admin routes (require admin role)

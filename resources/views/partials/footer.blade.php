@@ -6,11 +6,8 @@
                 <h2 class="text-2xl font-bold mb-4 text-gradient-primary">DigiMarkt</h2>
                 <p class="text-gray-300 mb-4">Digital Marketing Skills for TVET Institutions in Ghana</p>
                 <div class="flex items-center mb-4 bg-blue-900 p-3 rounded-lg">
-                    <img src="{{ asset('assets/images/eu-logo.svg') }}" alt="EU Logo" class="h-12 mr-3">
-                    <div>
-                        <p class="text-sm text-white font-semibold">Co-funded by the European Union</p>
-                        <p class="text-xs text-gray-300">Grant amount: €394,185.00</p>
-                    </div>
+                    <img src="{{ asset('assets/images/logo/eulogoNew.png') }}" alt="EU Logo" class="h-12 mr-3">
+                    
                 </div>
                 <div class="flex space-x-4">
                     <a href="https://www.facebook.com/DigiMarktProject" class="text-gray-300 hover:text-white" target="_blank" rel="noopener">
@@ -47,13 +44,28 @@
             <!-- Partner Institutions -->
             <div class="col-span-1 md:col-span-1">
                 <h3 class="text-lg font-semibold mb-4">Partner Institutions</h3>
-                <ul class="space-y-2">
-                    <li><a href="https://www.steinbeis.de" target="_blank" rel="noopener" class="text-gray-300 hover:text-white">Steinbeis (Germany)</a></li>
-                    <li><a href="https://www.uniag.sk/en/" target="_blank" rel="noopener" class="text-gray-300 hover:text-white">Slovak University of Agriculture</a></li>
-                    <li><a href="https://aamusted.edu.gh" target="_blank" rel="noopener" class="text-gray-300 hover:text-white">AAMUSTED (Ghana)</a></li>
-                    <li><a href="https://btu.edu.gh" target="_blank" rel="noopener" class="text-gray-300 hover:text-white">Bolgatanga Technical University</a></li>
-                    <li><a href="https://cctu.edu.gh" target="_blank" rel="noopener" class="text-gray-300 hover:text-white">Cape Coast Technical University</a></li>
-                </ul>
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <a href="https://www.steinbeis.de" target="_blank" rel="noopener" class="flex flex-col items-center">
+                        <img src="{{ asset('assets/images/logo/int@E_logo.png') }}" alt="Steinbeis Logo" class="h-12 mb-2 bg-white p-1 rounded">
+                        <span class="text-xs text-gray-300 text-center">Steinbeis</span>
+                    </a>
+                    <a href="https://www.uniag.sk/en/" target="_blank" rel="noopener" class="flex flex-col items-center">
+                        <img src="{{ asset('assets/images/logo/sua_logo.jpg') }}" alt="Slovak University of Agriculture Logo" class="h-12 mb-2 bg-white p-1 rounded">
+                        <span class="text-xs text-gray-300 text-center">SUA</span>
+                    </a>
+                    <a href="https://aamusted.edu.gh" target="_blank" rel="noopener" class="flex flex-col items-center">
+                        <img src="{{ asset('assets/images/logo/aamusted.jpg') }}" alt="AAMUSTED Logo" class="h-12 mb-2 bg-white p-1 rounded">
+                        <span class="text-xs text-gray-300 text-center">AAMUSTED</span>
+                    </a>
+                    <a href="https://btu.edu.gh" target="_blank" rel="noopener" class="flex flex-col items-center">
+                        <img src="{{ asset('assets/images/logo/Bolga_logo.png') }}" alt="Bolgatanga Technical University Logo" class="h-12 mb-2 bg-white p-1 rounded">
+                        <span class="text-xs text-gray-300 text-center">BTU</span>
+                    </a>
+                    <a href="https://cctu.edu.gh" target="_blank" rel="noopener" class="flex flex-col items-center">
+                        <img src="{{ asset('assets/images/logo/CCTU_logo.png') }}" alt="Cape Coast Technical University Logo" class="h-12 mb-2 bg-white p-1 rounded">
+                        <span class="text-xs text-gray-300 text-center">CCTU</span>
+                    </a>
+                </div>
             </div>
 
             <!-- Contact Info -->

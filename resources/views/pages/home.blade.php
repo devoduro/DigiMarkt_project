@@ -3,6 +3,57 @@
 @section('title', 'Home')
 
 @section('content')
+    <!-- Carousel Section -->
+    <section class="relative overflow-hidden">
+        <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="overlay-image" style="background-image: url('{{ asset('assets/images/carousel/pm1_img4.jpeg') }}');"></div>
+                    <div class="container">
+                        <div class="carousel-caption text-start">
+                            <h2>Digital Marketing in TVET</h2>
+                            <p>Empowering training providers and learners with digital marketing skills in Ghana</p>
+                            <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="overlay-image" style="background-image: url('{{ asset('assets/images/carousel/20191112054904-FotoJet32.webp') }}');"></div>
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <h2>International Collaboration</h2>
+                            <p>Working with partners across Europe and Africa to enhance digital marketing education</p>
+                            <p><a class="btn btn-lg btn-success" href="#">View Partners</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="overlay-image" style="background-image: url('{{ asset('assets/images/carousel/slider2.jpg') }}');"></div>
+                    <div class="container">
+                        <div class="carousel-caption text-end">
+                            <h2>Building Digital Capacity</h2>
+                            <p>Developing innovative training materials and resources for digital marketing</p>
+                            <p><a class="btn btn-lg btn-info" href="#">Explore Resources</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+
     <!-- Hero Section -->
     <section class="relative overflow-hidden bg-gradient-to-br from-indigo-900 via-purple-800 to-indigo-700 py-24 md:py-32">
         <!-- Animated Background Elements -->
@@ -15,8 +66,10 @@
         <div class="container mx-auto px-4 relative z-10">
             <div class="flex flex-col md:flex-row items-center">
                 <div class="md:w-1/2 mb-12 md:mb-0">
-                    <span class="inline-block px-4 py-1 bg-white bg-opacity-20 backdrop-blur-sm text-white rounded-full text-sm font-medium mb-6">EU Co-funded Project</span>
-                    <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-6">
+                    <div class="flex items-center mb-6">
+                           <img src="{{ asset('assets/images/logo/eulogoNew.png') }}" alt="EU Logo" class="h-16 bg-white p-2 rounded-lg shadow-lg">
+                    </div>
+                        <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-6">
                         Digital <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-300">Marketing</span> in TVET
                     </h1>
                     <p class="text-xl text-white text-opacity-90 mb-6 max-w-xl">
@@ -44,29 +97,29 @@
                 <div class="md:w-1/2 relative">
                     <div class="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-3xl blur-lg opacity-30 transform rotate-3"></div>
                     <div class="relative z-10 rounded-2xl shadow-2xl transform -rotate-2 hover:rotate-0 transition-transform duration-500 bg-white p-6">
-                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Project Partners</h3>
-                        <ul class="space-y-3 text-gray-700">
-                            <li class="flex items-center">
-                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                Steinbeis Beratungszentrum (SRZ), Germany
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                Slovak University of Agriculture, Slovakia
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                AAMUSTED, Ghana
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                Bolgatanga Technical University (BTU), Ghana
-                            </li>
-                            <li class="flex items-center">
-                                <svg class="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                Cape-Coast Technical University (CCTU), Ghana
-                            </li>
-                        </ul>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Project Partners</h3>
+                        <div class="grid grid-cols-2 gap-4 mb-4">
+                            <div class="flex flex-col items-center">
+                                <img src="{{ asset('assets/images/logo/int@E_logo.png') }}" alt="Steinbeis Logo" class="h-12 mb-2">
+                                <span class="text-xs text-gray-700 text-center">Steinbeis (Germany)</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <img src="{{ asset('assets/images/logo/sua_logo.jpg') }}" alt="Slovak University of Agriculture Logo" class="h-12 mb-2">
+                                <span class="text-xs text-gray-700 text-center">SUA (Slovakia)</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <img src="{{ asset('assets/images/logo/aamusted.jpg') }}" alt="AAMUSTED Logo" class="h-12 mb-2">
+                                <span class="text-xs text-gray-700 text-center">AAMUSTED (Ghana)</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <img src="{{ asset('assets/images/logo/Bolga_logo.png') }}" alt="Bolgatanga Technical University Logo" class="h-12 mb-2">
+                                <span class="text-xs text-gray-700 text-center">BTU (Ghana)</span>
+                            </div>
+                            <div class="flex flex-col items-center col-span-2 mx-auto">
+                                <img src="{{ asset('assets/images/logo/CCTU_logo.png') }}" alt="Cape Coast Technical University Logo" class="h-12 mb-2">
+                                <span class="text-xs text-gray-700 text-center">CCTU (Ghana)</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -135,7 +188,8 @@
     <section class="py-24 bg-gradient-to-b from-white to-gray-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-20">
-                <span class="inline-block px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium mb-4">POWERFUL FEATURES</span>
+              
+                <span class="inline-block px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium mb-4">PROJECT OBJECTIVES</span>
                 <h2 class="text-4xl font-bold text-gray-900 mb-4">Elevate Your Digital Marketing</h2>
                 <div class="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-600 mx-auto mb-6"></div>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -612,8 +666,11 @@
                             
                             <div class="flex flex-col lg:flex-row items-center justify-between relative z-10">
                                 <div class="lg:w-3/5 mb-10 lg:mb-0 lg:pr-16">
-                                    <span class="inline-block px-3 py-1 bg-white bg-opacity-20 text-white rounded-full text-sm font-medium mb-6">START TODAY</span>
-                                    <h2 class="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">Ready to Transform Your Digital Marketing Strategy?</h2>
+                                    <!-- <div class="flex items-center mb-6">
+                                        <img src="{{ asset('assets/images/logo/digiMark_logo.jpg') }}" alt="DigiMarkt Logo" class="h-16 mr-4 rounded-lg">
+                                        <img src="{{ asset('assets/images/logo/eulogoNew.png') }}" alt="EU Logo" class="h-12 bg-white p-2 rounded-lg">
+                                    </div>-->
+                                         <h2 class="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">Ready to Transform Your Digital Marketing Strategy?</h2>
                                     <div class="w-24 h-1 bg-white opacity-50 mb-8"></div>
                                     <p class="text-xl text-white opacity-90 mb-10 leading-relaxed">
                                         Join thousands of marketers who have already elevated their skills and strategies with our premium resources, tools, and expert guidance.

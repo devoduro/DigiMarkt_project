@@ -67,9 +67,9 @@ class ResourceController extends Controller
             'thumbnail_path' => $thumbnailPath,
             'file_path' => $filePath,
             'file_name' => $fileName,
-            'is_featured' => $request->has('is_featured'),
+            'is_featured' => $request->boolean('is_featured'),
             'access_level' => $validated['access_level'],
-            'is_published' => $request->has('is_published'),
+            'is_published' => $request->boolean('is_published'),
             'created_by' => auth()->id(),
             'download_count' => 0,
         ]);
@@ -117,9 +117,9 @@ class ResourceController extends Controller
             'description' => $validated['description'],
             'content' => $validated['content'] ?? null,
             'category' => $validated['category'],
-            'is_featured' => $request->has('is_featured'),
+            'is_featured' => $request->boolean('is_featured'),
             'access_level' => $validated['access_level'],
-            'is_published' => $request->has('is_published'),
+            'is_published' => $request->boolean('is_published'),
         ];
 
         if ($request->hasFile('thumbnail')) {

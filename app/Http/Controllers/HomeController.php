@@ -249,11 +249,13 @@ class HomeController extends Controller
      */
     public function deliverables()
     {
-        // Get documents, public ones for guests and all for authenticated users
+        // Get documents, published ones for guests and all for authenticated users
         if (auth()->check()) {
+            // Authenticated users can see all documents
             $documents = Document::latest()->paginate(12);
         } else {
-            $documents = Document::where('is_public', true)->latest()->paginate(12);
+            // Guests can see all published documents (not just public ones)
+            $documents = Document::where('is_published', true)->latest()->paginate(12);
         }
 
         return view('pages.deliverables', compact('documents'));
@@ -281,6 +283,42 @@ class HomeController extends Controller
     public function privacy()
     {
         return view('pages.privacy');
+    }
+    
+    /**
+     * Download a document file with authentication check.
+     *
+     * @param int $id
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse|\Illuminate\Http\RedirectResponse
+     */
+    public function documentDownload($id)
+    {
+        $document = \App\Models\Document::findOrFail($id);
+        
+        // Check if user is authenticated
+        if (!auth()->check()) {
+            // Store intended URL in session
+            session()->put('url.intended', url()->previous());
+            
+            // Redirect to login with message
+            return redirect()->route('login')
+                ->with('message', 'Please login to download this document.');
+        }
+        
+        // Check if file exists
+        if (!$document->file_path || !\Storage::exists($document->file_path)) {
+            return redirect()->back()->with('error', 'Document file not found');
+        }
+        
+        // Record the download
+        \App\Models\Download::create([
+            'user_id' => auth()->id(),
+            'document_id' => $document->id,
+            'ip_address' => request()->ip(),
+            'user_agent' => request()->userAgent(),
+        ]);
+        
+        return \Storage::download($document->file_path, $document->file_name);
     }
     
     /**
