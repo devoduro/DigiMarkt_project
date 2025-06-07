@@ -19,11 +19,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // Get latest public documents/resources
+        // Get latest public documents/deliverables
         $latestDocuments = Document::where('is_public', true)
+            ->orWhere('is_published', true)
             ->latest()
             ->take(3)
             ->get();
+            
+        // Debug info
+        \Log::info('Latest Documents Count: ' . $latestDocuments->count());
+        foreach ($latestDocuments as $doc) {
+            \Log::info('Document: ' . $doc->title . ', Public: ' . ($doc->is_public ? 'Yes' : 'No') . ', Published: ' . ($doc->is_published ? 'Yes' : 'No'));
+        }
             
         // Get featured digital marketing resources
         $featuredResources = Resource::where('is_published', true)

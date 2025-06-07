@@ -13,7 +13,7 @@
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <div class="overlay-image" style="background-image: url('{{ asset('assets/images/carousel/pm1_img4.jpeg') }}');"></div>
+                    <div class="overlay-image" style="background-image: url('{{ asset('assets/images/carousel/slider1.png') }}');"></div>
                     <div class="container">
                         <div class="carousel-caption text-start">
                             <h2>Digital Marketing in TVET</h2>
@@ -23,7 +23,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <div class="overlay-image" style="background-image: url('{{ asset('assets/images/carousel/20191112054904-FotoJet32.webp') }}');"></div>
+                    <div class="overlay-image" style="background-image: url('{{ asset('assets/images/carousel/slider2.png') }}');"></div>
                     <div class="container">
                         <div class="carousel-caption">
                             <h2>International Collaboration</h2>
@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <div class="overlay-image" style="background-image: url('{{ asset('assets/images/carousel/slider2.jpg') }}');"></div>
+                    <div class="overlay-image" style="background-image: url('{{ asset('assets/images/carousel/slider3.png') }}');"></div>
                     <div class="container">
                         <div class="carousel-caption text-end">
                             <h2>Building Digital Capacity</h2>
@@ -358,48 +358,40 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 @foreach($latestDocuments as $document)
-                <div class="group bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden border border-gray-100">
-                    <div class="h-48 bg-gradient-to-br from-indigo-500 to-purple-600 relative overflow-hidden">
-                        @if($document->thumbnail)
-                            <img src="{{ asset($document->thumbnail) }}" alt="{{ $document->title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                        @else
-                            <div class="flex items-center justify-center h-full">
-                                <svg class="w-16 h-16 text-white opacity-80" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                </svg>
-                            </div>
-                        @endif
-                        <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/70 to-transparent">
-                            <div class="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm text-white rounded-full text-xs font-medium">
-                                {{ $document->category ? $document->category->name : 'Uncategorized' }}
-                            </div>
-                        </div>
-                    </div>
+                <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow transform hover:-translate-y-1 duration-300">
                     <div class="p-6">
-                        <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-indigo-600 transition-colors duration-300">{{ $document->title }}</h3>
-                        <p class="text-gray-600 mb-6 line-clamp-3">{{ Str::limit($document->description, 120) }}</p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm text-gray-500 flex items-center">
-                                <svg class="w-4 h-4 mr-1 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                </svg>
-                                {{ $document->created_at->format('M d, Y') }}
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="px-3 py-1 bg-primary-light bg-opacity-20 text-primary-dark rounded-full text-sm">
+                                {{ $document->category ?? 'Uncategorized' }}
                             </span>
-                            <a href="{{ route('documents.show', $document) }}" class="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-medium transition-colors duration-300">
-                                View Resource
-                                <svg class="w-4 h-4 ml-1 group-hover:ml-2 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                            <span class="text-sm text-gray-500">
+                                {{ $document->created_at ? $document->created_at->format('M d, Y') : 'Date unavailable' }}
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ $document->title }}</h3>
+                        <p class="text-gray-600 mb-4">
+                            {{ Str::limit($document->description ?? 'No description available', 100) }}
+                        </p>
+                        <div class="flex items-center justify-between">
+                            <a href="{{ route('deliverables') }}#document-{{ $document->id }}" class="text-primary-dark hover:text-primary font-medium inline-flex items-center">
+                                View Details
+                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                                 </svg>
                             </a>
+                            <div class="text-sm text-gray-500">
+                                {{ $document->downloads ? $document->downloads->count() : '0' }} {{ Str::plural('download', $document->downloads ? $document->downloads->count() : 0) }}
+                            </div>
                         </div>
                     </div>
+                </div>
                 @endforeach
-                @if(count($latestDocuments) === 0)
-                    <div class="col-span-3 text-center py-8">
-                        <p class="text-gray-600">No documents available at the moment.</p>
-                    </div>
-                @endif
             </div>
+            @if(count($latestDocuments) === 0)
+                <div class="col-span-3 text-center py-8">
+                    <p class="text-gray-600">No documents available at the moment.</p>
+                </div>
+            @endif
 
             <div class="text-center mt-12">
                 <a href="{{ route('deliverables') }}" class="px-6 py-3 bg-primary-dark text-white font-semibold rounded-md hover:bg-primary transition-colors inline-block">

@@ -93,40 +93,42 @@
                         </div>
                     @endif
                     
-                    <!-- Add New Images -->
-                    <div class="mb-6">
-                        <h4 class="text-lg font-medium text-gray-700 mb-4">Add New Images</h4>
-                        <form action="{{ route('admin.activities.images.store', $activity) }}" method="POST" enctype="multipart/form-data" class="border rounded p-4">
-                            @csrf
-                            <div class="mb-4">
-                                <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Image File *</label>
-                                <input type="file" name="image" id="image" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('image') border-red-500 @enderror" required>
-                                @error('image')
-                                    <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
-                                @enderror
-                            </div>
-                            
-                            <div class="mb-4">
-                                <div class="flex items-center">
-                                    <input type="checkbox" name="is_primary" id="is_primary" class="mr-2 leading-tight">
-                                    <label for="is_primary" class="text-gray-700 text-sm font-bold">Set as Primary Image</label>
-                                </div>
-                            </div>
-                            
-                            <div class="flex items-center justify-end">
-                                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                                    <i class="fas fa-upload mr-2"></i> Upload Image
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                    
                     <div class="flex items-center justify-end mt-6">
                         <button type="submit" class="bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                             Update Activity
                         </button>
                     </div>
                 </form>
+                
+                <!-- Add New Images (Separate Form) -->
+                <div class="mt-8 mb-6">
+                    <h4 class="text-lg font-medium text-gray-700 mb-4">Add New Images</h4>
+                    <form action="{{ route('admin.activities.images.store', $activity) }}" method="POST" enctype="multipart/form-data" class="border rounded p-4">
+                        @csrf
+                        <div class="mb-4">
+                            <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Image File *</label>
+                            <input type="file" name="image" id="image" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline @error('image') border-red-500 @enderror" required>
+                            @error('image')
+                                <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        
+                        <div class="mb-4">
+                            <div class="flex items-center">
+                                <input type="checkbox" name="is_primary" id="is_primary" class="mr-2 leading-tight">
+                                <label for="is_primary" class="text-gray-700 text-sm font-bold">Set as Primary Image</label>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-end">
+                            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                                <i class="fas fa-upload mr-2"></i> Upload Image
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                    
+
             </div>
         </div>
     </div>
