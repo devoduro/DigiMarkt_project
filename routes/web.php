@@ -11,7 +11,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\DeliverableManagementController;
-
+use App\Http\Controllers\GalleryController;
+ 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,6 +33,8 @@ Route::get('/management-board', [\App\Http\Controllers\ManagementBoardController
 Route::get('/terms', [HomeController::class, 'terms'])->name('terms');
 Route::get('/privacy', [HomeController::class, 'privacy'])->name('privacy');
 Route::get('/deliverables', [HomeController::class, 'deliverables'])->name('deliverables');
+Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
+Route::get('/gallery/{id}', [GalleryController::class, 'show'])->name('gallery.show');
 
 // Authentication routes (Laravel's built-in auth)
 Auth::routes(['verify' => true]); // Enable email verification
@@ -115,5 +118,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/activities/{activity}/images', [\App\Http\Controllers\Admin\ProjectActivityController::class, 'storeImage'])->name('activities.images.store');
         Route::delete('/activities/{activity}/images/{image}', [\App\Http\Controllers\Admin\ProjectActivityController::class, 'destroyImage'])->name('activities.images.destroy');
         Route::post('/activities/{activity}/images/{image}/set-primary', [\App\Http\Controllers\Admin\ProjectActivityController::class, 'setPrimaryImage'])->name('activities.images.set-primary');
+
+        // Gallery management
+        Route::resource('galleries', \App\Http\Controllers\Admin\GalleryController::class);
+        Route::post('/galleries/{gallery}/toggle-featured', [\App\Http\Controllers\Admin\GalleryController::class, 'toggleFeatured'])->name('galleries.toggle-featured');
+        Route::post('/galleries/{gallery}/images', [\App\Http\Controllers\Admin\GalleryController::class, 'storeImage'])->name('galleries.images.store');
+        Route::delete('/galleries/{gallery}/images/{image}', [\App\Http\Controllers\Admin\GalleryController::class, 'destroyImage'])->name('galleries.images.destroy');
     });
 });

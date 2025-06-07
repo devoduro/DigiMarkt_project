@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Document;
 use App\Models\User;
+use App\Models\Gallery;
 use App\Models\Resource;
 use App\Models\ProjectActivity;
 use App\Models\Milestone;
@@ -136,14 +137,23 @@ class HomeController extends Controller
             ]);
         }
         
+        // Add this to the index method in HomeController
+        $featuredGalleries = Gallery::where('is_featured', true)
+        ->with('images')
+        ->latest()
+        ->take(3)
+        ->get();
+        
+        // Add $featuredGalleries to the view data
         return view('pages.home', compact(
-            'latestDocuments', 
-            'featuredResources', 
-            'featuredActivities', 
-            'upcomingMilestones', 
-            'stats', 
-            'testimonials', 
-            'categories'
+        'latestDocuments',
+        'featuredResources',
+        'featuredActivities',
+        'upcomingMilestones',
+        'stats',
+        'testimonials',
+        'categories',
+        'featuredGalleries' // Add this line
         ));
     }
 
