@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Button Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        
+        h2 {
+            margin-top: 0;
+            color: #333;
+        }
+        
+        .chat-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #4f46e5;
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            cursor: pointer;
+            font-size: 24px;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-section">
+        <h2>Chat Button Test Page</h2>
+        <p>This page tests if a chat button can be displayed with fixed positioning.</p>
+        <p>You should see a purple chat button with a chat icon in the bottom right corner of this page.</p>
+    </div>
+
+    <div class="test-section">
+        <h2>Diagnostic Information:</h2>
+        <pre id="diagnostic-info">Loading...</pre>
+    </div>
+
+    <button class="chat-button" id="test-chat-button">💬</button>
+
+    <script>
+        // Simple diagnostic information
+        const diagnostic = document.getElementById('diagnostic-info');
+        
+        // Gather browser information
+        const browserInfo = {
+            userAgent: navigator.userAgent,
+            viewportWidth: window.innerWidth,
+            viewportHeight: window.innerHeight,
+            timestamp: new Date().toString()
+        };
+        
+        // Display diagnostic info
+        diagnostic.textContent = JSON.stringify(browserInfo, null, 2);
+        
+        // Add click handler to button
+        document.getElementById('test-chat-button').addEventListener('click', function() {
+            alert('Chat button is working correctly!');
+        });
+    </script>
+</body>
+</html>

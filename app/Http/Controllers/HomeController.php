@@ -9,16 +9,48 @@ use App\Models\Gallery;
 use App\Models\Resource;
 use App\Models\ProjectActivity;
 use App\Models\Milestone;
+use App\Models\Visitor;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
     /**
+     * Track visitor for analytics.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return void
+     */
+    protected function trackVisitor(Request $request)
+    {
+        // Get IP address and user agent
+        $ip = $request->ip();
+        $userAgent = $request->header('User-Agent');
+        $today = Carbon::today();
+        
+        // Check if this IP has already visited today
+        $existingVisit = Visitor::where('ip_address', $ip)
+            ->where('visit_date', $today)
+            ->exists();
+            
+        // Record the visit
+        Visitor::create([
+            'ip_address' => $ip,
+            'user_agent' => $userAgent,
+            'visit_date' => $today,
+            'is_unique' => !$existingVisit,
+        ]);
+    }
+
+    /**
      * Show the home page with dynamic data.
      */
-    public function index()
+    public function index(Request $request)
     {
+        // Track visitor
+        $this->trackVisitor($request);
+        
         // Get latest public documents/deliverables
         $latestDocuments = Document::where('is_public', true)
             ->orWhere('is_published', true)
@@ -150,17 +182,39 @@ class HomeController extends Controller
         ->latest()
         ->take(3)
         ->get();
+
+        $galleries = Gallery::with('images')
+        ->latest()
+        ->paginate(12);
+        
+ 
+        // Get all galleries for display, not just featured ones
+        $allGalleries = Gallery::with('images')
+        ->latest()
+        ->take(5)
+        ->get();
         
         // Add $featuredGalleries to the view data
+        // Get visitor statistics
+        $visitorStats = [
+            'total' => Visitor::getTotalCount(),
+            'today' => Visitor::getTodayCount(),
+            'week' => Visitor::getWeekCount(),
+            'month' => Visitor::getMonthCount(),
+        ];
+        
         return view('pages.home', compact(
-        'latestDocuments',
-        'featuredResources',
-        'featuredActivities',
-        'upcomingMilestones',
-        'stats',
-        'testimonials',
-        'categories',
-        'featuredGalleries' // Add this line
+            'latestDocuments',
+            'featuredResources',
+            'featuredActivities',
+            'upcomingMilestones',
+            'stats',
+            'testimonials',
+            'categories',
+            'featuredGalleries',
+            'allGalleries',
+            'galleries',
+            'visitorStats' // Add visitor statistics
         ));
     }
 

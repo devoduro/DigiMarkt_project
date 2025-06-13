@@ -1,11 +1,11 @@
-<header class="bg-white shadow" x-data="mobileMenu">
+<header class="fixed top-0 w-full bg-white shadow z-50" x-data="mobileMenu">
     <div class="container mx-auto px-4 py-4">
         <div class="flex justify-between items-center">
             <!-- Logo -->
             <div class="flex items-center">
                 <a href="{{ route('home') }}" class="flex items-center">
                     <img src="{{ asset('assets/images/logo/digiMark_logo.jpg') }}" alt="DigiMarkt Logo" class="h-12 mr-2">
-                    <span class="text-2xl font-bold text-primary-dark">DigiMarkt Platform</span>
+                    <span class="text-2xl font-bold text-primary-dark">DigiMarkt</span>
                 </a>
             </div>
 

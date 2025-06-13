@@ -1,0 +1,244 @@
+/**
+ * DigiMarkt Accessibility Styles
+ * WCAG 2.1 AA compliant styles
+ */
+
+/* Utility classes for font sizes */
+.font-normal {
+    --base-font-size: 1rem;
+}
+
+.font-large {
+    --base-font-size: 1.25rem;
+}
+
+.font-x-large {
+    --base-font-size: 1.5rem;
+}
+
+/* Applying font sizes to elements */
+body.font-normal {
+    font-size: var(--base-font-size);
+}
+
+body.font-large {
+    font-size: var(--base-font-size);
+}
+
+body.font-large h1 {
+    font-size: calc(2.25rem * 1.1);
+}
+
+body.font-large h2 {
+    font-size: calc(1.875rem * 1.1);
+}
+
+body.font-large h3 {
+    font-size: calc(1.5rem * 1.1);
+}
+
+body.font-large p, 
+body.font-large li, 
+body.font-large label, 
+body.font-large input, 
+body.font-large button,
+body.font-large a {
+    font-size: calc(1rem * 1.1);
+}
+
+body.font-x-large {
+    font-size: var(--base-font-size);
+}
+
+body.font-x-large h1 {
+    font-size: calc(2.25rem * 1.2);
+}
+
+body.font-x-large h2 {
+    font-size: calc(1.875rem * 1.2);
+}
+
+body.font-x-large h3 {
+    font-size: calc(1.5rem * 1.2);
+}
+
+body.font-x-large p, 
+body.font-x-large li, 
+body.font-x-large label, 
+body.font-x-large input, 
+body.font-x-large button,
+body.font-x-large a {
+    font-size: calc(1rem * 1.2);
+}
+
+/* High contrast mode */
+body.contrast-high {
+    background-color: #000 !important;
+    color: #fff !important;
+}
+
+body.contrast-high a {
+    color: #ffff00 !important;
+    text-decoration: underline !important;
+}
+
+body.contrast-high button,
+body.contrast-high .btn {
+    background-color: #fff !important;
+    color: #000 !important;
+    border: 2px solid #fff !important;
+}
+
+body.contrast-high input,
+body.contrast-high textarea,
+body.contrast-high select {
+    background-color: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+}
+
+body.contrast-high header,
+body.contrast-high footer,
+body.contrast-high nav,
+body.contrast-high .card,
+body.contrast-high .modal-content,
+body.contrast-high .alert {
+    background-color: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+}
+
+body.contrast-high img {
+    filter: grayscale(100%) contrast(120%);
+}
+
+body.contrast-high svg {
+    fill: #fff;
+}
+
+body.contrast-high .text-muted,
+body.contrast-high .text-gray-500,
+body.contrast-high .text-gray-600,
+body.contrast-high .text-gray-700 {
+    color: #fff !important;
+}
+
+body.contrast-high hr {
+    border-color: #fff !important;
+}
+
+/* Reduced motion mode */
+body.reduced-motion * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+}
+
+/* Skip to content link */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.sr-only.focus-visible,
+.sr-only:focus-visible {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: auto;
+    padding: 1rem;
+    background-color: white;
+    color: black;
+    z-index: 9999;
+    border: 2px solid black;
+    clip: auto;
+    overflow: visible;
+}
+
+/* Focus indicators */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+select:focus,
+[tabindex]:focus {
+    outline: 3px solid rgba(79, 70, 229, 0.5);
+    outline-offset: 2px;
+}
+
+/* Accessibility panel styling */
+.accessibility-panel button {
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.accessibility-panel button:focus {
+    outline: 3px solid rgba(79, 70, 229, 0.5);
+    outline-offset: 2px;
+}
+
+.contrast-high .accessibility-panel button {
+    background-color: #fff !important;
+    color: #000 !important;
+}
+
+.contrast-high .accessibility-panel {
+    background-color: #000 !important;
+    color: #fff !important;
+    border: 2px solid #fff !important;
+}
+
+/* Make form elements more accessible */
+input, textarea, select {
+    max-width: 100%;
+    font-size: 16px; /* Prevent zoom on iOS */
+}
+
+/* Ensure proper spacing for touch targets */
+button, .btn, a.btn, input[type="button"], input[type="submit"] {
+    min-height: 44px;
+    min-width: 44px;
+}
+
+/* Enhanced focus for keyboard navigation */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+    outline: 3px solid rgba(79, 70, 229, 0.8);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
+}
+
+/* Improve form validation feedback */
+.form-error {
+    color: #ef4444;
+    font-weight: 500;
+}
+
+.form-control.is-invalid {
+    border-color: #ef4444;
+}
+
+/* Improve screen reader text */
+.sr-only-focusable:not(:focus) {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
