@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\DeliverableManagementController;
+use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\GalleryController;
  
 /*
@@ -22,6 +23,7 @@ use App\Http\Controllers\GalleryController;
 // Public routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
+Route::get('/partners', [AboutController::class, 'partners'])->name('partners');
 Route::get('/resources', [HomeController::class, 'resources'])->name('resources');
 Route::get('/resources/{id}', [HomeController::class, 'resourceShow'])->name('resources.show');
 Route::get('/resources/{id}/download', [HomeController::class, 'resourceDownload'])->name('resources.download');
@@ -124,5 +126,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/galleries/{gallery}/toggle-featured', [\App\Http\Controllers\Admin\GalleryController::class, 'toggleFeatured'])->name('galleries.toggle-featured');
         Route::post('/galleries/{gallery}/images', [\App\Http\Controllers\Admin\GalleryController::class, 'storeImage'])->name('galleries.images.store');
         Route::delete('/galleries/{gallery}/images/{image}', [\App\Http\Controllers\Admin\GalleryController::class, 'destroyImage'])->name('galleries.images.destroy');
+        
+        // Announcement management
+        Route::resource('announcements', AnnouncementController::class);
+        Route::patch('/announcements/{announcement}/toggle-active', [AnnouncementController::class, 'toggleActive'])->name('announcements.toggle-active');
     });
 });

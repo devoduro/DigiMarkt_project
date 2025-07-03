@@ -10,6 +10,7 @@ use App\Models\Resource;
 use App\Models\ProjectActivity;
 use App\Models\Milestone;
 use App\Models\Visitor;
+use App\Models\Announcement;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
@@ -203,6 +204,12 @@ class HomeController extends Controller
             'month' => Visitor::getMonthCount(),
         ];
         
+        // Get active announcements
+        $announcements = Announcement::active()
+            ->orderByPriority()
+            ->take(3)
+            ->get();
+        
         return view('pages.home', compact(
             'latestDocuments',
             'featuredResources',
@@ -214,7 +221,8 @@ class HomeController extends Controller
             'featuredGalleries',
             'allGalleries',
             'galleries',
-            'visitorStats' // Add visitor statistics
+            'visitorStats',
+            'announcements' // Add announcements
         ));
     }
 

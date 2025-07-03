@@ -37,6 +37,58 @@
     <link rel="stylesheet" href="{{ asset('assets/css/chatbot.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/accessibility.css') }}">
     
+    <style>
+        /* Announcement Slider Styles */
+        .announcement-slider {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            white-space: nowrap;
+        }
+        
+        .announcement-slide {
+            display: inline-block;
+            animation: slideAnnouncement 15s linear infinite;
+            padding-right: 50px;
+        }
+        
+        /* Marquee Styles */
+        .marquee-container {
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+        }
+        
+        .marquee-content {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 40s linear infinite;
+            padding-left: 100%;
+        }
+        
+        .marquee-content:hover {
+            animation-play-state: paused;
+        }
+        
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+        
+        @keyframes slideAnnouncement {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        .announcement-slider:hover .announcement-slide {
+            animation-play-state: paused;
+        }
+    </style>
+    
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -60,7 +112,7 @@
     @include('partials.header')
 
     <!-- Main Content -->
-    <main class="flex-grow pt-20">
+    <main class="flex-grow pt-16">
         @yield('content')
     </main>
 
@@ -70,6 +122,9 @@
     <!-- Accessibility Panel -->
     @include('components.accessibility-panel')
     
+    <!-- Audio Aid Button -->
+    @include('components.audio-aid-button')
+    
     <!-- Chatbot placeholder -->
     <!-- Single chatbot implementation at the bottom of the page -->
 
@@ -77,8 +132,34 @@
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
     
-    <!-- Bootstrap JavaScript -->
+    <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="{{ asset('js/custom.js') }}"></script>
+    <script src="{{ asset('assets/js/chatbot.js') }}"></script>
+    <script src="{{ asset('assets/js/accessibility.js') }}"></script>
+
+    <script>
+        // Announcement slider functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize announcement modals
+            var announcementModals = document.querySelectorAll('.modal');
+            announcementModals.forEach(function(modal) {
+                new bootstrap.Modal(modal);
+            });
+            
+            // Clone announcement slides for continuous scrolling effect if there's only one
+            const sliderContainer = document.querySelector('.announcement-slider');
+            if (sliderContainer) {
+                const slides = sliderContainer.querySelectorAll('.announcement-slide');
+                if (slides.length === 1) {
+                    const clone = slides[0].cloneNode(true);
+                    sliderContainer.appendChild(clone);
+                }
+            }
+        });
+    </script>
     
     <!-- Initialize Bootstrap Carousel -->
     <script>

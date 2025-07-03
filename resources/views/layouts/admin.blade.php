@@ -105,6 +105,13 @@
                     <span class="mx-3">Photo Galleries</span>
                 </a>
                 
+                <!-- Announcements -->
+                <a class="flex items-center px-6 py-2 mt-4 text-gray-100 hover:bg-primary-dark hover:text-white"
+                   href="{{ route('admin.announcements.index') }}">
+                    <i class="fas fa-bullhorn w-5 h-5 text-center"></i>
+                    <span class="mx-3">Announcements</span>
+                </a>
+                
                 <!-- User Management -->
                 <a class="flex items-center px-6 py-2 mt-4 text-gray-100 hover:bg-primary-dark hover:text-white"
                    href="{{ route('admin.users.index') }}">

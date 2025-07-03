@@ -3,6 +3,51 @@
 @section('title', 'Home')
 
 @section('content')
+    <!-- Marquee Announcement -->
+    <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-2 px-6 mb-6 mt-12 rounded-md shadow-md mx-4">
+        <marquee behavior="scroll" direction="left" scrollamount="5">
+            <div class="flex items-center space-x-12">
+                <span class="inline-flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    <span class="font-medium">DigiMarkt Project is co-funded by the European Union with a total funding of €394,185.00</span>
+                </span>
+                <span class="inline-flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    <span class="font-medium">Empowering TVET providers to enhance digital readiness of graduates in Ghana</span>
+                </span>
+                <span class="inline-flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    <span class="font-medium">Supporting teachers and trainers with new digital skills and competences</span>
+                </span>
+                <span class="inline-flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    <span class="font-medium">Improving employability potential of TVET learners through innovative education programs</span>
+                </span>
+                <span class="inline-flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    <span class="font-medium">DigiMarkt Project is co-funded by the European Union with a total funding of €394,185.00</span>
+                </span>
+                <span class="inline-flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                    <span class="font-medium">Empowering TVET providers to enhance digital readiness of graduates in Ghana</span>
+                </span>
+            </div>
+
+        </marquee>
+    </div>
+
     <!-- Carousel Section -->
     <section class="relative overflow-hidden">
         <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel">
@@ -53,6 +98,104 @@
             </button>
         </div>
     </section>
+
+    <!-- Marquee Section -->
+    <section class="bg-gradient-to-r from-blue-700 via-blue-600 to-blue-700 py-3 text-white overflow-hidden shadow-md">
+        <div class="marquee-container">
+            <div class="marquee-content">
+                <div class="flex items-center space-x-12">
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        <span class="font-semibold">DigiMarkt Project is co-funded by the European Union with a total funding of €394,185.00</span>
+                    </div>
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        <span class="font-semibold">Empowering TVET providers to enhance digital readiness of graduates in Ghana</span>
+                    </div>
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        <span class="font-semibold">Supporting teachers and trainers with new digital skills and competences</span>
+                    </div>
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        <span class="font-semibold">Improving employability potential of TVET learners through innovative education programs</span>
+                    </div>
+                    <!-- Duplicate items to ensure continuous scrolling -->
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        <span class="font-semibold">DigiMarkt Project is co-funded by the European Union with a total funding of €394,185.00</span>
+                    </div>
+                    <div class="flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                        <span class="font-semibold">Empowering TVET providers to enhance digital readiness of graduates in Ghana</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Announcements Section -->
+    @if(isset($announcements) && $announcements->count() > 0)
+    <section class="py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="flex items-center mb-3 md:mb-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+                    </svg>
+                    <h3 class="text-lg font-bold">ANNOUNCEMENTS</h3>
+                </div>
+                
+                <div class="w-full md:w-auto overflow-hidden">
+                    <div class="announcement-slider">
+                        @foreach($announcements as $announcement)
+                            <div class="announcement-slide px-4 py-2">
+                                <span class="font-semibold">{{ $announcement->title }}</span> - 
+                                <span>{{ Str::limit($announcement->content, 100) }}</span>
+                                <a href="#announcement-{{ $announcement->id }}" class="text-white underline ml-2" data-bs-toggle="modal" data-bs-target="#announcementModal-{{ $announcement->id }}">Read more</a>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @endif
+    
+    <!-- Announcement Modals -->
+    @foreach($announcements as $announcement)
+        <div class="modal fade" id="announcementModal-{{ $announcement->id }}" tabindex="-1" aria-labelledby="announcementModalLabel-{{ $announcement->id }}" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
+                        <h5 class="modal-title" id="announcementModalLabel-{{ $announcement->id }}">{{ $announcement->title }}</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="text-sm text-gray-500 mb-2">Published: {{ $announcement->publish_date->format('F d, Y') }}</p>
+                        <div class="prose max-w-none">
+                            {!! nl2br(e($announcement->content)) !!}
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
 
     <!-- Hero Section -->
     <section class="relative overflow-hidden bg-gradient-to-br from-indigo-900 via-purple-800 to-indigo-700 py-24 md:py-32">
@@ -120,6 +263,58 @@
                                 <span class="text-xs text-gray-700 text-center">CCTU (Ghana)</span>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Project Summary Section -->
+    <section class="py-20 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-5 z-0">
+            <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239C92AC" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-4xl mx-auto">
+                <div class="text-center mb-10">
+                    <span class="inline-block px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium mb-4">PROJECT SUMMARY</span>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-4">About DigiMarkt</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-600 mx-auto mb-6"></div>
+                </div>
+                
+                <div class="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        The aim of Digital Technical and Vocational Education and Training (DigiMarkt) in Ghana is to empower training providers and learners 
+                        to enhance their digital readiness for Technical and Vocational Education and Training (TVET). 
+                        By defining future skills needed for TVET graduates in the digital era and aligning such skills to the unique local Ghanaian Context will 
+                        help achieve the project aim.
+                    </p>
+                    
+                    <p class="text-gray-700 mb-6 leading-relaxed">
+                        The project will involve participants in co-creating DigiMarkt, as well as improving the skills of teachers/trainers 
+                        and mentors on innovative tools, online pedagogies and teaching techniques, cutting–edge technologies and trends in DigiMarkt. 
+                        The course will give opportunity to the youth, by empowering them in the use of digital transformation tools and model in order to practicalize 
+                        technical and vocational education.
+                    </p>
+                    
+                    <div class="mt-8">
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Project Objectives</h3>
+                        <ul class="list-disc pl-6 space-y-2 text-gray-700">
+                            <li>To support teachers and trainers with new digital skills and competences</li>
+                            <li>To improve the level of competences, skills and employability potential of TVET learners by developing new and innovative TVET education programmes, especially those delivering key competences in ICT skills</li>
+                            <li>To set up digital marketing laboratory to enable students interact and enhance students competency in Digital TVET marketing</li>
+                            <li>To empower TVET providers to enhance the resilience and digital readiness of TVET graduates in Ghana</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mt-8 text-center">
+                        <a href="{{ route('about') }}" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-medium rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 transform hover:-translate-y-1">
+                            <span>Learn More About DigiMarkt</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -227,11 +422,11 @@
         <div class="container mx-auto px-4">
             <div class="text-center mb-20">
               
-                <span class="inline-block px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium mb-4">PROJECT OBJECTIVES</span>
-                <h2 class="text-4xl font-bold text-gray-900 mb-4">Elevate Your Digital Marketing</h2>
+                <span class="inline-block px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium mb-4">KEY FEATURES</span>
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Enhancing Digital Marketing in TVET</h2>
                 <div class="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-600 mx-auto mb-6"></div>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Our platform provides comprehensive resources and cutting-edge tools designed for modern digital marketing professionals.
+                    DigiMarkt provides comprehensive resources and cutting-edge tools designed to enhance digital marketing education in TVET institutions.
                 </p>
             </div>
 
