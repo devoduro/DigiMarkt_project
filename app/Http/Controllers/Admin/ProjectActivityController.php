@@ -51,7 +51,7 @@ class ProjectActivityController extends Controller
             'date' => $validated['date'],
             'description' => $validated['description'],
             'status' => $validated['status'],
-            'featured' => $request->has('featured'),
+            'featured' => (bool)$request->input('featured'),
             'created_by' => auth()->id(),
         ]);
 
@@ -111,7 +111,7 @@ class ProjectActivityController extends Controller
             'date' => $validated['date'],
             'description' => $validated['description'],
             'status' => $validated['status'],
-            'featured' => $request->has('featured'),
+            'featured' => (bool)$request->input('featured'),
         ]);
 
         // Handle image uploads
@@ -165,7 +165,7 @@ class ProjectActivityController extends Controller
     public function toggleFeatured(ProjectActivity $activity)
     {
         $activity->update([
-            'featured' => !$activity->featured
+            'is_featured' => !$activity->is_featured
         ]);
         
         return redirect()->route('admin.activities.index')

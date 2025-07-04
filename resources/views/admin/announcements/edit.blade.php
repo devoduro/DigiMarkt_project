@@ -90,8 +90,10 @@
                     </div>
                     <div class="flex items-center h-full pt-6">
                         <div class="flex items-center">
+                            <!-- Hidden input ensures a value is always sent, even when checkbox is unchecked -->
+                            <input type="hidden" name="is_active" value="0">
                             <input type="checkbox" class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" 
-                                id="is_active" name="is_active" {{ old('is_active', $announcement->is_active) ? 'checked' : '' }}>
+                                id="is_active" name="is_active" value="1" {{ old('is_active', $announcement->is_active) ? 'checked' : '' }}>
                             <label for="is_active" class="ml-2 block text-sm text-gray-700">Active</label>
                         </div>
                     </div>

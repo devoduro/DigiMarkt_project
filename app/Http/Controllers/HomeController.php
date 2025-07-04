@@ -88,9 +88,9 @@ class HomeController extends Controller
         // Get statistics for the platform
         $stats = [
             'users' => User::count(),
-            'documents' => Document::count(),
+            'documents' => Document::count(), // Accurate count of deliverables
             'downloads' => DB::table('downloads')->count(),
-            'categories' => Document::select('category')->distinct()->count()
+            'partners' => 6 // Total number of partners (3 European + 3 Ghanaian)
         ];
         
         // Get testimonials (in a real app, these would come from a database)

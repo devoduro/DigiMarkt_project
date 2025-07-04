@@ -54,10 +54,12 @@
                     
                     <div class="mb-4">
                         <div class="flex items-center">
-                            <input type="checkbox" name="featured" id="featured" class="mr-2 leading-tight @error('featured') border-red-500 @enderror" {{ old('featured') ? 'checked' : '' }}>
-                            <label for="featured" class="text-gray-700 text-sm font-bold">Featured on Homepage</label>
+                            <!-- Hidden input ensures a value is always sent, even when checkbox is unchecked -->
+                            <input type="hidden" name="is_featured" value="0">
+                            <input type="checkbox" name="is_featured" id="is_featured" value="1" class="mr-2 leading-tight @error('is_featured') border-red-500 @enderror" {{ old('is_featured') ? 'checked' : '' }}>
+                            <label for="is_featured" class="text-gray-700 text-sm font-bold">Featured on Homepage</label>
                         </div>
-                        @error('featured')
+                        @error('is_featured')
                             <p class="text-red-500 text-xs italic mt-2">{{ $message }}</p>
                         @enderror
                     </div>

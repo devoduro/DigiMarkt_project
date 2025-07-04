@@ -99,52 +99,7 @@
         </div>
     </section>
 
-    <!-- Marquee Section -->
-    <section class="bg-gradient-to-r from-blue-700 via-blue-600 to-blue-700 py-3 text-white overflow-hidden shadow-md">
-        <div class="marquee-container">
-            <div class="marquee-content">
-                <div class="flex items-center space-x-12">
-                    <div class="flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                        <span class="font-semibold">DigiMarkt Project is co-funded by the European Union with a total funding of €394,185.00</span>
-                    </div>
-                    <div class="flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                        <span class="font-semibold">Empowering TVET providers to enhance digital readiness of graduates in Ghana</span>
-                    </div>
-                    <div class="flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                        <span class="font-semibold">Supporting teachers and trainers with new digital skills and competences</span>
-                    </div>
-                    <div class="flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                        <span class="font-semibold">Improving employability potential of TVET learners through innovative education programs</span>
-                    </div>
-                    <!-- Duplicate items to ensure continuous scrolling -->
-                    <div class="flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                        <span class="font-semibold">DigiMarkt Project is co-funded by the European Union with a total funding of €394,185.00</span>
-                    </div>
-                    <div class="flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                        </svg>
-                        <span class="font-semibold">Empowering TVET providers to enhance digital readiness of graduates in Ghana</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  
 
     <!-- Announcements Section -->
     @if(isset($announcements) && $announcements->count() > 0)
@@ -276,45 +231,61 @@
         </div>
         
         <div class="container mx-auto px-4 relative z-10">
-            <div class="max-w-4xl mx-auto">
-                <div class="text-center mb-10">
-                    <span class="inline-block px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium mb-4">PROJECT SUMMARY</span>
-                    <h2 class="text-3xl font-bold text-gray-900 mb-4">About DigiMarkt</h2>
-                    <div class="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-600 mx-auto mb-6"></div>
-                </div>
-                
-                <div class="bg-white rounded-2xl shadow-xl p-8 border border-gray-100">
-                    <p class="text-gray-700 mb-6 leading-relaxed">
-                        The aim of Digital Technical and Vocational Education and Training (DigiMarkt) in Ghana is to empower training providers and learners 
-                        to enhance their digital readiness for Technical and Vocational Education and Training (TVET). 
-                        By defining future skills needed for TVET graduates in the digital era and aligning such skills to the unique local Ghanaian Context will 
-                        help achieve the project aim.
-                    </p>
-                    
-                    <p class="text-gray-700 mb-6 leading-relaxed">
-                        The project will involve participants in co-creating DigiMarkt, as well as improving the skills of teachers/trainers 
-                        and mentors on innovative tools, online pedagogies and teaching techniques, cutting–edge technologies and trends in DigiMarkt. 
-                        The course will give opportunity to the youth, by empowering them in the use of digital transformation tools and model in order to practicalize 
-                        technical and vocational education.
-                    </p>
-                    
-                    <div class="mt-8">
-                        <h3 class="text-xl font-bold text-gray-900 mb-4">Project Objectives</h3>
-                        <ul class="list-disc pl-6 space-y-2 text-gray-700">
-                            <li>To support teachers and trainers with new digital skills and competences</li>
-                            <li>To improve the level of competences, skills and employability potential of TVET learners by developing new and innovative TVET education programmes, especially those delivering key competences in ICT skills</li>
-                            <li>To set up digital marketing laboratory to enable students interact and enhance students competency in Digital TVET marketing</li>
-                            <li>To empower TVET providers to enhance the resilience and digital readiness of TVET graduates in Ghana</li>
-                        </ul>
+            <div class="text-center mb-10">
+                <span class="inline-block px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium mb-4">PROJECT SUMMARY</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">About DigiMarkt</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-600 mx-auto mb-6"></div>
+            </div>
+            
+            <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+                <div class="flex flex-col md:flex-row">
+                    <!-- Left Column: Content -->
+                    <div class="md:w-1/2 p-8 md:p-10">
+                        <div class="prose max-w-none">
+                            <p class="text-gray-700 leading-relaxed mb-6">
+                                The aim of <span class="font-semibold text-indigo-700">Digital Technical and Vocational Education and Training (DigiMarkt)</span> in Ghana is to empower training providers and learners 
+                                to enhance their digital readiness for Technical and Vocational Education and Training (TVET).
+                            </p>
+                            
+                            <p class="text-gray-700 leading-relaxed mb-6">
+                                By defining future skills needed for TVET graduates in the digital era and aligning such skills to the unique local Ghanaian Context, 
+                                the project will help transform technical education across the region.
+                            </p>
+                            
+                            <h3 class="text-xl font-bold text-gray-900 mb-4 mt-8">Project Objectives</h3>
+                            <ul class="list-disc pl-6 space-y-3 text-gray-700">
+                                <li>Support teachers and trainers with new digital skills and competences</li>
+                                <li>Improve employability potential of TVET learners through innovative education programmes</li>
+                                <li>Set up digital marketing laboratories for hands-on student experience</li>
+                                <li>Empower TVET providers to enhance digital readiness of graduates in Ghana</li>
+                            </ul>
+                            
+                            <div class="mt-8">
+                                <a href="{{ route('about') }}" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-medium rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg">
+                                    <span>Learn More About DigiMarkt</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                     
-                    <div class="mt-8 text-center">
-                        <a href="{{ route('about') }}" class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-medium rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 transform hover:-translate-y-1">
-                            <span>Learn More About DigiMarkt</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                            </svg>
-                        </a>
+                    <!-- Right Column: Image -->
+                    <div class="md:w-1/2 bg-indigo-50 flex items-center justify-center p-6 md:p-0">
+                        <div class="relative w-full h-full min-h-[300px] md:min-h-[500px] overflow-hidden">
+                            <img 
+                                src="https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" 
+                                alt="Digital Technical and Vocational Training" 
+                                class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                            >
+                            <div class="absolute inset-0 bg-gradient-to-tr from-indigo-900/60 to-purple-800/30 flex flex-col justify-end p-8">
+                                <div class="bg-white/90 backdrop-blur-sm p-4 rounded-lg shadow-lg max-w-xs">
+                                    <h4 class="font-bold text-indigo-900 mb-1">Empowering TVET Education</h4>
+                                    <p class="text-sm text-gray-700">Building digital skills for the next generation of technical professionals in Ghana</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -330,49 +301,11 @@
         
         <div class="container mx-auto px-4 relative z-10">
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-2">Platform Impact</h2>
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">Site Statistics</h2>
                 <div class="w-20 h-1 bg-gradient-to-r from-indigo-500 to-purple-600 mx-auto mb-4"></div>
                 <p class="text-gray-600 max-w-2xl mx-auto">Our growing community and expanding resources</p>
             </div>
-            
-            <!-- Visitor Statistics -->
-            <div class="mb-16">
-                <div class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-2xl p-6 shadow-lg">
-                    <div class="flex flex-col md:flex-row items-center justify-between">
-                        <div class="md:w-1/3 mb-6 md:mb-0">
-                            <h3 class="text-2xl font-bold text-gray-800 mb-2">Visitor Statistics</h3>
-                            <p class="text-gray-600">Track our growing audience and engagement metrics</p>
-                        </div>
-                        <div class="md:w-2/3 grid grid-cols-2 md:grid-cols-4 gap-4">
-                            <div class="bg-white rounded-xl p-4 shadow hover:shadow-md transition-shadow duration-300">
-                                <div class="text-center">
-                                    <div class="text-3xl font-bold text-indigo-600 mb-1">{{ number_format($visitorStats['total']) }}</div>
-                                    <div class="text-sm text-gray-500">Total Visitors</div>
-                                </div>
-                            </div>
-                            <div class="bg-white rounded-xl p-4 shadow hover:shadow-md transition-shadow duration-300">
-                                <div class="text-center">
-                                    <div class="text-3xl font-bold text-purple-600 mb-1">{{ number_format($visitorStats['today']) }}</div>
-                                    <div class="text-sm text-gray-500">Today</div>
-                                </div>
-                            </div>
-                            <div class="bg-white rounded-xl p-4 shadow hover:shadow-md transition-shadow duration-300">
-                                <div class="text-center">
-                                    <div class="text-3xl font-bold text-blue-600 mb-1">{{ number_format($visitorStats['week']) }}</div>
-                                    <div class="text-sm text-gray-500">This Week</div>
-                                </div>
-                            </div>
-                            <div class="bg-white rounded-xl p-4 shadow hover:shadow-md transition-shadow duration-300">
-                                <div class="text-center">
-                                    <div class="text-3xl font-bold text-teal-600 mb-1">{{ number_format($visitorStats['month']) }}</div>
-                                    <div class="text-sm text-gray-500">This Month</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
+      
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
                 <div class="p-8 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
                     <div class="flex items-center justify-center w-16 h-16 mx-auto mb-6 rounded-full bg-indigo-100 text-indigo-600">
@@ -380,10 +313,18 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                         </svg>
                     </div>
-                    <div class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-indigo-600 to-purple-600 mb-2 text-center">{{ $stats['users'] }}</div>
-                    <div class="text-gray-600 text-center font-medium">Active Users</div>
+                    <div class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-indigo-600 to-purple-600 mb-2 text-center">{{ number_format($visitorStats['total']) }}</div>
+                    <div class="text-gray-600 text-center font-medium">Total Site Visitors Today</div>
                 </div>
-                
+                 <div class="p-8 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                    <div class="flex items-center justify-center w-16 h-16 mx-auto mb-6 rounded-full bg-blue-100 text-blue-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                        </svg>
+                    </div>
+                    <div class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-blue-500 to-indigo-500 mb-2 text-center">{{ $stats['partners'] }}</div>
+                    <div class="text-gray-600 text-center font-medium">Partners</div>
+                </div>
                 <div class="p-8 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
                     <div class="flex items-center justify-center w-16 h-16 mx-auto mb-6 rounded-full bg-teal-100 text-teal-600">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -391,7 +332,7 @@
                         </svg>
                     </div>
                     <div class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-teal-500 to-cyan-500 mb-2 text-center">{{ $stats['documents'] }}</div>
-                    <div class="text-gray-600 text-center font-medium">Resources</div>
+                    <div class="text-gray-600 text-center font-medium">Deliverables</div>
                 </div>
                 
                 <div class="p-8 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
@@ -404,15 +345,7 @@
                     <div class="text-gray-600 text-center font-medium">Downloads</div>
                 </div>
                 
-                <div class="p-8 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
-                    <div class="flex items-center justify-center w-16 h-16 mx-auto mb-6 rounded-full bg-blue-100 text-blue-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-                        </svg>
-                    </div>
-                    <div class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-blue-500 to-indigo-500 mb-2 text-center">{{ $stats['categories'] }}</div>
-                    <div class="text-gray-600 text-center font-medium">Categories</div>
-                </div>
+               
             </div>
         </div>
     </section>
@@ -573,70 +506,11 @@
         </div>
     </section>
     
-    <!-- Latest Resources Section -->
-    <section class="py-24 bg-gray-50 relative overflow-hidden">
-        <!-- Background Elements -->
-        <div class="absolute -top-24 -right-24 w-96 h-96 bg-indigo-100 rounded-full opacity-30 z-0"></div>
-        <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-teal-100 rounded-full opacity-30 z-0"></div>
-        
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="text-center mb-16">
-                <span class="inline-block px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-medium mb-4">FRESH CONTENT</span>
-                <h2 class="text-4xl font-bold text-gray-900 mb-4">Latest Digital Marketing Resources</h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-purple-500 to-pink-500 mx-auto mb-6"></div>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Explore our most recent digital marketing resources, guides, and deliverables to stay ahead of the curve.
-                </p>
-            </div>
+     
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                @foreach($latestDocuments as $document)
-                <div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow transform hover:-translate-y-1 duration-300">
-                    <div class="p-6">
-                        <div class="flex items-center justify-between mb-4">
-                            <span class="px-3 py-1 bg-primary-light bg-opacity-20 text-primary-dark rounded-full text-sm">
-                                {{ $document->category ?? 'Uncategorized' }}
-                            </span>
-                            <span class="text-sm text-gray-500">
-                                {{ $document->created_at ? $document->created_at->format('M d, Y') : 'Date unavailable' }}
-                            </span>
-                        </div>
-                        <h3 class="text-xl font-semibold text-gray-900 mb-2">{{ $document->title }}</h3>
-                        <p class="text-gray-600 mb-4">
-                            {{ Str::limit($document->description ?? 'No description available', 100) }}
-                        </p>
-                        <div class="flex items-center justify-between">
-                            <a href="{{ route('deliverables') }}#document-{{ $document->id }}" class="text-primary-dark hover:text-primary font-medium inline-flex items-center">
-                                View Details
-                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                                </svg>
-                            </a>
-                            <div class="text-sm text-gray-500">
-                                {{ $document->downloads ? $document->downloads->count() : '0' }} {{ Str::plural('download', $document->downloads ? $document->downloads->count() : 0) }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-            @if(count($latestDocuments) === 0)
-                <div class="col-span-3 text-center py-8">
-                    <p class="text-gray-600">No documents available at the moment.</p>
-                </div>
-            @endif
-
-            <div class="text-center mt-12">
-                <a href="{{ route('deliverables') }}" class="px-6 py-3 bg-primary-dark text-white font-semibold rounded-md hover:bg-primary transition-colors inline-block">
-                    View All Resources
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Project Milestones Section -->
+    <!-- Project Milestones Section 
     <section class="py-24 bg-white relative overflow-hidden">
-        <!-- Background Elements -->
+      
         <div class="absolute -top-24 -left-24 w-96 h-96 bg-green-100 rounded-full opacity-30 z-0"></div>
         <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-emerald-100 rounded-full opacity-30 z-0"></div>
         
@@ -723,11 +597,11 @@
             </div>
         </div>
     </section>
-
- 
-    <!-- Testimonials Section -->
+-->
+ <!--
+    
     <section class="py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
-        <!-- Background Elements -->
+       
         <div class="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-indigo-50 to-transparent opacity-70 z-0"></div>
         <div class="absolute -top-10 left-1/4 w-32 h-32 bg-purple-100 rounded-full opacity-50 z-0 blur-xl"></div>
         <div class="absolute top-40 right-1/4 w-40 h-40 bg-teal-100 rounded-full opacity-50 z-0 blur-xl"></div>
@@ -745,7 +619,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
                 @foreach($testimonials as $testimonial)
                     <div class="group bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 relative overflow-hidden">
-                        <!-- Quote Icon -->
+                        
                         <div class="absolute -top-2 -right-2 text-gray-100 opacity-30 z-0">
                             <svg class="w-24 h-24" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
@@ -781,6 +655,7 @@
             </div>
         </div>
     </section>
+    -->
 
    
     <!-- Two-Factor Authentication Promotion -->
@@ -903,9 +778,9 @@
 
     </section>
 
-    <!-- Gallery Section -->
+    <!-- Gallery Section
     <section class="py-24 bg-white relative overflow-hidden">
-        <!-- Background Elements -->
+      
         <div class="absolute -top-24 -right-36 w-96 h-96 bg-pink-100 rounded-full opacity-30 z-0"></div>
         <div class="absolute -bottom-24 -left-36 w-96 h-96 bg-blue-100 rounded-full opacity-30 z-0"></div>
         
@@ -919,9 +794,7 @@
                 </p>
             </div>
 
-            <!-- Gallery Grid with Dynamic Content -->
            
-
 <div class="bg-gray-50 py-12">
     <div class="container mx-auto px-4">
         @if($galleries->count() > 0)
@@ -966,7 +839,7 @@
         @endif
     </div>
 </div>
-            <!-- View All Button -->
+            
             <div class="text-center mt-12">
                 <a href="{{ route('gallery') }}" class="inline-block px-8 py-4 bg-gradient-to-r from-pink-500 to-blue-500 text-white font-semibold rounded-xl hover:from-pink-600 hover:to-blue-600 transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl">
                     <span class="flex items-center justify-center">
@@ -979,5 +852,5 @@
             </div>
         </div>
     </section>
-   
+    -->
 @endsection
