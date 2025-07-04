@@ -19,7 +19,7 @@ class ProjectActivity extends Model
         'date',
         'description',
         'status',
-        'is_featured',
+        'featured',
         'created_by',
     ];
 
@@ -31,7 +31,7 @@ class ProjectActivity extends Model
     protected function casts(): array
     {
         return [
-            'is_featured' => 'boolean',
+            'featured' => 'boolean',
         ];
     }
 

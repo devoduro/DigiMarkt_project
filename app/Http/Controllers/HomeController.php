@@ -73,7 +73,7 @@ class HomeController extends Controller
             ->get();
             
         // Get featured project activities
-        $featuredActivities = ProjectActivity::where('is_featured', true)
+        $featuredActivities = ProjectActivity::where('featured', true)
             ->with('images')
             ->latest()
             ->take(3)
