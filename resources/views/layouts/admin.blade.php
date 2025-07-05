@@ -98,6 +98,13 @@
                     <span class="mx-3">Project Activities</span>
                 </a>
                 
+                <!-- Videos -->
+                <a class="flex items-center px-6 py-2 mt-4 text-gray-100 hover:bg-primary-dark hover:text-white {{ request()->routeIs('admin.videos.*') ? 'bg-primary-dark' : '' }}"
+                   href="{{ route('admin.videos.index') }}">
+                    <i class="fas fa-video w-5 h-5 text-center"></i>
+                    <span class="mx-3">Videos</span>
+                </a>
+                
                 <!-- Photo Galleries -->
                 <a class="flex items-center px-6 py-2 mt-4 text-gray-100 hover:bg-primary-dark hover:text-white"
                    href="{{ route('admin.galleries.index') }}">

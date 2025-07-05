@@ -350,86 +350,70 @@
         </div>
     </section>
 
-    <!-- Features Section -->
+    <!-- Announcements Section (Detailed) -->
     <section class="py-24 bg-gradient-to-b from-white to-gray-50">
         <div class="container mx-auto px-4">
             <div class="text-center mb-20">
-              
-                <span class="inline-block px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium mb-4">KEY FEATURES</span>
-                <h2 class="text-4xl font-bold text-gray-900 mb-4">Enhancing Digital Marketing in TVET</h2>
+                <span class="inline-block px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-sm font-medium mb-4">ANNOUNCEMENTS</span>
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Latest Project Updates</h2>
                 <div class="w-24 h-1 bg-gradient-to-r from-indigo-500 to-purple-600 mx-auto mb-6"></div>
                 <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    DigiMarkt provides comprehensive resources and cutting-edge tools designed to enhance digital marketing education in TVET institutions.
+                    Stay informed with the latest announcements and updates from the DigiMarkt project.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-                <!-- Feature 1 -->
-                <div class="group bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-100 rounded-full -mr-16 -mt-16 opacity-50 group-hover:opacity-80 transition-opacity duration-300"></div>
-                    <div class="relative z-10">
-                        <div class="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl w-16 h-16 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300">
-                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                            </svg>
+            @if(isset($announcements) && $announcements->count() > 0)
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    @foreach($announcements as $announcement)
+                        <div class="group bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-100 rounded-full -mr-16 -mt-16 opacity-50 group-hover:opacity-80 transition-opacity duration-300"></div>
+                            <div class="relative z-10">
+                                <div class="bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl w-16 h-16 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300">
+                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path>
+                                    </svg>
+                                </div>
+                                <div class="flex justify-between items-center mb-4">
+                                    <h3 class="text-2xl font-bold text-gray-900 group-hover:text-indigo-600 transition-colors duration-300">{{ $announcement->title }}</h3>
+                                    <span class="text-xs text-white bg-indigo-500 px-2 py-1 rounded-full">{{ $announcement->publish_date->format('M d, Y') }}</span>
+                                </div>
+                                <p class="text-gray-600 mb-6 leading-relaxed line-clamp-3">
+                                    {{ Str::limit(strip_tags($announcement->content), 150) }}
+                                </p>
+                                <a href="#" class="text-indigo-600 font-medium inline-flex items-center group-hover:text-indigo-800 transition-colors duration-300" data-bs-toggle="modal" data-bs-target="#announcementModal-{{ $announcement->id }}">
+                                    Read more
+                                    <svg class="w-4 h-4 ml-2 group-hover:ml-3 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                    </svg>
+                                </a>
+                            </div>
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-indigo-600 transition-colors duration-300">Comprehensive Resources</h3>
-                        <p class="text-gray-600 mb-6 leading-relaxed">
-                            Access a wide range of digital marketing resources, guides, templates, and best practices to enhance your marketing strategy and drive results.
-                        </p>
-                        <a href="#" class="text-indigo-600 font-medium inline-flex items-center group-hover:text-indigo-800 transition-colors duration-300">
-                            Learn more
-                            <svg class="w-4 h-4 ml-2 group-hover:ml-3 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                            </svg>
+                    @endforeach
+                </div>
+                
+                @if($announcements->count() > 3)
+                    <div class="text-center mt-12">
+                        <a href="#" class="inline-block px-8 py-4 bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold rounded-xl hover:from-indigo-600 hover:to-purple-700 transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl">
+                            <span class="flex items-center justify-center">
+                                <span>View All Announcements</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                </svg>
+                            </span>
                         </a>
                     </div>
-                </div>
-
-                <!-- Feature 2 -->
-                <div class="group bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-teal-100 rounded-full -mr-16 -mt-16 opacity-50 group-hover:opacity-80 transition-opacity duration-300"></div>
-                    <div class="relative z-10">
-                        <div class="bg-gradient-to-r from-teal-500 to-cyan-500 rounded-2xl w-16 h-16 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300">
-                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-teal-600 transition-colors duration-300">Secure Document Access</h3>
-                        <p class="text-gray-600 mb-6 leading-relaxed">
-                            Securely access and download important deliverables and milestones with our authenticated system featuring two-factor authentication protection.
-                        </p>
-                        <a href="#" class="text-teal-600 font-medium inline-flex items-center group-hover:text-teal-800 transition-colors duration-300">
-                            Learn more
-                            <svg class="w-4 h-4 ml-2 group-hover:ml-3 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                            </svg>
-                        </a>
+                @endif
+            @else
+                <div class="bg-white p-12 rounded-2xl shadow-xl text-center">
+                    <div class="flex justify-center mb-6">
+                        <svg class="w-16 h-16 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path>
+                        </svg>
                     </div>
+                    <h3 class="text-2xl font-bold text-gray-700 mb-3">No Announcements Available</h3>
+                    <p class="text-gray-500">Check back later for updates and announcements about the DigiMarkt project.</p>
                 </div>
-
-                <!-- Feature 3 -->
-                <div class="group bg-white p-8 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100 relative overflow-hidden">
-                    <div class="absolute top-0 right-0 w-32 h-32 bg-purple-100 rounded-full -mr-16 -mt-16 opacity-50 group-hover:opacity-80 transition-opacity duration-300"></div>
-                    <div class="relative z-10">
-                        <div class="bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl w-16 h-16 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-300">
-                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
-                            </svg>
-                        </div>
-                        <h3 class="text-2xl font-bold text-gray-900 mb-4 group-hover:text-purple-600 transition-colors duration-300">Advanced Analytics</h3>
-                        <p class="text-gray-600 mb-6 leading-relaxed">
-                            Powerful admin tools to manage users, track content performance, and analyze platform usage with detailed interactive analytics dashboards.
-                        </p>
-                        <a href="#" class="text-purple-600 font-medium inline-flex items-center group-hover:text-purple-800 transition-colors duration-300">
-                            Learn more
-                            <svg class="w-4 h-4 ml-2 group-hover:ml-3 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            @endif
         </div>
     </section>
 

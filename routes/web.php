@@ -38,6 +38,10 @@ Route::get('/deliverables', [HomeController::class, 'deliverables'])->name('deli
 Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
 Route::get('/gallery/{id}', [GalleryController::class, 'show'])->name('gallery.show');
 
+// Video routes
+Route::get('/videos', [\App\Http\Controllers\VideoController::class, 'index'])->name('videos');
+Route::get('/videos/{id}', [\App\Http\Controllers\VideoController::class, 'show'])->name('videos.show');
+
 // Authentication routes (Laravel's built-in auth)
 Auth::routes(['verify' => true]); // Enable email verification
 
@@ -130,5 +134,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Announcement management
         Route::resource('announcements', AnnouncementController::class);
         Route::patch('/announcements/{announcement}/toggle-active', [AnnouncementController::class, 'toggleActive'])->name('announcements.toggle-active');
+        
+        // Video management
+        Route::resource('videos', \App\Http\Controllers\Admin\VideoController::class);
+        Route::post('/videos/{video}/toggle-featured', [\App\Http\Controllers\Admin\VideoController::class, 'toggleFeatured'])->name('videos.toggle-featured');
+        Route::post('/videos/{video}/toggle-published', [\App\Http\Controllers\Admin\VideoController::class, 'togglePublished'])->name('videos.toggle-published');
     });
 });

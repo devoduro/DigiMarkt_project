@@ -546,34 +546,61 @@ class HomeController extends Controller
         // Work Packages data
         $workPackages = [
             [
-                'title' => 'WP1: Project Management and Implementation',
-                'description' => 'Coordination, financial management, quality assurance, and reporting for the project.',
+                'title' => 'WP1: Project Administration and Coordination',
+                'description' => 'Initial meetings, management and monitoring meetings, project reports, midterm and final reports.',
                 'status' => 'In Progress',
-                'completion' => 45
+                'completion' => 45,
+                'tasks' => [
+                    'T1.1 Initial Meeting to kick off the project',
+                    'T1.2 Management and monitoring meeting',
+                    'T1.3 Project report, midterm and final reports'
+                ]
             ],
             [
-                'title' => 'WP2: Digital Marketing Skills Needs Assessment',
-                'description' => 'Research and analysis of digital marketing skills needs in TVET institutions in Ghana.',
+                'title' => 'WP2: Social Digital Entrepreneurship and Needs Analysis',
+                'description' => 'Field research, data collection, questionnaire analysis, and roadmap for project implementation.',
                 'status' => 'Completed',
-                'completion' => 100
+                'completion' => 100,
+                'tasks' => [
+                    'T2.1 Field research and data collection',
+                    'T2.2 Project questionnaire analysis and definition',
+                    'T2.3 Road map for project implementation and reports delivery'
+                ]
             ],
             [
-                'title' => 'WP3: Curriculum Development and Training',
-                'description' => 'Development of digital marketing curriculum and training of TVET educators.',
+                'title' => 'WP3: Training Materials and Mentorship',
+                'description' => 'Equipment purchase, lab setup, EU experience transfer, staff training, and curriculum development.',
                 'status' => 'In Progress',
-                'completion' => 60
+                'completion' => 60,
+                'tasks' => [
+                    'T3.1 Purchase equipment, design and Establish Training labs',
+                    'T3.2 Transfer of EU experience and Staff Training',
+                    'T3.3 Design training courses and learning materials',
+                    'T3.4 Develop an innovation model for academia-industry collaboration'
+                ]
             ],
             [
-                'title' => 'WP4: Digital Marketing Laboratory Setup',
-                'description' => 'Establishment of digital marketing labs in participating TVET institutions.',
-                'status' => 'Upcoming',
-                'completion' => 10
+                'title' => 'WP4: Quality Evaluation and Assurance',
+                'description' => 'Quality plan development, project activity monitoring, and impact evaluation.',
+                'status' => 'In Progress',
+                'completion' => 30,
+                'tasks' => [
+                    'T4.1 Develop a quality plan',
+                    'T4.2 Evaluate and monitor project activities',
+                    'T4.3 Evaluate impact and external reports'
+                ]
             ],
             [
-                'title' => 'WP5: Dissemination and Exploitation',
+                'title' => 'WP5: Project Impact and Dissemination',
                 'description' => 'Dissemination of project results and sustainability planning.',
                 'status' => 'In Progress',
-                'completion' => 30
+                'completion' => 30,
+                'tasks' => [
+                    'T5.1 Develop project web site',
+                    'T5.2 Dissemination planning',
+                    'T5.3 Organize workshops and conferences',
+                    'T5.4 Sustainable planning'
+                ]
             ]
         ];
         

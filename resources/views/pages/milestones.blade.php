@@ -54,6 +54,25 @@
                 <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
                     <h3 class="text-xl font-bold text-gray-900 mb-3">{{ $package['title'] }}</h3>
                     <p class="text-gray-600 mb-4">{{ $package['description'] }}</p>
+                    
+                    @if(isset($package['tasks']) && count($package['tasks']) > 0)
+                    <div class="mb-5 mt-2">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Tasks</h4>
+                        <ul class="space-y-2 pl-1">
+                            @foreach($package['tasks'] as $task)
+                            <li class="flex items-start">
+                                <span class="inline-flex items-center justify-center w-6 h-6 bg-indigo-100 text-indigo-600 rounded-full mr-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </span>
+                                <span class="text-gray-700">{{ $task }}</span>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+                    
                     <div class="flex items-center justify-between">
                         <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium 
                             @if($package['status'] == 'Completed') bg-green-100 text-green-800
@@ -157,66 +176,7 @@
             </div>
         </div>
         
-        <!-- Partners -->
-        <div class="max-w-5xl mx-auto mb-16">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Project Partners</h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-indigo-500 to-primary-dark mx-auto mb-6"></div>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Our international consortium brings together expertise from Europe and Africa.
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                @foreach($partners as $partner)
-                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col items-center text-center">
-                    <img src="{{ $partner['logo'] }}" alt="{{ $partner['name'] }}" class="h-20 object-contain mb-4">
-                    <h3 class="text-lg font-bold text-gray-900 mb-2">{{ $partner['name'] }}</h3>
-                    <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-gray-100 text-gray-800">
-                        {{ $partner['country'] }}
-                    </span>
-                </div>
-                @endforeach
-            </div>
-        </div>
-        
-        <!-- Gallery -->
-        <div class="max-w-6xl mx-auto">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Project Gallery</h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-indigo-500 to-primary-dark mx-auto mb-6"></div>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Visual highlights from our project activities and events.
-                </p>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                @foreach($gallery as $item)
-                <div class="group bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
-                    <div class="relative h-64 overflow-hidden">
-                        <img src="{{ $item['image'] }}" alt="{{ $item['title'] }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                            <div class="p-4 w-full">
-                                <span class="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm text-white rounded-full text-xs font-medium mb-2">
-                                    {{ $item['category'] }}
-                                </span>
-                                <h3 class="text-white font-bold">{{ $item['title'] }}</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-            
-            <div class="text-center mt-12">
-                <a href="{{ route('deliverables') }}" class="inline-flex items-center px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-md transition-colors">
-                    View Project Deliverables
-                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                    </svg>
-                </a>
-            </div>
-        </div>
+      
     </div>
 </div>
 
