@@ -158,88 +158,8 @@
         </div>
     </div>
 
-    <!-- Analytics Charts Row -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-        <!-- Downloads Chart -->
-        <div class="bg-white rounded-xl shadow-md p-6 col-span-2">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-lg font-semibold text-gray-900">Download Trends</h2>
-                <div class="flex space-x-2">
-                    <button class="px-3 py-1 text-xs font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200">Weekly</button>
-                    <button class="px-3 py-1 text-xs font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700">Monthly</button>
-                    <button class="px-3 py-1 text-xs font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200">Yearly</button>
-                </div>
-            </div>
-            <div class="h-64 w-full">
-                <!-- Chart Placeholder - In production, use a real chart library -->
-                <div class="relative h-full w-full bg-gray-50 rounded-lg overflow-hidden">
-                    <div class="absolute bottom-0 left-0 right-0 flex justify-between items-end h-full p-4">
-                        <div class="w-1/12 bg-blue-500 rounded-t-md" style="height: 30%"></div>
-                        <div class="w-1/12 bg-blue-500 rounded-t-md" style="height: 45%"></div>
-                        <div class="w-1/12 bg-blue-500 rounded-t-md" style="height: 25%"></div>
-                        <div class="w-1/12 bg-blue-500 rounded-t-md" style="height: 50%"></div>
-                        <div class="w-1/12 bg-blue-500 rounded-t-md" style="height: 60%"></div>
-                        <div class="w-1/12 bg-blue-500 rounded-t-md" style="height: 40%"></div>
-                        <div class="w-1/12 bg-blue-500 rounded-t-md" style="height: 70%"></div>
-                        <div class="w-1/12 bg-blue-500 rounded-t-md" style="height: 80%"></div>
-                        <div class="w-1/12 bg-blue-500 rounded-t-md" style="height: 65%"></div>
-                        <div class="w-1/12 bg-blue-500 rounded-t-md" style="height: 75%"></div>
-                        <div class="w-1/12 bg-blue-500 rounded-t-md" style="height: 90%"></div>
-                        <div class="w-1/12 bg-blue-500 rounded-t-md" style="height: 85%"></div>
-                    </div>
-                    <div class="absolute bottom-0 left-0 right-0 flex justify-between text-xs text-gray-500 px-4 pb-1">
-                        <div>Jan</div>
-                        <div>Feb</div>
-                        <div>Mar</div>
-                        <div>Apr</div>
-                        <div>May</div>
-                        <div>Jun</div>
-                        <div>Jul</div>
-                        <div>Aug</div>
-                        <div>Sep</div>
-                        <div>Oct</div>
-                        <div>Nov</div>
-                        <div>Dec</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Category Distribution -->
-        <div class="bg-white rounded-xl shadow-md p-6">
-            <h2 class="text-lg font-semibold text-gray-900 mb-4">Category Distribution</h2>
-            <div class="h-64 flex items-center justify-center">
-                <!-- Donut Chart Placeholder - In production, use a real chart library -->
-                <div class="relative h-48 w-48 rounded-full border-8 border-transparent" style="background: conic-gradient(#4f46e5 0% 25%, #3b82f6 25% 45%, #10b981 45% 65%, #f59e0b 65% 85%, #ef4444 85% 100%)">
-                    <div class="absolute inset-0 rounded-full bg-white m-3 flex items-center justify-center">
-                        <span class="text-lg font-bold text-gray-700">{{ $totalDocuments ?? 18 }}</span>
-                    </div>
-                </div>
-            </div>
-            <div class="grid grid-cols-2 gap-2 mt-4">
-                <div class="flex items-center">
-                    <span class="w-3 h-3 bg-indigo-600 rounded-full mr-2"></span>
-                    <span class="text-xs text-gray-600">Marketing (25%)</span>
-                </div>
-                <div class="flex items-center">
-                    <span class="w-3 h-3 bg-blue-500 rounded-full mr-2"></span>
-                    <span class="text-xs text-gray-600">SEO (20%)</span>
-                </div>
-                <div class="flex items-center">
-                    <span class="w-3 h-3 bg-green-500 rounded-full mr-2"></span>
-                    <span class="text-xs text-gray-600">Social Media (20%)</span>
-                </div>
-                <div class="flex items-center">
-                    <span class="w-3 h-3 bg-yellow-500 rounded-full mr-2"></span>
-                    <span class="text-xs text-gray-600">Content (20%)</span>
-                </div>
-                <div class="flex items-center">
-                    <span class="w-3 h-3 bg-red-500 rounded-full mr-2"></span>
-                    <span class="text-xs text-gray-600">Other (15%)</span>
-                </div>
-            </div>
-        </div>
-    </div>
+     
+ 
 
     <!-- Milestones & Deliverables Section -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
@@ -437,7 +357,7 @@
     </div>
 
     <!-- Charts Section -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+    <div class="mb-8">
         <!-- Visitor Statistics Chart -->
         <div class="bg-white rounded-xl shadow-md overflow-hidden">
             <div class="px-6 py-4 border-b border-gray-100">
@@ -445,16 +365,6 @@
             </div>
             <div class="p-6">
                 <canvas id="visitorChart" height="300"></canvas>
-            </div>
-        </div>
-
-        <!-- Download Statistics Chart -->
-        <div class="bg-white rounded-xl shadow-md overflow-hidden">
-            <div class="px-6 py-4 border-b border-gray-100">
-                <h3 class="text-lg font-semibold text-gray-800">Download Statistics</h3>
-            </div>
-            <div class="p-6">
-                <canvas id="downloadChart" height="300"></canvas>
             </div>
         </div>
     </div>
@@ -644,64 +554,7 @@
             }
         });
 
-        // Download Statistics Chart
-        const downloadCtx = document.getElementById('downloadChart').getContext('2d');
-        const downloadChart = new Chart(downloadCtx, {
-            type: 'bar',
-            data: {
-                labels: [{{ implode(', ', array_map(function($key) { return "'$key'"; }, array_keys($downloadCategories))) }}],
-                datasets: [{
-                    label: 'Downloads by Category',
-                    data: [{{ implode(', ', array_values($downloadCategories)) }}],
-                    backgroundColor: [
-                        'rgba(59, 130, 246, 0.7)',
-                        'rgba(16, 185, 129, 0.7)',
-                        'rgba(245, 158, 11, 0.7)',
-                        'rgba(139, 92, 246, 0.7)',
-                        'rgba(239, 68, 68, 0.7)'
-                    ],
-                    borderWidth: 0,
-                    borderRadius: 4
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        mode: 'index',
-                        intersect: false,
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            drawBorder: false,
-                            color: 'rgba(200, 200, 200, 0.15)',
-                        },
-                        ticks: {
-                            font: {
-                                size: 12,
-                            }
-                        }
-                    },
-                    x: {
-                        grid: {
-                            display: false
-                        },
-                        ticks: {
-                            font: {
-                                size: 12
-                            }
-                        }
-                    }
-                }
-            }
-        });
+        // Download Statistics Chart has been removed
     });
 </script>
 @endpush

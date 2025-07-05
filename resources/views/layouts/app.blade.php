@@ -111,10 +111,16 @@
     <!-- Header -->
     @include('partials.header')
 
-    <!-- Main Content -->
-    <main class="flex-grow pt-16">
+    <!-- Main Content Container with padding for fixed header -->
+    <div class="pt-24"> <!-- Add padding-top to account for fixed header -->
+        <!-- Project Objective Marquee -->
+        @include('partials.marquee')
+
+        <!-- Main Content -->
+        <main class="flex-grow">
         @yield('content')
     </main>
+    </div>
 
     <!-- Footer -->
     @include('partials.footer')

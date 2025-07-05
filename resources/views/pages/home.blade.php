@@ -3,51 +3,6 @@
 @section('title', 'Home')
 
 @section('content')
-    <!-- Marquee Announcement -->
-    <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-2 px-6 mb-6 mt-12 rounded-md shadow-md mx-4">
-        <marquee behavior="scroll" direction="left" scrollamount="5">
-            <div class="flex items-center space-x-12">
-                <span class="inline-flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                    <span class="font-medium">DigiMarkt Project is co-funded by the European Union with a total funding of €394,185.00</span>
-                </span>
-                <span class="inline-flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                    <span class="font-medium">Empowering TVET providers to enhance digital readiness of graduates in Ghana</span>
-                </span>
-                <span class="inline-flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                    <span class="font-medium">Supporting teachers and trainers with new digital skills and competences</span>
-                </span>
-                <span class="inline-flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                    <span class="font-medium">Improving employability potential of TVET learners through innovative education programs</span>
-                </span>
-                <span class="inline-flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                    <span class="font-medium">DigiMarkt Project is co-funded by the European Union with a total funding of €394,185.00</span>
-                </span>
-                <span class="inline-flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 text-yellow-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                    <span class="font-medium">Empowering TVET providers to enhance digital readiness of graduates in Ghana</span>
-                </span>
-            </div>
-
-        </marquee>
-    </div>
-
     <!-- Carousel Section -->
     <section class="relative overflow-hidden">
         <div id="carouselExampleIndicators" class="carousel slide carousel-fade" data-bs-ride="carousel">
@@ -292,64 +247,7 @@
         </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="py-20 bg-white relative overflow-hidden">
-        <!-- Background Pattern -->
-        <div class="absolute inset-0 opacity-5 z-0">
-            <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239C92AC" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
-        </div>
-        
-        <div class="container mx-auto px-4 relative z-10">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-2">Site Statistics</h2>
-                <div class="w-20 h-1 bg-gradient-to-r from-indigo-500 to-purple-600 mx-auto mb-4"></div>
-                <p class="text-gray-600 max-w-2xl mx-auto">Our growing community and expanding resources</p>
-            </div>
-      
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div class="p-8 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
-                    <div class="flex items-center justify-center w-16 h-16 mx-auto mb-6 rounded-full bg-indigo-100 text-indigo-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg>
-                    </div>
-                    <div class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-indigo-600 to-purple-600 mb-2 text-center">{{ number_format($visitorStats['total']) }}</div>
-                    <div class="text-gray-600 text-center font-medium">Total Site Visitors Today</div>
-                </div>
-                 <div class="p-8 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
-                    <div class="flex items-center justify-center w-16 h-16 mx-auto mb-6 rounded-full bg-blue-100 text-blue-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
-                        </svg>
-                    </div>
-                    <div class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-blue-500 to-indigo-500 mb-2 text-center">{{ $stats['partners'] }}</div>
-                    <div class="text-gray-600 text-center font-medium">Partners</div>
-                </div>
-                <div class="p-8 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
-                    <div class="flex items-center justify-center w-16 h-16 mx-auto mb-6 rounded-full bg-teal-100 text-teal-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                        </svg>
-                    </div>
-                    <div class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-teal-500 to-cyan-500 mb-2 text-center">{{ $stats['documents'] }}</div>
-                    <div class="text-gray-600 text-center font-medium">Deliverables</div>
-                </div>
-                
-                <div class="p-8 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
-                    <div class="flex items-center justify-center w-16 h-16 mx-auto mb-6 rounded-full bg-purple-100 text-purple-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
-                        </svg>
-                    </div>
-                    <div class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-purple-500 to-pink-500 mb-2 text-center">{{ $stats['downloads'] }}</div>
-                    <div class="text-gray-600 text-center font-medium">Downloads</div>
-                </div>
-                
-               
-            </div>
-        </div>
-    </section>
-
+  
     <!-- Announcements Section (Detailed) -->
     <section class="py-24 bg-gradient-to-b from-white to-gray-50">
         <div class="container mx-auto px-4">
@@ -416,6 +314,63 @@
             @endif
         </div>
     </section>
+  <!-- Stats Section -->
+  <section class="py-20 bg-white relative overflow-hidden">
+    <!-- Background Pattern -->
+    <div class="absolute inset-0 opacity-5 z-0">
+        <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%239C92AC" fill-opacity="0.4"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+    </div>
+    
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 mb-2">Site Statistics</h2>
+            <div class="w-20 h-1 bg-gradient-to-r from-indigo-500 to-purple-600 mx-auto mb-4"></div>
+            <p class="text-gray-600 max-w-2xl mx-auto">Our growing community and expanding resources</p>
+        </div>
+  
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div class="p-8 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                <div class="flex items-center justify-center w-16 h-16 mx-auto mb-6 rounded-full bg-indigo-100 text-indigo-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                </div>
+                <div class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-indigo-600 to-purple-600 mb-2 text-center">{{ number_format($visitorStats['total']) }}</div>
+                <div class="text-gray-600 text-center font-medium">Total Site Visitors Today</div>
+            </div>
+             <div class="p-8 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                <div class="flex items-center justify-center w-16 h-16 mx-auto mb-6 rounded-full bg-blue-100 text-blue-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                    </svg>
+                </div>
+                <div class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-blue-500 to-indigo-500 mb-2 text-center">{{ $stats['partners'] }}</div>
+                <div class="text-gray-600 text-center font-medium">Partners</div>
+            </div>
+            <div class="p-8 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                <div class="flex items-center justify-center w-16 h-16 mx-auto mb-6 rounded-full bg-teal-100 text-teal-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                </div>
+                <div class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-teal-500 to-cyan-500 mb-2 text-center">{{ $stats['documents'] }}</div>
+                <div class="text-gray-600 text-center font-medium">Deliverables</div>
+            </div>
+            
+            <div class="p-8 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
+                <div class="flex items-center justify-center w-16 h-16 mx-auto mb-6 rounded-full bg-purple-100 text-purple-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+                    </svg>
+                </div>
+                <div class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-purple-500 to-pink-500 mb-2 text-center">{{ $stats['downloads'] }}</div>
+                <div class="text-gray-600 text-center font-medium">Downloads</div>
+            </div>
+            
+           
+        </div>
+    </div>
+</section>
 
     <!-- Featured Project Activities Section -->
     <section class="py-24 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
@@ -693,7 +648,7 @@
                                                     <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
                                                 </svg>
                                             </div>
-                                            <span class="text-white">Premium Resources</span>
+                                            <span class="text-white">Community Resource Access</span>
                                         </div>
                                         <div class="flex items-center">
                                             <div class="w-10 h-10 rounded-full bg-white bg-opacity-20 flex items-center justify-center mr-3">
@@ -703,48 +658,42 @@
                                             </div>
                                             <span class="text-white">Expert Guidance</span>
                                         </div>
-                                        <div class="flex items-center">
-                                            <div class="w-10 h-10 rounded-full bg-white bg-opacity-20 flex items-center justify-center mr-3">
-                                                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                                                </svg>
-                                            </div>
-                                            <span class="text-white">Community Access</span>
-                                        </div>
+                                       
                                     </div>
                                 </div>
                                 
                                 <div class="lg:w-2/5">
                                     <div class="bg-white bg-opacity-10 backdrop-blur-sm rounded-2xl p-8 border border-white border-opacity-20 shadow-xl transform hover:-translate-y-1 transition-all duration-300">
-                                        <h3 class="text-2xl font-bold text-white mb-6 text-center">Get Started Now</h3>
+                                        <h3 class="text-2xl font-bold text-white mb-6 text-center">Explore Our Media</h3>
                                         <div class="space-y-4 mb-6">
-                                            <div class="flex items-center">
-                                                <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center mr-3">
-                                                    <svg class="w-4 h-4 text-indigo-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                            <a href="{{ route('videos') }}" class="flex items-center group">
+                                                <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center mr-3 group-hover:bg-red-200 transition-all duration-300">
+                                                    <svg class="w-5 h-5 text-red-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"></path>
                                                     </svg>
                                                 </div>
-                                                <span class="text-white">Instant access to all resources</span>
-                                            </div>
-                                            <div class="flex items-center">
-                                                <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center mr-3">
-                                                    <svg class="w-4 h-4 text-indigo-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                                <span class="text-white text-lg font-medium group-hover:text-indigo-100 transition-all duration-300">Watch Training Videos</span>
+                                            </a>
+                                            <a href="{{ route('gallery') }}" class="flex items-center group">
+                                                <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-3 group-hover:bg-blue-200 transition-all duration-300">
+                                                    <svg class="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
                                                     </svg>
                                                 </div>
-                                                <span class="text-white">Regular strategy updates</span>
-                                            </div>
-                                            <div class="flex items-center">
-                                                <div class="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center mr-3">
-                                                    <svg class="w-4 h-4 text-indigo-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                                <span class="text-white text-lg font-medium group-hover:text-indigo-100 transition-all duration-300">Browse Photo Gallery</span>
+                                            </a>
+                                            <a href="" class="flex items-center group">
+                                                <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-3 group-hover:bg-green-200 transition-all duration-300">
+                                                    <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                                        <path d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z"></path>
+                                                        <path d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z"></path>
                                                     </svg>
                                                 </div>
-                                                <span class="text-white">Priority support</span>
-                                            </div>
+                                                <span class="text-white text-lg font-medium group-hover:text-indigo-100 transition-all duration-300">Read Newsletters</span>
+                                            </a>
                                         </div>
-                                        <a href="{{ route('register') }}" class="block w-full px-8 py-4 bg-white text-indigo-700 font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 text-center">
-                                            Create Free Account
+                                        <a href="{{ route('login') }}" class="block w-full px-8 py-4 bg-white text-indigo-700 font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 text-center">
+                                            login for Full Access
                                         </a>
                                         <p class="text-white text-opacity-80 text-sm text-center mt-4">No credit card required</p>
                                     </div>

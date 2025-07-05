@@ -40,7 +40,10 @@
                                 <div class="flex flex-col md:flex-row md:items-start">
                                     <div class="md:w-1/4 flex flex-col items-center mb-6 md:mb-0 md:mr-8">
                                         <div class="w-32 h-32 bg-gray-100 rounded-full flex items-center justify-center mb-4 overflow-hidden">
-                                            <img src="{{ asset($partner['logo']) }}" alt="{{ $partner['name'] }} Logo" class="max-w-full max-h-full object-contain">
+                                            @php
+                                                $logoPath = strpos($partner['logo'], '/') !== false ? $partner['logo'] : 'assets/images/logo/' . $partner['logo'];
+                                            @endphp
+                                            <img src="{{ asset($logoPath) }}" alt="{{ $partner['name'] }} Logo" class="max-w-full max-h-full object-contain">
                                         </div>
                                         <h3 class="text-xl font-bold text-gray-900 text-center">{{ $partner['name'] }}</h3>
                                         <p class="text-gray-600 text-center">{{ $partner['country'] }}</p>
@@ -78,7 +81,10 @@
                                 <div class="flex flex-col md:flex-row md:items-start">
                                     <div class="md:w-1/4 flex flex-col items-center mb-6 md:mb-0 md:mr-8">
                                         <div class="w-32 h-32 bg-gray-100 rounded-full flex items-center justify-center mb-4 overflow-hidden">
-                                            <img src="{{ asset($partner['logo']) }}" alt="{{ $partner['name'] }} Logo" class="max-w-full max-h-full object-contain">
+                                            @php
+                                                $logoPath = strpos($partner['logo'], '/') !== false ? $partner['logo'] : 'assets/images/logo/' . $partner['logo'];
+                                            @endphp
+                                            <img src="{{ asset($logoPath) }}" alt="{{ $partner['name'] }} Logo" class="max-w-full max-h-full object-contain">
                                         </div>
                                         <h3 class="text-xl font-bold text-gray-900 text-center">{{ $partner['name'] }}</h3>
                                         <p class="text-gray-600 text-center">{{ $partner['country'] }}</p>

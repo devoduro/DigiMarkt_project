@@ -90,14 +90,7 @@ class DashboardController extends Controller
             $monthlyVisitorData[] = round($baseValue + $variance + rand(-20, 20));
         }
         
-        // Generate download category data
-        $downloadCategories = [
-            'Documents' => round($totalDownloads * 0.4),
-            'Templates' => round($totalDownloads * 0.25),
-            'Reports' => round($totalDownloads * 0.15),
-            'Media' => round($totalDownloads * 0.1),
-            'Other' => round($totalDownloads * 0.1)
-        ];
+        // Download categories data removed
         
         // Project stats - you can customize this based on your project needs
         $projectStats = [
@@ -116,7 +109,7 @@ class DashboardController extends Controller
             'recentDeliverables', 'totalMilestones', 'completedMilestones',
             'totalDeliverables', 'completedDeliverables', 'totalActivities',
             'upcomingActivities', 'totalResources', 'projectStats',
-            'monthlyVisitorData', 'downloadCategories'
+            'monthlyVisitorData'
         ));
     }
 }
