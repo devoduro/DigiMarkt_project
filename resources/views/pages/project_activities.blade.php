@@ -41,53 +41,7 @@
         </div>
     </section>
 
-    <!-- Announcements Section -->
-    <section class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="max-w-4xl mx-auto">
-                <div class="mb-12">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Announcements</h2>
-                    <div class="w-20 h-1 bg-gradient-to-r from-indigo-500 to-purple-600 mb-8"></div>
-                    
-                    <div class="space-y-8">
-                        @foreach($announcements as $announcement)
-                            <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 overflow-hidden">
-                                <div class="p-6">
-                                    <div class="flex justify-between items-start">
-                                        <h3 class="text-xl font-bold text-gray-900 mb-2">{{ $announcement['title'] }}</h3>
-                                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800">
-                                            {{ $announcement['date'] }}
-                                        </span>
-                                    </div>
-                                    <p class="text-gray-700 mb-4">{{ $announcement['content'] }}</p>
-                                    
-                                    <div class="flex justify-between items-center">
-                                        @if(isset($announcement['document']))
-                                            <a href="#" class="inline-flex items-center text-indigo-600 hover:text-indigo-800">
-                                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                                    <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z" clip-rule="evenodd"></path>
-                                                </svg>
-                                                Terms of Reference
-                                            </a>
-                                        @else
-                                            <div></div>
-                                        @endif
-                                        
-                                        <a href="#" class="text-indigo-600 hover:text-indigo-800 text-sm">
-                                            <span>Read more</span>
-                                            <svg class="w-4 h-4 inline-block ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                                            </svg>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    
 
     <!-- Activities Timeline Section -->
     <section class="py-20 bg-white">

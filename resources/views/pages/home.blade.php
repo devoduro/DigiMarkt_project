@@ -394,7 +394,12 @@
                         <!-- Activity Image -->
                         <div class="relative h-56 overflow-hidden">
                             @if($activity->images->isNotEmpty())
-                                <img src="{{ asset('storage/' . $activity->images->first()->image_path) }}" 
+                                @php
+                                    // Get the image path from the database
+                                    $imagePath = $activity->images->first()->image_path;
+                                @endphp
+                                {{-- Direct URL to the image in storage/app/public folder --}}
+                                <img src="{{ url('storage/' . $imagePath) }}" 
                                     alt="{{ $activity->title }}" 
                                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
                             @else
@@ -735,7 +740,8 @@
                 @foreach($galleries as $gallery)
                     <div class="bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300 hover:shadow-lg hover:-translate-y-1">
                         <a href="{{ route('gallery.show', $gallery->id) }}" class="block relative pb-[60%] overflow-hidden">
-                            <img src="{{ asset('storage/' . $gallery->thumbnail_path) }}" alt="{{ $gallery->title }}" class="absolute inset-0 w-full h-full object-cover">
+                            {{-- Direct URL approach for cPanel compatibility --}}
+                            <img src="{{ url('storage/' . $gallery->thumbnail_path) }}" alt="{{ $gallery->title }}" class="absolute inset-0 w-full h-full object-cover">
                         </a>
                         <div class="p-6">
                             <h3 class="text-xl font-bold text-gray-800 mb-2">
