@@ -87,7 +87,7 @@
                                 <option value="">Select Type</option>
                                 <option value="youtube" {{ old('video_type') == 'youtube' ? 'selected' : '' }}>YouTube</option>
                                 <option value="vimeo" {{ old('video_type') == 'vimeo' ? 'selected' : '' }}>Vimeo</option>
-                                <option value="upload" {{ old('video_type') == 'upload' ? 'selected' : '' }}>Upload File</option>
+                                <option value="upload" {{ old('video_type', 'upload') == 'upload' ? 'selected' : '' }}>Upload File</option>
                             </select>
                         </div>
                         
@@ -98,10 +98,63 @@
                             <p class="mt-1 text-sm text-gray-500">Enter the full URL of the YouTube or Vimeo video</p>
                         </div>
                         
-                        <div class="video-file-group hidden">
+                        <div class="video-file-group">
                             <label for="video_file" class="block text-sm font-medium text-gray-700 mb-1">Video File</label>
-                            <input type="file" class="w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" id="video_file" name="video_file" accept="video/mp4,video/mov,video/avi,video/wmv">
-                            <p class="mt-1 text-sm text-gray-500">Max file size: 100MB. Supported formats: MP4, MOV, AVI, WMV</p>
+                            
+                            <div class="video-upload-container border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-blue-500 transition-colors cursor-pointer bg-gray-50" id="video-dropzone">
+                                <input type="file" class="hidden" id="video_file" name="video_file" accept="video/mp4,video/mov,video/avi,video/wmv">
+                                
+                                <!-- Upload Icon State -->
+                                <div class="video-upload-placeholder">
+                                    <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                                        <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H8m36-12h-4m-8-4v4m0 0v4m0-4h12M4 16h4m4 0h12" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                    <p class="mt-2 text-sm font-medium text-gray-900">Drag and drop your video here</p>
+                                    <p class="mt-1 text-xs text-gray-500">Or click to browse</p>
+                                    <button type="button" class="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" id="browse-video-btn">
+                                        Browse files
+                                    </button>
+                                </div>
+                                
+                                <!-- Preview State -->
+                                <div class="video-preview hidden flex flex-col items-center">
+                                    <div class="relative w-full max-w-md aspect-video bg-black rounded-lg overflow-hidden mb-3">
+                                        <video class="w-full h-full object-contain" id="video-preview" controls></video>
+                                    </div>
+                                    <div class="flex items-center justify-between w-full max-w-md">
+                                        <div class="flex-1 mr-4">
+                                            <p class="text-sm font-medium text-gray-900 truncate" id="video-name"></p>
+                                            <p class="text-xs text-gray-500" id="video-size"></p>
+                                        </div>
+                                        <button type="button" class="inline-flex items-center p-2 border border-transparent rounded-full shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" id="remove-video-btn">
+                                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <!-- Upload Progress -->
+                                <div class="upload-progress hidden w-full max-w-md mx-auto mt-4">
+                                    <div class="flex justify-between mb-1">
+                                        <span class="text-sm font-medium text-gray-700">Uploading...</span>
+                                        <span class="text-sm font-medium text-gray-700" id="upload-percentage">0%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2.5">
+                                        <div class="bg-blue-600 h-2.5 rounded-full" id="upload-progress-bar" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-2 flex items-center text-sm text-gray-500">
+                                <svg class="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+                                </svg>
+                                <span>Max file size: 100MB. Supported formats: MP4, MOV, AVI, WMV</span>
+                            </div>
+                            
+                            <!-- Error message container -->
+                            <div class="hidden mt-2 text-sm text-red-600" id="video-upload-error"></div>
                         </div>
                         
                         <div>
@@ -172,8 +225,216 @@
             }
         });
         
-        // Trigger change event on page load to set initial state
-        $('#video_type').trigger('change');
+        // Initialize video type on page load
+        const initialVideoType = $('#video_type').val() || 'upload';
+        $('#video_type').val(initialVideoType).trigger('change');
+        
+        // Video upload functionality
+        const videoDropzone = document.getElementById('video-dropzone');
+        const videoInput = document.getElementById('video_file');
+        const browseBtn = document.getElementById('browse-video-btn');
+        const removeBtn = document.getElementById('remove-video-btn');
+        const videoPreview = document.getElementById('video-preview');
+        const videoName = document.getElementById('video-name');
+        const videoSize = document.getElementById('video-size');
+        const uploadPlaceholder = document.querySelector('.video-upload-placeholder');
+        const previewContainer = document.querySelector('.video-preview');
+        const errorContainer = document.getElementById('video-upload-error');
+        
+        // Make sure all elements exist before adding event listeners
+        if (!videoDropzone || !videoInput || !browseBtn || !removeBtn || !videoPreview || 
+            !videoName || !videoSize || !uploadPlaceholder || !previewContainer || !errorContainer) {
+            console.error('One or more video upload elements not found');
+        }
+        
+        // Handle click on dropzone
+        if (videoDropzone) {
+            videoDropzone.addEventListener('click', function(e) {
+                // Only trigger file input if not clicking the remove button or browse button
+                if (e.target !== removeBtn && !removeBtn.contains(e.target) && 
+                    e.target !== browseBtn && !browseBtn.contains(e.target)) {
+                    videoInput.click();
+                }
+                e.preventDefault(); // Prevent form submission
+            });
+        }
+        
+        // Handle click on browse button
+        if (browseBtn) {
+            browseBtn.addEventListener('click', function(e) {
+                videoInput.click();
+                e.preventDefault(); // Prevent event bubbling and form submission
+                e.stopPropagation();
+            });
+        }
+        
+        // Handle drag and drop events
+        if (videoDropzone) {
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                videoDropzone.addEventListener(eventName, preventDefaults, false);
+            });
+            
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            
+            ['dragenter', 'dragover'].forEach(eventName => {
+                videoDropzone.addEventListener(eventName, highlight, false);
+            });
+            
+            ['dragleave', 'drop'].forEach(eventName => {
+                videoDropzone.addEventListener(eventName, unhighlight, false);
+            });
+        }
+        
+        function highlight() {
+            videoDropzone.classList.add('border-blue-500', 'bg-blue-50');
+        }
+        
+        function unhighlight() {
+            videoDropzone.classList.remove('border-blue-500', 'bg-blue-50');
+        }
+        
+        // Handle file drop
+        if (videoDropzone) {
+            videoDropzone.addEventListener('drop', handleDrop, false);
+            
+            function handleDrop(e) {
+                const dt = e.dataTransfer;
+                if (dt.files && dt.files.length > 0) {
+                    const file = dt.files[0];
+                    handleVideoFile(file);
+                }
+            }
+        }
+        
+        // Handle file selection via input
+        if (videoInput) {
+            videoInput.addEventListener('change', function() {
+                if (this.files && this.files[0]) {
+                    handleVideoFile(this.files[0]);
+                }
+            });
+        }
+        
+        // Handle remove button click
+        if (removeBtn) {
+            removeBtn.addEventListener('click', function(e) {
+                resetVideoUpload();
+                e.preventDefault(); // Prevent form submission
+                e.stopPropagation();
+            });
+        }
+        
+        function handleVideoFile(file) {
+            if (!file) return;
+            
+            // Reset any previous errors
+            if (errorContainer) {
+                errorContainer.classList.add('hidden');
+                errorContainer.textContent = '';
+            }
+            
+            // Validate file type
+            const acceptedTypes = ['video/mp4', 'video/quicktime', 'video/x-msvideo', 'video/x-ms-wmv'];
+            if (!acceptedTypes.includes(file.type)) {
+                showError('Invalid file type. Please upload MP4, MOV, AVI, or WMV files only.');
+                return;
+            }
+            
+            // Validate file size (100MB max)
+            const maxSize = 100 * 1024 * 1024; // 100MB in bytes
+            if (file.size > maxSize) {
+                showError('File is too large. Maximum size is 100MB.');
+                return;
+            }
+            
+            // Update UI to show preview
+            if (uploadPlaceholder && previewContainer) {
+                uploadPlaceholder.classList.add('hidden');
+                previewContainer.classList.remove('hidden');
+            }
+            
+            // Set video source and show preview
+            if (videoPreview) {
+                const objectUrl = URL.createObjectURL(file);
+                videoPreview.src = objectUrl;
+            }
+            
+            // Set file info
+            if (videoName && videoSize) {
+                videoName.textContent = file.name;
+                videoSize.textContent = formatFileSize(file.size);
+            }
+            
+            // Store the file in the input
+            try {
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                videoInput.files = dataTransfer.files;
+            } catch (e) {
+                console.error('Error setting file input:', e);
+            }
+        }
+        
+        function resetVideoUpload() {
+            // Clear the file input
+            if (videoInput) {
+                videoInput.value = '';
+            }
+            
+            // Reset the UI
+            if (uploadPlaceholder && previewContainer) {
+                uploadPlaceholder.classList.remove('hidden');
+                previewContainer.classList.add('hidden');
+            }
+            
+            if (videoPreview) {
+                videoPreview.src = '';
+            }
+            
+            if (videoName) {
+                videoName.textContent = '';
+            }
+            
+            if (videoSize) {
+                videoSize.textContent = '';
+            }
+            
+            // Hide error message if any
+            if (errorContainer) {
+                errorContainer.classList.add('hidden');
+            }
+        }
+        
+        function showError(message) {
+            if (errorContainer) {
+                errorContainer.textContent = message;
+                errorContainer.classList.remove('hidden');
+            }
+            resetVideoUpload();
+        }
+        
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+        
+        // Handle form submission
+        $('form').on('submit', function(e) {
+            const videoType = $('#video_type').val();
+            
+            if (videoType === 'upload' && !videoInput.files.length) {
+                e.preventDefault();
+                showError('Please select a video file to upload.');
+            }
+        });
     });
 </script>
 @endsection

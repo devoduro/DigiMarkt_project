@@ -58,13 +58,7 @@
                 </a>
                 
                 
-    <!-- Project Activities -->
-    <a class="flex items-center px-6 py-2 mt-4 text-gray-100 hover:bg-primary-dark hover:text-white"
-    href="{{ route('admin.resources.index') }}">
-    <i class="fas fa-book-open w-5 h-5 text-center"></i>
-        <span class="mx-3">Digital Resources</span>
- </a>
-
+ 
 
 
 
@@ -75,7 +69,7 @@
      <a class="flex items-center px-6 py-2 mt-4 text-gray-100 hover:bg-primary-dark hover:text-white"
      href="{{ route('admin.deliverables.index') }}">
      <i class="fas fa-file-alt w-5 h-5 text-center"></i>
-     <span class="mx-3">Documents</span>
+     <span class="mx-3">Project Deliverables</span>
   </a>
 
 
@@ -117,6 +111,13 @@
                    href="{{ route('admin.announcements.index') }}">
                     <i class="fas fa-bullhorn w-5 h-5 text-center"></i>
                     <span class="mx-3">Announcements</span>
+                </a>
+                
+                <!-- Blog Posts -->
+                <a class="flex items-center px-6 py-2 mt-4 text-gray-100 hover:bg-primary-dark hover:text-white {{ request()->routeIs('admin.blog-posts.*') ? 'bg-primary-dark' : '' }}"
+                   href="{{ route('admin.blog-posts.index') }}">
+                    <i class="fas fa-newspaper w-5 h-5 text-center"></i>
+                    <span class="mx-3">Blog Posts</span>
                 </a>
                 
                 <!-- User Management -->

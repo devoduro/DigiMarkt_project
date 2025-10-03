@@ -11,6 +11,7 @@ use App\Models\ProjectActivity;
 use App\Models\Milestone;
 use App\Models\Visitor;
 use App\Models\Announcement;
+use App\Models\BlogPost;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
@@ -210,6 +211,21 @@ class HomeController extends Controller
             ->take(3)
             ->get();
         
+        // Get latest blog posts for homepage
+        $latestBlogPosts = BlogPost::published()
+            ->with('creator')
+            ->latest('published_at')
+            ->take(3)
+            ->get();
+        
+        // Get featured blog posts
+        $featuredBlogPosts = BlogPost::published()
+            ->featured()
+            ->with('creator')
+            ->latest('published_at')
+            ->take(2)
+            ->get();
+        
         return view('pages.home', compact(
             'latestDocuments',
             'featuredResources',
@@ -222,16 +238,113 @@ class HomeController extends Controller
             'allGalleries',
             'galleries',
             'visitorStats',
-            'announcements' // Add announcements
+            'announcements',
+            'latestBlogPosts',
+            'featuredBlogPosts'
         ));
     }
 
     /**
      * Show the about page.
      */
+     
+         public function managementBoard()
+    {
+        return view('pages.management_board');
+    }
+
     public function about()
     {
         return view('pages.about');
+    }
+
+    public function partners()
+    {
+        $europeanPartners = [
+            [
+                'name' => 'Slovak University of Agriculture in Nitra',
+                'country' => 'Slovakia',
+                'logo' => 'sua-logo.png',
+                'website' => 'www.uniag.sk',
+                'description' => 'The Slovak University of Agriculture in Nitra has attained the position of one of Slovakia\'s leading universities since it was founded in 1952. The University is consistently rated in the top group for the high quality of its teaching and research in the Slovak Republic. The University cultivates close and productive links with its local and regional community and will continue to expand its work at an international level in both teaching and scientific research.'
+            ],
+            [
+                'name' => 'Innovative Technologies and Education (Int@E UG)',
+                'country' => 'Germany',
+                'logo' => 'intae-logo.png',
+                'description' => 'Int@E UG is a German firm which provides vocational training, training innovative computer and medical technology, knowledge management, mobile learning, e-learning and software training, collaborative research and innovation, quality assessment, organizational analysis and organizational development to help education institutions of all kinds achieve greater excellence, navigate change, Knowledge transfer and strengthen the University-Enterprise linkage.'
+            ],
+            [
+                'name' => 'Steinbeis Beratungszentren GmbH',
+                'country' => 'Germany',
+                'logo' => 'steinbeis-logo.png',
+                'website' => 'www.steinbeis-beratung.de',
+                'description' => 'Steinbeis Beratungszentren GmbH, headquartered in Leipzig, Germany, is a premier institute specializing in mediation, conflict management, and organizational development. The institute offers expert services in handling escalated conflict situations and citizen participation in infrastructure projects. As a leading training center in Germany, they provide comprehensive education programs in mediation and conflict management.'
+            ]
+        ];
+
+        $ghanaianPartners = [
+            [
+                'name' => 'Akenten Appiah-Menka University of Skills Training and Entrepreneurial Development',
+                'country' => 'Ghana',
+                'logo' => 'aamusted-logo.png',
+                'description' => 'AAMUSTED is Ghana\'s Premier Public TVET and Entrepreneurial Development Teacher Education University.',
+                'mission' => 'To train and provide relevant TVET and entrepreneurial development teachers and other professionals for TVET institutions and industry and promote research and innovation for educational policy and economic development.',
+                'vision' => 'To be a world-class socially responsible TVET and Entrepreneurial Development Teacher Education University.',
+                'values' => [
+                    'Excellence with Integrity',
+                    'Education for Work and Development',
+                    'Creativity, Innovation and Invention',
+                    'Collaboration and Teamwork',
+                    'Entrepreneurial Development',
+                    'Gender Equity, Social Inclusiveness and Diversity'
+                ]
+            ],
+            [
+                'name' => 'Bolgatanga Technical University',
+                'country' => 'Ghana',
+                'logo' => 'btu-logo.png',
+                'description' => 'Bolgatanga Technical University provides career-focused education, applying state-of-the-art laboratories and workshops for teaching, practical training, applied research, sustainable agricultural and entrepreneurship development in a conducive environment.',
+                'mission' => 'The mission of the university is to provide career-focused education, applying state-of-the-art laboratories and workshops for teaching, practical training, applied research, sustainable agricultural and entrepreneurship development in a conducive environment.',
+                'vision' => 'The vision of the University is to become a preferred technical university with innovative academic programmes producing graduates equipped with new technological skills for sustainable development.',
+                'values' => [
+                    'Academic freedom',
+                    'Excellence',
+                    'Integrity',
+                    'Innovation',
+                    'Discipline',
+                    'Sustainability',
+                    'Equity'
+                ],
+                'niche' => 'The niche area of the University is ecological agriculture in line with its agrarian and savannah geographical location.'
+            ],
+            [
+                'name' => 'Cape Coast Technical University',
+                'country' => 'Ghana',
+                'logo' => 'cctu-logo.png',
+                'description' => 'Cape Coast Technical University provides quality technical, vocational and entrepreneurial education that inspires learners to be creative and driven towards technology-based and sustainable solutions for communities and industries.',
+                'mission' => 'Our mission is to provide quality technical, vocational and entrepreneurial, education that inspires learners to be creative and driven towards technology-based and sustainable solutions for communities and industries within the country and the sub-region.',
+                'vision' => 'Our Vision is to be a leading technologically innovative and entrepreneurial Technical University with a reputation in green and clean energy technologies.',
+                'values' => [
+                    'Innovation',
+                    'Creativity',
+                    'Professionalism',
+                    'Integrity',
+                    'Discipline',
+                    'Respect for all',
+                    'Team spirit',
+                    'Service to community'
+                ],
+                'functions' => [
+                    'Teaching, Research, and Innovation',
+                    'Entrepreneurial Skills Development',
+                    'Consultancy Services',
+                    'Community Engagement'
+                ]
+            ]
+        ];
+
+        return view('pages.partners', compact('europeanPartners', 'ghanaianPartners'));
     }
 
     /**
@@ -372,32 +485,62 @@ class HomeController extends Controller
      */
     public function documentDownload($id)
     {
-        $document = \App\Models\Document::findOrFail($id);
-        
-        // Check if user is authenticated
-        if (!auth()->check()) {
-            // Store intended URL in session
-            session()->put('url.intended', url()->previous());
+        try {
+            $document = \App\Models\Document::findOrFail($id);
             
-            // Redirect to login with message
-            return redirect()->route('login')
-                ->with('message', 'Please login to download this document.');
+            // Check if user is authenticated
+            if (!auth()->check()) {
+                // Store intended URL in session
+                session()->put('url.intended', url()->previous());
+                
+                // Redirect to login with message
+                return redirect()->route('login')
+                    ->with('message', 'Please login to download this document.');
+            }
+            
+            // Check if document is accessible by the current user
+            if (!$document->isAccessibleBy(auth()->user())) {
+                return redirect()->back()->with('error', 'You do not have permission to download this document.');
+            }
+            
+            // Check if file path exists
+            if (!$document->file_path) {
+                \Log::error('Document file path is empty', ['document_id' => $document->id]);
+                return redirect()->back()->with('error', 'Document file path not found.');
+            }
+            
+            // Check if file exists in public storage (where files are actually stored)
+            if (!\Storage::disk('public')->exists($document->file_path)) {
+                \Log::error('Document file not found in public storage', [
+                    'document_id' => $document->id,
+                    'file_path' => $document->file_path,
+                    'storage_disk' => 'public',
+                    'full_path' => storage_path('app/public/' . $document->file_path)
+                ]);
+                
+                return redirect()->back()->with('error', 'Document file not found. Please contact the administrator.');
+            }
+            
+            // Record the download
+            \App\Models\Download::create([
+                'user_id' => auth()->id(),
+                'document_id' => $document->id,
+                'ip_address' => request()->ip(),
+                'user_agent' => request()->userAgent(),
+            ]);
+            
+            // Attempt to download the file from public storage
+            return \Storage::disk('public')->download($document->file_path, $document->file_name);
+            
+        } catch (\Exception $e) {
+            \Log::error('Error downloading document', [
+                'document_id' => $id,
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            
+            return redirect()->back()->with('error', 'An error occurred while downloading the document: ' . $e->getMessage());
         }
-        
-        // Check if file exists
-        if (!$document->file_path || !\Storage::exists($document->file_path)) {
-            return redirect()->back()->with('error', 'Document file not found');
-        }
-        
-        // Record the download
-        \App\Models\Download::create([
-            'user_id' => auth()->id(),
-            'document_id' => $document->id,
-            'ip_address' => request()->ip(),
-            'user_agent' => request()->userAgent(),
-        ]);
-        
-        return \Storage::download($document->file_path, $document->file_name);
     }
     
     /**

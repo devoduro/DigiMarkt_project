@@ -10,10 +10,13 @@
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="5" aria-label="Slide 6"></button>
             </div>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <div class="overlay-image" style="background-image: url('{{ asset('assets/images/carousel/slider1.png') }}');"></div>
+                    <div class="overlay-image" style="background-image: url('{{ asset('assets/images/carousel/slider20.jpg') }}');"></div>
                     <div class="container">
                         <div class="carousel-caption text-start">
                             <h2>Digital Marketing in TVET</h2>
@@ -32,13 +35,43 @@
                         </div>
                     </div>
                 </div>
+                 <div class="carousel-item">
+                    <div class="overlay-image" style="background-image: url('{{ asset('assets/images/carousel/slider25.jpg') }}');"></div>
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <h2>International Collaboration</h2>
+                            <p>Working with partners across Europe and Africa to enhance digital marketing education</p>
+                            <p><a class="btn btn-lg btn-success" href="#">View Partners</a></p>
+                        </div>
+                    </div>
+                </div>
+                 <div class="carousel-item">
+                    <div class="overlay-image" style="background-image: url('{{ asset('assets/images/carousel/slider21.jpg') }}');"></div>
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <h2>Capacity Building through International Collaboration</h2>
+                            <p>Working with partners across Europe and Africa to enhance digital marketing education</p>
+                            <p><a class="btn btn-lg btn-success" href="#">View Partners</a></p>
+                        </div>
+                    </div>
+                </div>
                 <div class="carousel-item">
-                    <div class="overlay-image" style="background-image: url('{{ asset('assets/images/carousel/slider3.png') }}');"></div>
+                    <div class="overlay-image" style="background-image: url('{{ asset('assets/images/carousel/gal4.jpg') }}');"></div>
                     <div class="container">
                         <div class="carousel-caption text-end">
                             <h2>Building Digital Capacity</h2>
                             <p>Developing innovative training materials and resources for digital marketing</p>
                             <p><a class="btn btn-lg btn-info" href="#">Explore Resources</a></p>
+                        </div>
+                    </div>
+                </div>
+                 <div class="carousel-item">
+                    <div class="overlay-image" style="background-image: url('{{ asset('assets/images/carousel/slider22.jpg') }}');"></div>
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <h2>International Collaboration</h2>
+                            <p>Working with partners across Europe and Africa to enhance digital marketing education</p>
+                            <p><a class="btn btn-lg btn-success" href="#">View Partners</a></p>
                         </div>
                     </div>
                 </div>
@@ -153,8 +186,12 @@
                         <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Project Partners</h3>
                         <div class="grid grid-cols-2 gap-4 mb-4">
                             <div class="flex flex-col items-center">
-                                <img src="{{ asset('assets/images/logo/int@E_logo.png') }}" alt="Steinbeis Logo" class="h-12 mb-2">
-                                <span class="text-xs text-gray-700 text-center">Steinbeis (Germany)</span>
+                                <img src="{{ asset('assets/images/logo/steinbeis_logo.png') }}" alt="Steinbeis Logo" class="h-12 mb-2">
+                                <span class="text-xs text-gray-700 text-center">Steinbeis Mediation (Germany)</span>
+                            </div>
+                            <div class="flex flex-col items-center">
+                                <img src="{{ asset('assets/images/logo/int@E_logo.png') }}" alt="INT@E Logo" class="h-12 mb-2">
+                                <span class="text-xs text-gray-700 text-center">INT@E (Germany)</span>
                             </div>
                             <div class="flex flex-col items-center">
                                 <img src="{{ asset('assets/images/logo/sua_logo.jpg') }}" alt="Slovak University of Agriculture Logo" class="h-12 mb-2">
@@ -336,7 +373,7 @@
                     </svg>
                 </div>
                 <div class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-indigo-600 to-purple-600 mb-2 text-center">{{ number_format($visitorStats['total']) }}</div>
-                <div class="text-gray-600 text-center font-medium">Total Site Visitors Today</div>
+                <div class="text-gray-600 text-center font-medium">Total Site Visitors</div>
             </div>
              <div class="p-8 bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
                 <div class="flex items-center justify-center w-16 h-16 mx-auto mb-6 rounded-full bg-blue-100 text-blue-600">
@@ -715,6 +752,100 @@
 
 
     </section>
+
+    <!-- Latest News & Blog Posts Section -->
+    @if(isset($latestBlogPosts) && $latestBlogPosts->count() > 0)
+    <section class="py-24 bg-gray-50 relative overflow-hidden">
+        <!-- Background decorations -->
+        <div class="absolute -top-24 -left-24 w-96 h-96 bg-blue-100 rounded-full opacity-30 z-0"></div>
+        <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-indigo-100 rounded-full opacity-30 z-0"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mb-4">LATEST NEWS</span>
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">News & Updates</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto mb-6"></div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Stay updated with the latest news, announcements, and project developments
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                @foreach($latestBlogPosts as $post)
+                    <article class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group border border-gray-100">
+                        @if($post->featured_image)
+                            <div class="relative h-48 overflow-hidden">
+                                <img src="{{ asset('storage/' . $post->featured_image) }}" 
+                                     alt="{{ $post->title }}" 
+                                     class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500">
+                                @if($post->is_featured)
+                                    <div class="absolute top-4 left-4 bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                        <i class="fas fa-star mr-1"></i>Featured
+                                    </div>
+                                @endif
+                            </div>
+                        @else
+                            <div class="relative h-48 bg-gradient-to-br from-blue-400 to-indigo-600 flex items-center justify-center">
+                                <svg class="w-16 h-16 text-white opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
+                                </svg>
+                                @if($post->is_featured)
+                                    <div class="absolute top-4 left-4 bg-yellow-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                        <i class="fas fa-star mr-1"></i>Featured
+                                    </div>
+                                @endif
+                            </div>
+                        @endif
+                        
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="inline-block px-2 py-1 bg-{{ $post->category === 'News' ? 'blue' : ($post->category === 'Updates' ? 'green' : ($post->category === 'Events' ? 'purple' : 'orange')) }}-100 text-{{ $post->category === 'News' ? 'blue' : ($post->category === 'Updates' ? 'green' : ($post->category === 'Events' ? 'purple' : 'orange')) }}-800 rounded text-sm font-medium">
+                                    {{ $post->category }}
+                                </span>
+                                <span class="text-gray-500 text-sm">{{ $post->published_at->format('M d, Y') }}</span>
+                            </div>
+                            
+                            <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300 line-clamp-2">
+                                {{ $post->title }}
+                            </h3>
+                            
+                            <p class="text-gray-600 mb-4 line-clamp-3">{{ $post->excerpt }}</p>
+                            
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold mr-2">
+                                        {{ substr($post->creator->name, 0, 1) }}
+                                    </div>
+                                    <span>{{ $post->creator->name }}</span>
+                                </div>
+                                
+                                <a href="#" class="text-blue-600 font-medium inline-flex items-center group-hover:text-blue-800 transition-colors duration-300">
+                                    Read more
+                                    <svg class="w-4 h-4 ml-2 group-hover:ml-3 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                @endforeach
+            </div>
+            
+            @if($latestBlogPosts->count() >= 3)
+                <div class="text-center mt-12">
+                    <a href="#" class="inline-block px-8 py-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold rounded-xl hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl">
+                        <span class="flex items-center justify-center">
+                            <span>View All News & Updates</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+            @endif
+        </div>
+    </section>
+    @endif
 
     <!-- Gallery Section
     <section class="py-24 bg-white relative overflow-hidden">

@@ -43,6 +43,14 @@ class DashboardController extends Controller
         $weekVisitors = Visitor::getWeekCount();
         $monthVisitors = Visitor::getMonthCount();
         
+        // Enhanced visitor analytics
+        $yesterdayVisitors = Visitor::getYesterdayCount();
+        $last7DaysVisitors = Visitor::getLast7DaysCount();
+        $last30DaysVisitors = Visitor::getLast30DaysCount();
+        $averageDailyVisitors = Visitor::getAverageDailyVisitors();
+        $peakVisitorDay = Visitor::getPeakVisitorDay();
+        $visitorGrowthRate = Visitor::getGrowthRate();
+        
         // Project information
         $totalMilestones = Milestone::count();
         $completedMilestones = Milestone::where('status', 'Completed')->count();
@@ -81,15 +89,14 @@ class DashboardController extends Controller
             ->take(5)
             ->get();
             
-        // Generate monthly visitor data for the chart
-        $monthlyVisitorData = [];
-        for ($i = 1; $i <= 12; $i++) {
-            // Generate some realistic increasing/decreasing pattern
-            $baseValue = $monthVisitors * 0.7;
-            $variance = $i <= 6 ? $i * ($monthVisitors * 0.05) : (12 - $i) * ($monthVisitors * 0.05);
-            $monthlyVisitorData[] = round($baseValue + $variance + rand(-20, 20));
-        }
-        
+        // Generate enhanced visitor data for charts
+        $monthlyVisitorData = Visitor::getMonthlyVisitorData();
+        $dailyVisitorData = Visitor::getDailyVisitorData(30); // Last 30 days
+        $hourlyVisitorData = Visitor::getHourlyVisitorData(); // Today's hourly data
+        $topCountries = Visitor::getTopCountries(5);
+        $topBrowsers = Visitor::getTopBrowsers(5);
+        $topDevices = Visitor::getTopDevices();
+
         // Download categories data removed
         
         // Project stats - you can customize this based on your project needs
@@ -109,7 +116,10 @@ class DashboardController extends Controller
             'recentDeliverables', 'totalMilestones', 'completedMilestones',
             'totalDeliverables', 'completedDeliverables', 'totalActivities',
             'upcomingActivities', 'totalResources', 'projectStats',
-            'monthlyVisitorData'
+            'monthlyVisitorData', 'yesterdayVisitors', 'last7DaysVisitors',
+            'last30DaysVisitors', 'averageDailyVisitors', 'peakVisitorDay',
+            'visitorGrowthRate', 'dailyVisitorData', 'hourlyVisitorData',
+            'topCountries', 'topBrowsers', 'topDevices'
         ));
     }
 }

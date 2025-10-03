@@ -29,42 +29,54 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $query = User::query();
+        try {
+            $query = User::query();
 
-        // Apply filters
-        if ($request->filled('search')) {
-            $query->where('name', 'like', '%' . $request->search . '%')
-                ->orWhere('email', 'like', '%' . $request->search . '%');
+            // Apply filters
+            if ($request->filled('search')) {
+                $query->where('name', 'like', '%' . $request->search . '%')
+                    ->orWhere('email', 'like', '%' . $request->search . '%');
+            }
+
+            if ($request->filled('role')) {
+                $query->where('role', $request->role);
+            }
+
+            if ($request->filled('status')) {
+                $query->where('is_active', $request->status === 'active');
+            }
+
+            // Apply sorting
+            $sort = $request->sort ?? 'newest';
+            switch ($sort) {
+                case 'oldest':
+                    $query->oldest();
+                    break;
+                case 'name_asc':
+                    $query->orderBy('name', 'asc');
+                    break;
+                case 'name_desc':
+                    $query->orderBy('name', 'desc');
+                    break;
+                default:
+                    $query->latest();
+                    break;
+            }
+
+            $users = $query->paginate(10);
+
+            return view('admin.users', compact('users'));
+        } catch (\Exception $e) {
+            // Log the error
+            \Log::error('Error in UserController@index: ' . $e->getMessage());
+            \Log::error($e->getTraceAsString());
+            
+            // Return a simple view with error details
+            return response()->view('errors.custom', [
+                'message' => 'An error occurred: ' . $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ], 500);
         }
-
-        if ($request->filled('role')) {
-            $query->where('role', $request->role);
-        }
-
-        if ($request->filled('status')) {
-            $query->where('is_active', $request->status === 'active');
-        }
-
-        // Apply sorting
-        $sort = $request->sort ?? 'newest';
-        switch ($sort) {
-            case 'oldest':
-                $query->oldest();
-                break;
-            case 'name_asc':
-                $query->orderBy('name', 'asc');
-                break;
-            case 'name_desc':
-                $query->orderBy('name', 'desc');
-                break;
-            default:
-                $query->latest();
-                break;
-        }
-
-        $users = $query->paginate(10);
-
-        return view('admin.users', compact('users'));
     }
 
     /**

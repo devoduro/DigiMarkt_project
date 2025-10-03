@@ -78,7 +78,7 @@ class AboutController extends Controller
             [
                 'name' => 'Steinbeis Beratungszentren GmbH (SBZ)',
                 'country' => 'Germany',
-                'logo' => 'int@E_logo.png', // Using int@E_logo.png as a placeholder for SBZ
+                'logo' => 'steinbeis_logo.png', // Using int@E_logo.png as a placeholder for SBZ
                 'description' => 'Steinbeis Beratungszentren GmbH, headquartered in Leipzig, Germany, is a premier institute specializing in mediation, conflict management, and organizational development. The institute offers expert services in handling escalated conflict situations and citizen participation in infrastructure projects. As a leading training center in Germany, they provide comprehensive education programs in mediation and conflict management, emphasizing practical application and scientific foundation. Over the past two decades, Steinbeis Beratungszentren GmbH also gained expertise in project management by leading multiple cross-national EU grant-aided projects.',
                 'website' => 'SBR'
             ],

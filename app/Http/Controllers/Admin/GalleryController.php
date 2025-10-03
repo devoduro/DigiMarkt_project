@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Gallery;
 use App\Models\GalleryImage;
+use App\Services\StorageSyncService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -62,6 +63,7 @@ class GalleryController extends Controller
 
             // Store thumbnail
             $thumbnailPath = $request->file('thumbnail')->store('galleries/thumbnails', 'public');
+            StorageSyncService::syncFile($thumbnailPath);
 
             // Create gallery record
             $gallery = Gallery::create([
@@ -75,6 +77,7 @@ class GalleryController extends Controller
             // Handle gallery images
             foreach ($request->file('images') as $index => $image) {
                 $path = $image->store('galleries/images', 'public');
+                StorageSyncService::syncFile($path);
                 
                 GalleryImage::create([
                     'gallery_id' => $gallery->id,
@@ -131,9 +134,11 @@ class GalleryController extends Controller
         if ($request->hasFile('thumbnail')) {
             // Delete old thumbnail
             Storage::disk('public')->delete($gallery->thumbnail_path);
+            StorageSyncService::deleteFile($gallery->thumbnail_path);
             
             // Store new thumbnail
             $thumbnailPath = $request->file('thumbnail')->store('galleries/thumbnails', 'public');
+            StorageSyncService::syncFile($thumbnailPath);
             $gallery->thumbnail_path = $thumbnailPath;
         }
 
@@ -153,10 +158,12 @@ class GalleryController extends Controller
     {
         // Delete thumbnail
         Storage::disk('public')->delete($gallery->thumbnail_path);
+        StorageSyncService::deleteFile($gallery->thumbnail_path);
         
         // Delete all gallery images
         foreach ($gallery->images as $image) {
             Storage::disk('public')->delete($image->image_path);
+            StorageSyncService::deleteFile($image->image_path);
         }
         
         $gallery->delete();
@@ -187,6 +194,7 @@ class GalleryController extends Controller
         ]);
         
         $path = $request->file('image')->store('galleries/images', 'public');
+        StorageSyncService::syncFile($path);
         
         // Get the highest display order
         $maxOrder = $gallery->images()->max('display_order') ?? -1;
@@ -213,6 +221,7 @@ class GalleryController extends Controller
         
         // Delete the image file
         Storage::disk('public')->delete($image->image_path);
+        StorageSyncService::deleteFile($image->image_path);
         
         // Delete the image record
         $image->delete();

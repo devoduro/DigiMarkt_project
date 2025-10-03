@@ -22,21 +22,32 @@ use App\Http\Controllers\GalleryController;
 
 // Public routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/about', [AboutController::class, 'index'])->name('about');
-Route::get('/partners', [AboutController::class, 'partners'])->name('partners');
+Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('/partners', [HomeController::class, 'partners'])->name('partners');
+Route::get('/management-board', [HomeController::class, 'managementBoard'])->name('management.board');
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
+Route::get('/terms', [HomeController::class, 'terms'])->name('terms');
+Route::get('/privacy', [HomeController::class, 'privacy'])->name('privacy');
 Route::get('/resources', [HomeController::class, 'resources'])->name('resources');
 Route::get('/resources/{id}', [HomeController::class, 'resourceShow'])->name('resources.show');
 Route::get('/resources/{id}/download', [HomeController::class, 'resourceDownload'])->name('resources.download');
-Route::get('/milestones', [HomeController::class, 'milestones'])->name('milestones');
-Route::get('/project-activities', [HomeController::class, 'projectActivities'])->name('project.activities');
-Route::get('/contact', [ContactController::class, 'index'])->name('contact');
-Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
-Route::get('/management-board', [\App\Http\Controllers\ManagementBoardController::class, 'index'])->name('management.board');
-Route::get('/terms', [HomeController::class, 'terms'])->name('terms');
-Route::get('/privacy', [HomeController::class, 'privacy'])->name('privacy');
 Route::get('/deliverables', [HomeController::class, 'deliverables'])->name('deliverables');
-Route::get('/gallery', [GalleryController::class, 'index'])->name('gallery');
-Route::get('/gallery/{id}', [GalleryController::class, 'show'])->name('gallery.show');
+Route::get('/documents/{id}/download', [HomeController::class, 'documentDownload'])->name('documents.download');
+Route::get('/project-activities', [HomeController::class, 'projectActivities'])->name('project.activities');
+Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard')->middleware('auth');
+
+// Public milestones and work packages routes
+Route::get('/milestones', [\App\Http\Controllers\MilestoneController::class, 'index'])->name('milestones');
+Route::get('/work-packages', [\App\Http\Controllers\WorkPackageController::class, 'index'])->name('work-packages');
+
+// Public news/blog routes
+Route::get('/news', [\App\Http\Controllers\BlogController::class, 'index'])->name('news.index');
+Route::get('/news/{blogPost}', [\App\Http\Controllers\BlogController::class, 'show'])->name('news.show');
+
+// Gallery routes
+Route::get('/gallery', [\App\Http\Controllers\GalleryController::class, 'index'])->name('gallery');
+Route::get('/gallery/{id}', [\App\Http\Controllers\GalleryController::class, 'show'])->name('gallery.show');
 
 // Video routes
 Route::get('/videos', [\App\Http\Controllers\VideoController::class, 'index'])->name('videos');
@@ -58,7 +69,12 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/user/two-factor-authentication', [\App\Http\Controllers\Auth\TwoFactorAuthController::class, 'disable']);
 });
 
-// Protected routes (require authentication)
+// Deliverables downloads (require auth and verification, but not 2FA)
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/deliverables/{id}/download', [HomeController::class, 'documentDownload'])->name('deliverables.download');
+});
+
+// Protected routes (require authentication and 2FA)
 Route::middleware(['auth', 'verified', \App\Http\Middleware\EnsureTwoFactorAuthenticated::class])->group(function () {
     // Dashboard
     Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
@@ -69,9 +85,6 @@ Route::middleware(['auth', 'verified', \App\Http\Middleware\EnsureTwoFactorAuthe
     Route::put('/profile/password', [ProfileController::class, 'updatePassword'])->name('profile.password');
     Route::post('/profile/two-factor', [ProfileController::class, 'enableTwoFactor'])->name('profile.two-factor.enable');
     Route::delete('/profile/two-factor', [ProfileController::class, 'disableTwoFactor'])->name('profile.two-factor.disable');
-    
-    // Deliverables - authenticated downloads only
-    Route::get('/deliverables/{id}/download', [HomeController::class, 'documentDownload'])->name('deliverables.download');
 
     // Protected deliverable routes
     Route::middleware(['auth', 'verified'])->group(function () {
@@ -107,6 +120,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Project Milestone management
         Route::resource('milestones', \App\Http\Controllers\Admin\MilestoneController::class);
         Route::post('/milestones/{milestone}/toggle-featured', [\App\Http\Controllers\Admin\MilestoneController::class, 'toggleFeatured'])->name('milestones.toggle-featured');
+        Route::put('/milestones/{milestone}/publish', [\App\Http\Controllers\Admin\MilestoneController::class, 'publish'])->name('milestones.publish');
+        Route::put('/milestones/{milestone}/unpublish', [\App\Http\Controllers\Admin\MilestoneController::class, 'unpublish'])->name('milestones.unpublish');
         Route::post('/milestones/reorder', [\App\Http\Controllers\Admin\MilestoneController::class, 'reorder'])->name('milestones.reorder');
         
         // Milestone Deliverables management
@@ -139,5 +154,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('videos', \App\Http\Controllers\Admin\VideoController::class);
         Route::post('/videos/{video}/toggle-featured', [\App\Http\Controllers\Admin\VideoController::class, 'toggleFeatured'])->name('videos.toggle-featured');
         Route::post('/videos/{video}/toggle-published', [\App\Http\Controllers\Admin\VideoController::class, 'togglePublished'])->name('videos.toggle-published');
+        
+        // Work Package management
+        Route::resource('work-packages', \App\Http\Controllers\Admin\WorkPackageController::class);
+        Route::post('/work-packages/{workPackage}/toggle-featured', [\App\Http\Controllers\Admin\WorkPackageController::class, 'toggleFeatured'])->name('work-packages.toggle-featured');
+        Route::put('/work-packages/{workPackage}/publish', [\App\Http\Controllers\Admin\WorkPackageController::class, 'publish'])->name('work-packages.publish');
+        Route::put('/work-packages/{workPackage}/unpublish', [\App\Http\Controllers\Admin\WorkPackageController::class, 'unpublish'])->name('work-packages.unpublish');
+        
+        // Blog Post management
+        Route::resource('blog-posts', \App\Http\Controllers\Admin\BlogPostController::class);
+        Route::patch('/blog-posts/{blogPost}/publish', [\App\Http\Controllers\Admin\BlogPostController::class, 'publish'])->name('blog-posts.publish');
+        Route::patch('/blog-posts/{blogPost}/unpublish', [\App\Http\Controllers\Admin\BlogPostController::class, 'unpublish'])->name('blog-posts.unpublish');
+        Route::patch('/blog-posts/{blogPost}/toggle-featured', [\App\Http\Controllers\Admin\BlogPostController::class, 'toggleFeatured'])->name('blog-posts.toggle-featured');
     });
 });

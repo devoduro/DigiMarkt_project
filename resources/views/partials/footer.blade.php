@@ -46,8 +46,12 @@
                 <h3 class="text-lg font-semibold mb-4">Partner Institutions</h3>
                 <div class="grid grid-cols-2 gap-4 mb-4">
                     <a href="https://www.steinbeis.de" target="_blank" rel="noopener" class="flex flex-col items-center">
-                        <img src="{{ asset('assets/images/logo/int@E_logo.png') }}" alt="Steinbeis Logo" class="h-12 mb-2 bg-white p-1 rounded">
-                        <span class="text-xs text-gray-300 text-center">Steinbeis</span>
+                        <img src="{{ asset('assets/images/logo/steinbeis_logo.png') }}" alt="Steinbeis Logo" class="h-12 mb-2 bg-white p-1 rounded">
+                        <span class="text-xs text-gray-300 text-center">STEINBEIS</span>
+                    </a>
+                    <a href="https://intate.de/en" target="_blank" rel="noopener" class="flex flex-col items-center">
+                        <img src="{{ asset('assets/images/logo/int@E_logo.png') }}" alt="Int@E Logo" class="h-12 mb-2 bg-white p-1 rounded">
+                        <span class="text-xs text-gray-300 text-center">INT@E</span>
                     </a>
                     <a href="https://www.uniag.sk/en/" target="_blank" rel="noopener" class="flex flex-col items-center">
                         <img src="{{ asset('assets/images/logo/sua_logo.jpg') }}" alt="Slovak University of Agriculture Logo" class="h-12 mb-2 bg-white p-1 rounded">
@@ -89,7 +93,7 @@
                         <svg class="h-6 w-6 mr-2 text-primary-light" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
                         </svg>
-                        <span class="text-gray-300">+233 302 123 456</span>
+                        <span class="text-gray-300">+233 244 071 973</span>
                     </li>
                 </ul>
             </div>

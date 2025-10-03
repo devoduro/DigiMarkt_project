@@ -143,16 +143,46 @@
                         </svg>
                     </div>
                 </div>
-                <div class="flex items-baseline">
+                <div class="flex items-baseline mb-2">
                     <p class="text-3xl font-bold text-gray-900">{{ $totalVisitors }}</p>
+                    @if($visitorGrowthRate != 0)
+                        <span class="ml-2 text-sm font-medium {{ $visitorGrowthRate > 0 ? 'text-green-600' : 'text-red-600' }}">
+                            {{ $visitorGrowthRate > 0 ? '+' : '' }}{{ $visitorGrowthRate }}%
+                        </span>
+                    @endif
                 </div>
-                <div class="mt-1 text-xs text-gray-500">Total unique visitors</div>
+                <div class="text-xs text-gray-500 mb-3">Total unique visitors</div>
+                <div class="text-xs text-gray-600">
+                    <div class="flex justify-between mb-1">
+                        <span>Avg. daily:</span>
+                        <span class="font-medium">{{ $averageDailyVisitors }}</span>
+                    </div>
+                    @if($peakVisitorDay['date'])
+                        <div class="flex justify-between">
+                            <span>Peak day:</span>
+                            <span class="font-medium">{{ $peakVisitorDay['count'] }} ({{ $peakVisitorDay['date'] }})</span>
+                        </div>
+                    @endif
+                </div>
             </div>
             <div class="bg-gray-50 px-5 py-3">
-                <div class="flex justify-between text-sm">
-                    <span class="text-purple-600">Today: {{ $todayVisitors }}</span>
-                    <span class="text-purple-600">This week: {{ $weekVisitors }}</span>
-                    <span class="text-purple-600">This month: {{ $monthVisitors }}</span>
+                <div class="grid grid-cols-2 gap-4 text-sm">
+                    <div class="text-center">
+                        <div class="text-purple-600 font-semibold">{{ $todayVisitors }}</div>
+                        <div class="text-gray-500 text-xs">Today</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-purple-600 font-semibold">{{ $yesterdayVisitors }}</div>
+                        <div class="text-gray-500 text-xs">Yesterday</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-purple-600 font-semibold">{{ $weekVisitors }}</div>
+                        <div class="text-gray-500 text-xs">This Week</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-purple-600 font-semibold">{{ $monthVisitors }}</div>
+                        <div class="text-gray-500 text-xs">This Month</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -356,15 +386,100 @@
         </div>
     </div>
 
-    <!-- Charts Section -->
+    <!-- Enhanced Visitor Analytics Section -->
     <div class="mb-8">
-        <!-- Visitor Statistics Chart -->
-        <div class="bg-white rounded-xl shadow-md overflow-hidden">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Main Visitor Chart -->
+            <div class="lg:col-span-2 bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="px-6 py-4 border-b border-gray-100 flex justify-between items-center">
+                    <h3 class="text-lg font-semibold text-gray-800">Visitor Trends</h3>
+                    <div class="flex space-x-2">
+                        <button id="monthlyViewBtn" class="px-3 py-1 text-sm bg-primary text-white rounded-md">Monthly</button>
+                        <button id="dailyViewBtn" class="px-3 py-1 text-sm bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">Daily</button>
+                        <button id="hourlyViewBtn" class="px-3 py-1 text-sm bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300">Hourly</button>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <canvas id="visitorChart" height="300"></canvas>
+                </div>
+            </div>
+            
+            <!-- Visitor Analytics Summary -->
+            <div class="space-y-6">
+                <!-- Top Countries -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-100">
+                        <h4 class="text-md font-semibold text-gray-800">Top Countries</h4>
+                    </div>
+                    <div class="p-6">
+                        @foreach($topCountries as $country)
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-blue-500 rounded-full mr-3"></div>
+                                    <span class="text-sm text-gray-700">{{ $country['country'] }}</span>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-sm font-medium text-gray-900">{{ $country['count'] }}</div>
+                                    <div class="text-xs text-gray-500">{{ $country['percentage'] }}%</div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+                
+                <!-- Browser Stats -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <div class="px-6 py-4 border-b border-gray-100">
+                        <h4 class="text-md font-semibold text-gray-800">Top Browsers</h4>
+                    </div>
+                    <div class="p-6">
+                        @foreach($topBrowsers as $browser)
+                            <div class="flex items-center justify-between mb-3">
+                                <div class="flex items-center">
+                                    <div class="w-3 h-3 bg-green-500 rounded-full mr-3"></div>
+                                    <span class="text-sm text-gray-700">{{ $browser['browser'] }}</span>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-sm font-medium text-gray-900">{{ $browser['count'] }}</div>
+                                    <div class="text-xs text-gray-500">{{ $browser['percentage'] }}%</div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Device Statistics -->
+        <div class="mt-6 bg-white rounded-xl shadow-md overflow-hidden">
             <div class="px-6 py-4 border-b border-gray-100">
-                <h3 class="text-lg font-semibold text-gray-800">Visitor Statistics</h3>
+                <h3 class="text-lg font-semibold text-gray-800">Device Statistics</h3>
             </div>
             <div class="p-6">
-                <canvas id="visitorChart" height="300"></canvas>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    @foreach($topDevices as $device)
+                        <div class="text-center">
+                            <div class="w-16 h-16 mx-auto mb-3 rounded-full flex items-center justify-center {{ $device['device'] === 'Desktop' ? 'bg-blue-100' : ($device['device'] === 'Mobile' ? 'bg-green-100' : 'bg-purple-100') }}">
+                                @if($device['device'] === 'Desktop')
+                                    <svg class="w-8 h-8 {{ $device['device'] === 'Desktop' ? 'text-blue-600' : '' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                    </svg>
+                                @elseif($device['device'] === 'Mobile')
+                                    <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a1 1 0 001-1V4a1 1 0 00-1-1H8a1 1 0 00-1 1v16a1 1 0 001 1z"></path>
+                                    </svg>
+                                @else
+                                    <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                    </svg>
+                                @endif
+                            </div>
+                            <h4 class="text-lg font-semibold text-gray-900">{{ $device['count'] }}</h4>
+                            <p class="text-sm text-gray-600">{{ $device['device'] }}</p>
+                            <p class="text-xs text-gray-500">{{ $device['percentage'] }}%</p>
+                        </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>
@@ -495,36 +610,89 @@
 @endsection
 
 @push('scripts')
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Visitor Statistics Chart
+        // Enhanced Visitor Statistics Chart
         const visitorCtx = document.getElementById('visitorChart').getContext('2d');
+        
+        // Chart data sets
+        const chartData = {
+            monthly: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                data: [{{ implode(', ', $monthlyVisitorData) }}],
+                label: 'Monthly Visitors'
+            },
+            daily: {
+                labels: {!! json_encode($dailyVisitorData['labels']) !!},
+                data: {!! json_encode($dailyVisitorData['data']) !!},
+                label: 'Daily Visitors (Last 30 Days)'
+            },
+            hourly: {
+                labels: {!! json_encode($hourlyVisitorData['labels']) !!},
+                data: {!! json_encode($hourlyVisitorData['data']) !!},
+                label: 'Hourly Visitors (Today)'
+            }
+        };
+        
+        let currentView = 'monthly';
+        
         const visitorChart = new Chart(visitorCtx, {
             type: 'line',
             data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                labels: chartData.monthly.labels,
                 datasets: [{
-                    label: 'Monthly Visitors',
-                    data: [{{ implode(', ', $monthlyVisitorData) }}],
-                    backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                    label: chartData.monthly.label,
+                    data: chartData.monthly.data,
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
                     borderColor: 'rgba(59, 130, 246, 1)',
-                    borderWidth: 2,
-                    tension: 0.3,
+                    borderWidth: 3,
+                    tension: 0.4,
                     pointBackgroundColor: 'rgba(59, 130, 246, 1)',
-                    pointRadius: 4
+                    pointBorderColor: 'rgba(255, 255, 255, 2)',
+                    pointBorderWidth: 2,
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    fill: true
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
+                },
                 plugins: {
                     legend: {
                         display: true,
-                        position: 'top'
+                        position: 'top',
+                        labels: {
+                            usePointStyle: true,
+                            padding: 20,
+                            font: {
+                                size: 13,
+                                weight: '500'
+                            }
+                        }
                     },
                     tooltip: {
-                        mode: 'index',
-                        intersect: false,
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        titleColor: 'white',
+                        bodyColor: 'white',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 1,
+                        cornerRadius: 8,
+                        displayColors: false,
+                        callbacks: {
+                            title: function(context) {
+                                return context[0].label;
+                            },
+                            label: function(context) {
+                                return `Visitors: ${context.parsed.y}`;
+                            }
+                        }
                     }
                 },
                 scales: {
@@ -532,12 +700,14 @@
                         beginAtZero: true,
                         grid: {
                             drawBorder: false,
-                            color: 'rgba(200, 200, 200, 0.15)',
+                            color: 'rgba(200, 200, 200, 0.2)',
                         },
                         ticks: {
                             font: {
                                 size: 12,
-                            }
+                            },
+                            color: 'rgba(107, 114, 128, 1)',
+                            padding: 10
                         }
                     },
                     x: {
@@ -547,14 +717,37 @@
                         ticks: {
                             font: {
                                 size: 12
-                            }
+                            },
+                            color: 'rgba(107, 114, 128, 1)',
+                            padding: 10
                         }
                     }
                 }
             }
         });
-
-        // Download Statistics Chart has been removed
+        
+        // Chart view switching functionality
+        function updateChart(view) {
+            const data = chartData[view];
+            visitorChart.data.labels = data.labels;
+            visitorChart.data.datasets[0].data = data.data;
+            visitorChart.data.datasets[0].label = data.label;
+            visitorChart.update('active');
+            
+            // Update button states
+            document.querySelectorAll('[id$="ViewBtn"]').forEach(btn => {
+                btn.classList.remove('bg-primary', 'text-white');
+                btn.classList.add('bg-gray-200', 'text-gray-700');
+            });
+            
+            document.getElementById(view + 'ViewBtn').classList.remove('bg-gray-200', 'text-gray-700');
+            document.getElementById(view + 'ViewBtn').classList.add('bg-primary', 'text-white');
+        }
+        
+        // Event listeners for chart view buttons
+        document.getElementById('monthlyViewBtn').addEventListener('click', () => updateChart('monthly'));
+        document.getElementById('dailyViewBtn').addEventListener('click', () => updateChart('daily'));
+        document.getElementById('hourlyViewBtn').addEventListener('click', () => updateChart('hourly'));
     });
 </script>
 @endpush

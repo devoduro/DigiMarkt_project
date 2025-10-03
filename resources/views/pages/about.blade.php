@@ -61,9 +61,27 @@
                 </div>
 
                 <div class="mb-16">
-                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Project Objectives</h2>
+                    <h2 class="text-3xl font-bold text-gray-900 mb-6">Project Aim and Objectives</h2>
                     <div class="w-20 h-1 bg-gradient-to-r from-indigo-500 to-purple-600 mb-8"></div>
+                    
+                    <!-- Project Aim -->
+                    <div class="bg-indigo-50 rounded-2xl p-8 shadow-lg mb-8 border border-indigo-100">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
+                            <div class="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center mr-3 shadow-lg">
+                                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            Project Aim
+                        </h3>
+                        <p class="text-lg text-gray-700 leading-relaxed">
+                            The aim of the DigiMarkt Project in Ghana, is to empower training providers and learners to enhance their digital readiness for Technical and Vocational Education and Training (TVET).
+                        </p>
+                    </div>
+
+                    <!-- Project Objectives -->
                     <div class="bg-gray-50 rounded-2xl p-8 shadow-lg">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Project Objectives</h3>
                         <ul class="space-y-6">
                             <li class="flex">
                                 <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center mr-4 shadow-lg">

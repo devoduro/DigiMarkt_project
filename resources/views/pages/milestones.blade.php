@@ -16,85 +16,8 @@
 
 <div class="bg-gray-50 py-16">
     <div class="container mx-auto px-4">
-        <!-- Project Summary -->
-        <div class="max-w-5xl mx-auto mb-16">
-            <div class="bg-white p-8 rounded-xl shadow-lg">
-                <h2 class="text-3xl font-bold text-gray-900 mb-6 flex items-center">
-                    <span class="inline-block w-12 h-12 bg-indigo-100 text-indigo-600 rounded-full mr-4 flex items-center justify-center">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                    </span>
-                    Project Summary
-                </h2>
-                <div class="prose prose-lg max-w-none">
-                    <p>The aim of Digital Marketing in Technical and Vocational Education and Training (DigiMarkt) in Ghana is to empower training providers and learners to enhance their digital readiness for Technical and Vocational Education and Training (TVET).</p>
-                    
-                    <p>By defining future skills needed for TVET graduates in the digital era and aligning such skills to the unique local Ghanaian Context will help achieve the project aim. The project will involve participants in co-creating DigiMarkt, as well as improving the skills of teachers/trainers and mentors on innovative tools, online pedagogies and teaching techniques, cutting–edge technologies and trends in DigiMarkt.</p>
-                    
-                    <p>The course will give opportunity to the youth, by empowering them in the use of digital transformation tools and model in order to practicalize technical and vocational education. For the purposes of skills transfer for interested institutions and organizations that are willing to reinforce capacity and attractiveness of TVET, the DIGIMARKT approach will be available for the public to ensure sustainability.</p>
-                    
-                    <p>Further to the project sustainability plan, an online micro learning unit on DIGIMARKT will be available to all interested organizations and learners in English by the project partners. The project will be a two-year duration, and will be implemented by Steinbeis Beratungszentrum (SRZ), Slovak University of Agriculture, Int@E Akenten Appiah-Menka University of Skills Training and Entrepreneurial Development (AAMUSTED), Bolgatanga Technical University (BTU), Cape- Coast Technical University (CCTU).</p>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Work Packages -->
-        <div class="max-w-5xl mx-auto mb-16">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-900 mb-4">Work Packages</h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-indigo-500 to-primary-dark mx-auto mb-6"></div>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Our project is organized into five key work packages, each with specific objectives and deliverables.
-                </p>
-            </div>
-            
-            <div class="space-y-6">
-                @foreach($workPackages as $package)
-                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">{{ $package['title'] }}</h3>
-                    <p class="text-gray-600 mb-4">{{ $package['description'] }}</p>
-                    
-                    @if(isset($package['tasks']) && count($package['tasks']) > 0)
-                    <div class="mb-5 mt-2">
-                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Tasks</h4>
-                        <ul class="space-y-2 pl-1">
-                            @foreach($package['tasks'] as $task)
-                            <li class="flex items-start">
-                                <span class="inline-flex items-center justify-center w-6 h-6 bg-indigo-100 text-indigo-600 rounded-full mr-2">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                </span>
-                                <span class="text-gray-700">{{ $task }}</span>
-                            </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    @endif
-                    
-                    <div class="flex items-center justify-between">
-                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium 
-                            @if($package['status'] == 'Completed') bg-green-100 text-green-800
-                            @elseif($package['status'] == 'In Progress') bg-blue-100 text-blue-800
-                            @else bg-yellow-100 text-yellow-800 @endif">
-                            {{ $package['status'] }}
-                        </span>
-                        <span class="text-sm text-gray-500">Completion: {{ $package['completion'] }}%</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-2.5 mt-3">
-                        <div class="h-2.5 rounded-full 
-                            @if($package['status'] == 'Completed') bg-green-600
-                            @elseif($package['status'] == 'In Progress') bg-blue-600
-                            @else bg-yellow-600 @endif" 
-                            style="width: {{ $package['completion'] }}%"></div>
-                    </div>
-                </div>
-                @endforeach
-            </div>
-        </div>
-        
-        <!-- Project Milestones -->
+
+ <!-- Project Milestones -->
         <div class="max-w-5xl mx-auto mb-16">
             <div class="text-center mb-12">
                 <h2 class="text-3xl font-bold text-gray-900 mb-4">Project Milestones</h2>
@@ -176,6 +99,88 @@
             </div>
         </div>
         
+
+
+
+        <!-- Project Summary -->
+        <div class="max-w-5xl mx-auto mb-16">
+            <div class="bg-white p-8 rounded-xl shadow-lg">
+                <h2 class="text-3xl font-bold text-gray-900 mb-6 flex items-center">
+                    <span class="inline-block w-12 h-12 bg-indigo-100 text-indigo-600 rounded-full mr-4 flex items-center justify-center">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </span>
+                    Project Summary
+                </h2>
+                <div class="prose prose-lg max-w-none">
+                    <p>The aim of Digital Marketing in Technical and Vocational Education and Training (DigiMarkt) in Ghana is to empower training providers and learners to enhance their digital readiness for Technical and Vocational Education and Training (TVET).</p>
+                    
+                    <p>By defining future skills needed for TVET graduates in the digital era and aligning such skills to the unique local Ghanaian Context will help achieve the project aim. The project will involve participants in co-creating DigiMarkt, as well as improving the skills of teachers/trainers and mentors on innovative tools, online pedagogies and teaching techniques, cutting–edge technologies and trends in DigiMarkt.</p>
+                    
+                    <p>The course will give opportunity to the youth, by empowering them in the use of digital transformation tools and model in order to practicalize technical and vocational education. For the purposes of skills transfer for interested institutions and organizations that are willing to reinforce capacity and attractiveness of TVET, the DIGIMARKT approach will be available for the public to ensure sustainability.</p>
+                    
+                    <p>Further to the project sustainability plan, an online micro learning unit on DIGIMARKT will be available to all interested organizations and learners in English by the project partners. The project will be a two-year duration, and will be implemented by Steinbeis Beratungszentrum (SRZ), Slovak University of Agriculture, Int@E Akenten Appiah-Menka University of Skills Training and Entrepreneurial Development (AAMUSTED), Bolgatanga Technical University (BTU), Cape- Coast Technical University (CCTU).</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Work Packages -->
+        <div class="max-w-5xl mx-auto mb-16">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Work Packages</h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-indigo-500 to-primary-dark mx-auto mb-6"></div>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Our project is organized into five key work packages, each with specific objectives and deliverables.
+                </p>
+            </div>
+            
+            <div class="space-y-6">
+                @foreach($workPackages as $package)
+                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300">
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">{{ $package['title'] }}</h3>
+                    <p class="text-gray-600 mb-4">{{ $package['description'] }}</p>
+                    
+                    @if(isset($package['tasks']) && count($package['tasks']) > 0)
+                    <div class="mb-5 mt-2">
+                        <h4 class="text-lg font-semibold text-gray-800 mb-3">Tasks</h4>
+                        <ul class="space-y-2 pl-1">
+                            @foreach($package['tasks'] as $task)
+                            <li class="flex items-start">
+                                <span class="inline-flex items-center justify-center w-6 h-6 bg-indigo-100 text-indigo-600 rounded-full mr-2">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </span>
+                                <span class="text-gray-700">{{ $task }}</span>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+                    
+                    <div class="flex items-center justify-between">
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium 
+                            @if($package['status'] == 'Completed') bg-green-100 text-green-800
+                            @elseif($package['status'] == 'In Progress') bg-blue-100 text-blue-800
+                            @else bg-yellow-100 text-yellow-800 @endif">
+                            {{ $package['status'] }}
+                        </span>
+                        <span class="text-sm text-gray-500">Completion: {{ $package['completion'] }}%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2.5 mt-3">
+                        <div class="h-2.5 rounded-full 
+                            @if($package['status'] == 'Completed') bg-green-600
+                            @elseif($package['status'] == 'In Progress') bg-blue-600
+                            @else bg-yellow-600 @endif" 
+                            style="width: {{ $package['completion'] }}%"></div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+        
+       
       
     </div>
 </div>
