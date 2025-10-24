@@ -33,7 +33,7 @@ window.addEventListener('load', function() {
             if (typeof AccessibleChatbot !== 'undefined') {
                 window.accessibleChatbot = new AccessibleChatbot({
                     apiEndpoint: '/api/chatbot/message',
-                    welcomeMessage: 'Hello! I\'m DigiBot, your digital marketing assistant. How can I help you today?',
+                    welcomeMessage: 'Hello! Welcome to DigiMarkt. I can help you learn about the project, partners, objectives, and digital marketing in TVET. What would you like to know?',
                     position: 'bottom-right',
                     theme: 'light'
                 });

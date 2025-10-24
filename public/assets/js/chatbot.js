@@ -32,10 +32,10 @@ class AccessibleChatbot {
      * Initialize the chatbot
      */
     init() {
+        this.setupAccessibilityFeatures();
         this.createElements();
         this.setupEventListeners();
         this.addWelcomeMessage();
-        this.setupAccessibilityFeatures();
     }
 
     /**
@@ -289,38 +289,33 @@ class AccessibleChatbot {
      * @returns {Promise<string>} Bot's response
      */
     async fetchBotResponse(userInput) {
-        if (!this.options.apiKey) {
-            // Mock response for demo purposes, would be replaced by real API call
-            return new Promise(resolve => {
-                setTimeout(() => {
-                    const mockResponses = [
-                        "That's a great question about digital marketing! The key is to start with defining your target audience.",
-                        "I'd recommend focusing on content marketing and SEO as your first steps.",
-                        "Social media marketing is crucial for brand awareness. Consider starting with the platforms where your audience is most active.",
-                        "Email marketing still has one of the highest ROIs of any digital marketing channel. Start by building your subscriber list.",
-                        "Analytics are essential for measuring your marketing success. Make sure you're tracking the right metrics for your goals."
-                    ];
-                    const randomResponse = mockResponses[Math.floor(Math.random() * mockResponses.length)];
-                    resolve(randomResponse);
-                }, 1000);
-            });
-        }
-
-        const response = await fetch(this.options.apiEndpoint, {
-            method: 'POST',
-            headers: {
+        try {
+            const headers = {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${this.options.apiKey}`
-            },
-            body: JSON.stringify({ message: userInput })
-        });
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
+            };
+            
+            // Only add Authorization header if apiKey is provided
+            if (this.options.apiKey) {
+                headers['Authorization'] = `Bearer ${this.options.apiKey}`;
+            }
 
-        if (!response.ok) {
-            throw new Error('Error fetching response');
+            const response = await fetch(this.options.apiEndpoint, {
+                method: 'POST',
+                headers: headers,
+                body: JSON.stringify({ message: userInput })
+            });
+
+            if (!response.ok) {
+                throw new Error('Error fetching response: ' + response.status);
+            }
+
+            const data = await response.json();
+            return data.response || data.message || 'Sorry, I could not process your request.';
+        } catch (error) {
+            console.error('Chatbot API Error:', error);
+            throw error;
         }
-
-        const data = await response.json();
-        return data.response;
     }
 
     /**
@@ -427,7 +422,9 @@ class AccessibleChatbot {
      * @param {string} message - Message to announce
      */
     announceForScreenReader(message) {
-        this.srAnnouncer.textContent = message;
+        if (this.srAnnouncer) {
+            this.srAnnouncer.textContent = message;
+        }
     }
 
     /**
@@ -491,6 +488,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.accessibleChatbot = new AccessibleChatbot({
         // Configuration options can be set here
         apiKey: null, // Set your API key here if you have one
-        welcomeMessage: 'Hello! I\'m DigiBot, your digital marketing assistant. How can I help you with your digital marketing questions today?'
+        apiEndpoint: '/api/chatbot/message',
+        welcomeMessage: 'Hello! Welcome to DigiMarkt. I can help you learn about the project, partners, objectives, and digital marketing in TVET. What would you like to know?'
     });
 });

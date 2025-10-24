@@ -6,9 +6,25 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
+use App\Services\OpenAIChatService;
+use App\Models\ChatbotConversation;
+use Illuminate\Support\Str;
 
 class ChatbotController extends Controller
 {
+    protected $aiService;
+
+    public function __construct()
+    {
+        try {
+            $this->aiService = new OpenAIChatService();
+        } catch (\Exception $e) {
+            Log::warning('ChatBot: AI service not available, using rule-based fallback', [
+                'error' => $e->getMessage()
+            ]);
+            $this->aiService = null;
+        }
+    }
     /**
      * Process a chatbot request and generate a response
      *
@@ -17,35 +33,83 @@ class ChatbotController extends Controller
      */
     public function processMessage(Request $request)
     {
+        $startTime = microtime(true);
+        
         // Validate request data
         $validated = $request->validate([
             'message' => 'required|string|max:1000',
+            'session_id' => 'nullable|string'
         ]);
 
         // Extract the user message
         $userMessage = $validated['message'];
+        $sessionId = $validated['session_id'] ?? $request->session()->getId() ?? Str::uuid()->toString();
         
         try {
-            // In a real implementation, you'd connect to an AI service like OpenAI, Azure, etc.
-            // Here we'll implement a simple rule-based response system
-            $response = $this->generateResponse($userMessage);
-            
-            // Log the interaction (in a real app, you might want to store this in a database)
-            Log::info('Chatbot interaction', [
+            $response = null;
+            $responseType = 'rule-based';
+            $tokensUsed = null;
+
+            // Try AI service first if available
+            if ($this->aiService && $this->aiService->isAvailable()) {
+                try {
+                    // Get conversation history for context
+                    $conversationHistory = ChatbotConversation::getSessionHistory($sessionId, 5);
+                    
+                    // Generate AI response
+                    $response = $this->aiService->generateResponse($userMessage, $conversationHistory);
+                    $responseType = 'ai';
+                    
+                    Log::info('ChatBot: AI response generated', [
+                        'session_id' => $sessionId,
+                        'user_message' => $userMessage
+                    ]);
+                } catch (\Exception $e) {
+                    Log::warning('ChatBot: AI service failed, falling back to rule-based', [
+                        'error' => $e->getMessage()
+                    ]);
+                    $response = null;
+                }
+            }
+
+            // Fallback to rule-based response if AI fails or is unavailable
+            if (!$response) {
+                $response = $this->generateRuleBasedResponse($userMessage);
+                $responseType = 'rule-based';
+                
+                Log::info('ChatBot: Rule-based response generated', [
+                    'session_id' => $sessionId,
+                    'user_message' => $userMessage
+                ]);
+            }
+
+            // Calculate response time
+            $responseTime = (int)((microtime(true) - $startTime) * 1000);
+
+            // Store conversation in database
+            ChatbotConversation::create([
+                'session_id' => $sessionId,
+                'ip_address' => $request->ip(),
                 'user_message' => $userMessage,
                 'bot_response' => $response,
-                'ip' => $request->ip()
+                'response_type' => $responseType,
+                'response_time_ms' => $responseTime,
+                'tokens_used' => $tokensUsed
             ]);
             
             return response()->json([
                 'success' => true,
-                'response' => $response
+                'response' => $response,
+                'session_id' => $sessionId,
+                'response_type' => $responseType,
+                'response_time_ms' => $responseTime
             ]);
             
         } catch (\Exception $e) {
-            Log::error('Chatbot error', [
+            Log::error('ChatBot error', [
                 'message' => $e->getMessage(),
-                'user_message' => $userMessage
+                'user_message' => $userMessage,
+                'session_id' => $sessionId
             ]);
             
             return response()->json([
@@ -56,12 +120,12 @@ class ChatbotController extends Controller
     }
 
     /**
-     * Generate a response based on the user message
+     * Generate a rule-based response (fallback when AI is unavailable)
      * 
      * @param string $userMessage
      * @return string
      */
-    private function generateResponse($userMessage)
+    private function generateRuleBasedResponse($userMessage)
     {
         $message = strtolower($userMessage);
         
@@ -203,6 +267,81 @@ class ChatbotController extends Controller
             return 'DigiMarkt develops comprehensive training materials and resources for digital marketing education. These include curricula, teaching guides, practical exercises, case studies, and digital tools. Many resources are available through the project website for registered users. The materials are designed to be practical and applicable to the Ghanaian context.';
         }
         
+        // Participation and Involvement (check specific phrases first)
+        if (str_contains($message, 'how to join') || str_contains($message, 'how do i join') || str_contains($message, 'how can i join') || str_contains($message, 'participate') || str_contains($message, 'get involved') || str_contains($message, 'be involved')) {
+            return 'There are several ways to engage with DigiMarkt: 1) TVET institutions can access the training materials and resources developed by the project, 2) Teachers and trainers can benefit from the professional development programmes, 3) Students can enroll in digital marketing courses at partner institutions, 4) Organizations can explore collaboration opportunities. For specific inquiries about participation, please use the contact form on this website to reach out to the project team.';
+        }
+        
+        // Partnership and Collaboration
+        if (str_contains($message, 'become a partner') || str_contains($message, 'join the project') || str_contains($message, 'join as partner') || str_contains($message, 'collaborate') || str_contains($message, 'partnership')) {
+            return 'Thank you for your interest in DigiMarkt! The current project consortium consists of six partner institutions. However, the project welcomes collaboration and knowledge sharing with interested TVET institutions, organizations, and stakeholders. For inquiries about collaboration opportunities, partnerships, or accessing project resources, please contact us through the contact page on this website. The project team will be happy to discuss how you can engage with DigiMarkt activities.';
+        }
+        
+        // Registration and Enrollment
+        if (str_contains($message, 'register') || str_contains($message, 'enroll') || str_contains($message, 'sign up') || str_contains($message, 'apply')) {
+            return 'If you\'re interested in enrolling in digital marketing courses, please contact the partner institutions directly: AAMUSTED, Bolgatanga Technical University (BTU), or Cape Coast Technical University (CCTU). Each institution has its own admission process for TVET programmes. For access to online resources and materials, you can register on this website. For other inquiries, please visit our contact page.';
+        }
+        
+        // Location and Visit
+        if (str_contains($message, 'where') || str_contains($message, 'location') || str_contains($message, 'visit') || str_contains($message, 'address')) {
+            return 'DigiMarkt is implemented across multiple locations in Ghana and Europe. The Ghanaian partner institutions are: AAMUSTED (Kumasi), Bolgatanga Technical University (Bolgatanga, Upper East Region), and Cape Coast Technical University (Cape Coast, Central Region). European partners are based in Germany (Steinbeis and INT@E) and Slovakia (Slovak University of Agriculture in Nitra). For specific addresses and contact details, please visit the contact or partners page on this website.';
+        }
+        
+        // Milestones
+        if (str_contains($message, 'milestone') || str_contains($message, 'progress') || str_contains($message, 'achievement')) {
+            return 'DigiMarkt tracks project progress through key milestones. These include curriculum development, laboratory setup, teacher training sessions, student enrollment, resource creation, and dissemination activities. You can view detailed milestone information and progress updates on the Milestones page of this website. Each milestone has specific deliverables and timelines to ensure the project stays on track.';
+        }
+        
+        // Deliverables
+        if (str_contains($message, 'deliverable') || str_contains($message, 'output') || str_contains($message, 'result')) {
+            return 'DigiMarkt produces several key deliverables including: digital marketing curricula, training materials, laboratory equipment and setup, teacher training programs, student learning resources, online micro-learning units, case studies, and evaluation reports. All deliverables are designed to ensure sustainable impact on TVET education in Ghana. Visit the Deliverables page to see detailed information about project outputs.';
+        }
+        
+        // Activities and Events
+        if (str_contains($message, 'activit') || str_contains($message, 'event') || str_contains($message, 'workshop') || str_contains($message, 'training session')) {
+            return 'DigiMarkt organizes various activities including teacher training workshops, student capacity building sessions, curriculum development meetings, laboratory setup activities, dissemination events, and stakeholder engagement sessions. These activities involve both Ghanaian and European partners working together. Check the Project Activities page for upcoming and past events, workshops, and training sessions.';
+        }
+        
+        // News and Blog
+        if (str_contains($message, 'news') || str_contains($message, 'blog') || str_contains($message, 'update') || str_contains($message, 'announcement') || str_contains($message, 'latest')) {
+            return 'Stay updated with the latest DigiMarkt news, announcements, and blog posts! The website features regular updates about project activities, success stories, partner highlights, training sessions, and important announcements. Visit the News section to read the latest articles and stay informed about project developments and achievements.';
+        }
+        
+        // Gallery and Photos
+        if (str_contains($message, 'gallery') || str_contains($message, 'photo') || str_contains($message, 'image') || str_contains($message, 'picture')) {
+            return 'The DigiMarkt Gallery showcases photos from project activities, training sessions, laboratory setups, partner meetings, and events. Visual documentation helps tell the story of the project\'s impact on TVET education in Ghana. Browse the Gallery page to see images from various project activities and milestones.';
+        }
+        
+        // Videos
+        if (str_contains($message, 'video') || str_contains($message, 'watch') || str_contains($message, 'recording')) {
+            return 'DigiMarkt produces educational videos and documentation of project activities. These videos include training sessions, testimonials, laboratory tours, partner interviews, and instructional content on digital marketing topics. Visit the Videos page to watch content that brings the project to life and provides insights into digital marketing education in TVET.';
+        }
+        
+        // Resources and Downloads
+        if (str_contains($message, 'resource') || str_contains($message, 'material') || str_contains($message, 'download') || str_contains($message, 'document')) {
+            return 'DigiMarkt provides comprehensive resources including curricula, teaching guides, practical exercises, case studies, digital tools, and learning materials. Many resources are available for download on the Resources page. These materials are designed to be practical and applicable to the Ghanaian TVET context. Registered users can access additional exclusive resources.';
+        }
+        
+        // Management Board and Leadership
+        if (str_contains($message, 'management') || str_contains($message, 'board') || str_contains($message, 'leader') || str_contains($message, 'coordinator') || str_contains($message, 'team')) {
+            return 'The DigiMarkt project is led by a Management Board comprising representatives from all six partner institutions. The board oversees project implementation, ensures quality standards, manages resources, and coordinates activities across Ghana and Europe. Visit the Management Board page to learn about the project leadership team, their roles, and responsibilities in driving the project\'s success.';
+        }
+        
+        // About Page
+        if (str_contains($message, 'about') || str_contains($message, 'who are you') || str_contains($message, 'tell me more')) {
+            return 'DigiMarkt (Digital Marketing in Technical and Vocational Education and Training) is an EU-funded project empowering TVET institutions in Ghana with digital marketing education. The project brings together six partner institutions from Ghana, Germany, and Slovakia to develop curricula, establish laboratories, train teachers, and equip students with in-demand digital skills. Visit the About page for comprehensive information about the project\'s background, vision, and impact.';
+        }
+        
+        // Website Navigation
+        if (str_contains($message, 'page') || str_contains($message, 'section') || str_contains($message, 'navigate') || str_contains($message, 'find')) {
+            return 'The DigiMarkt website includes several sections: Home, About, Partners, Milestones, Deliverables, Project Activities, News, Gallery, Videos, Resources, Management Board, and Contact. Each section provides detailed information about different aspects of the project. Use the navigation menu to explore all sections and learn more about digital marketing education in TVET.';
+        }
+        
+        // Help and Support
+        if (str_contains($message, 'help') || str_contains($message, 'support') || str_contains($message, 'assist')) {
+            return 'I\'m here to help! I can provide information about: DigiMarkt project overview, objectives, partners, EU funding, TVET education, digital marketing topics (SEO, social media, content marketing, email marketing, PPC, analytics), laboratories, teacher training, student benefits, curriculum, career opportunities, milestones, deliverables, activities, news, gallery, videos, resources, management board, and more. What would you like to know?';
+        }
+        
         // Default response if no keywords match
         return "That's an interesting question! DigiMarkt is focused on digital marketing education in TVET institutions in Ghana. I can provide information about the project objectives, partners, funding, curriculum, digital marketing topics (SEO, social media, content marketing, etc.), laboratories, teacher training, and more. What specific aspect would you like to know about?";
     }
@@ -218,13 +357,15 @@ class ChatbotController extends Controller
             'What is DigiMarkt project about?',
             'Who are the project partners?',
             'What are the project objectives?',
-            'Tell me about AAMUSTED',
+            'How to join the project?',
             'What is TVET?',
             'How is the project funded?',
             'What digital marketing topics are covered?',
-            'What are the digital marketing laboratories?',
-            'How does DigiMarkt help students?',
-            'What is the project duration?'
+            'Tell me about project activities',
+            'Show me the latest news',
+            'What are the project milestones?',
+            'What resources are available?',
+            'How does DigiMarkt help students?'
         ];
         
         return response()->json([
