@@ -264,20 +264,20 @@ class HomeController extends Controller
             [
                 'name' => 'Slovak University of Agriculture in Nitra',
                 'country' => 'Slovakia',
-                'logo' => 'sua-logo.png',
+                'logo' => 'sua_logo.jpg',
                 'website' => 'www.uniag.sk',
                 'description' => 'The Slovak University of Agriculture in Nitra has attained the position of one of Slovakia\'s leading universities since it was founded in 1952. The University is consistently rated in the top group for the high quality of its teaching and research in the Slovak Republic. The University cultivates close and productive links with its local and regional community and will continue to expand its work at an international level in both teaching and scientific research.'
             ],
             [
                 'name' => 'Innovative Technologies and Education (Int@E UG)',
                 'country' => 'Germany',
-                'logo' => 'intae-logo.png',
+                'logo' => 'int@E_logo.png',
                 'description' => 'Int@E UG is a German firm which provides vocational training, training innovative computer and medical technology, knowledge management, mobile learning, e-learning and software training, collaborative research and innovation, quality assessment, organizational analysis and organizational development to help education institutions of all kinds achieve greater excellence, navigate change, Knowledge transfer and strengthen the University-Enterprise linkage.'
             ],
             [
                 'name' => 'Steinbeis Beratungszentren GmbH',
                 'country' => 'Germany',
-                'logo' => 'steinbeis-logo.png',
+                'logo' => 'steinbeis_logo.png',
                 'website' => 'www.steinbeis-beratung.de',
                 'description' => 'Steinbeis Beratungszentren GmbH, headquartered in Leipzig, Germany, is a premier institute specializing in mediation, conflict management, and organizational development. The institute offers expert services in handling escalated conflict situations and citizen participation in infrastructure projects. As a leading training center in Germany, they provide comprehensive education programs in mediation and conflict management.'
             ]
@@ -287,7 +287,7 @@ class HomeController extends Controller
             [
                 'name' => 'Akenten Appiah-Menka University of Skills Training and Entrepreneurial Development',
                 'country' => 'Ghana',
-                'logo' => 'aamusted-logo.png',
+                'logo' => 'aamusted.jpg',
                 'description' => 'AAMUSTED is Ghana\'s Premier Public TVET and Entrepreneurial Development Teacher Education University.',
                 'mission' => 'To train and provide relevant TVET and entrepreneurial development teachers and other professionals for TVET institutions and industry and promote research and innovation for educational policy and economic development.',
                 'vision' => 'To be a world-class socially responsible TVET and Entrepreneurial Development Teacher Education University.',
@@ -303,7 +303,7 @@ class HomeController extends Controller
             [
                 'name' => 'Bolgatanga Technical University',
                 'country' => 'Ghana',
-                'logo' => 'btu-logo.png',
+                'logo' => 'Bolga_logo.png',
                 'description' => 'Bolgatanga Technical University provides career-focused education, applying state-of-the-art laboratories and workshops for teaching, practical training, applied research, sustainable agricultural and entrepreneurship development in a conducive environment.',
                 'mission' => 'The mission of the university is to provide career-focused education, applying state-of-the-art laboratories and workshops for teaching, practical training, applied research, sustainable agricultural and entrepreneurship development in a conducive environment.',
                 'vision' => 'The vision of the University is to become a preferred technical university with innovative academic programmes producing graduates equipped with new technological skills for sustainable development.',
@@ -321,7 +321,7 @@ class HomeController extends Controller
             [
                 'name' => 'Cape Coast Technical University',
                 'country' => 'Ghana',
-                'logo' => 'cctu-logo.png',
+                'logo' => 'CCTU_logo.png',
                 'description' => 'Cape Coast Technical University provides quality technical, vocational and entrepreneurial education that inspires learners to be creative and driven towards technology-based and sustainable solutions for communities and industries.',
                 'mission' => 'Our mission is to provide quality technical, vocational and entrepreneurial, education that inspires learners to be creative and driven towards technology-based and sustainable solutions for communities and industries within the country and the sub-region.',
                 'vision' => 'Our Vision is to be a leading technologically innovative and entrepreneurial Technical University with a reputation in green and clean energy technologies.',

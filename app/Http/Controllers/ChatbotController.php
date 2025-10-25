@@ -4,27 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Cache;
-use App\Services\OpenAIChatService;
 use App\Models\ChatbotConversation;
 use Illuminate\Support\Str;
+use App\Models\WorkPackage;
+use App\Models\ProjectActivity;
+use App\Models\Milestone;
+use App\Models\Document;
 
 class ChatbotController extends Controller
 {
-    protected $aiService;
-
-    public function __construct()
-    {
-        try {
-            $this->aiService = new OpenAIChatService();
-        } catch (\Exception $e) {
-            Log::warning('ChatBot: AI service not available, using rule-based fallback', [
-                'error' => $e->getMessage()
-            ]);
-            $this->aiService = null;
-        }
-    }
     /**
      * Process a chatbot request and generate a response
      *
@@ -43,46 +31,14 @@ class ChatbotController extends Controller
 
         // Extract the user message
         $userMessage = $validated['message'];
-        $sessionId = $validated['session_id'] ?? $request->session()->getId() ?? Str::uuid()->toString();
+        $sessionId = $validated['session_id']
+            ?? ($request->hasSession() ? $request->session()->getId() : null)
+            ?? Str::uuid()->toString();
         
         try {
-            $response = null;
-            $responseType = 'rule-based';
-            $tokensUsed = null;
-
-            // Try AI service first if available
-            if ($this->aiService && $this->aiService->isAvailable()) {
-                try {
-                    // Get conversation history for context
-                    $conversationHistory = ChatbotConversation::getSessionHistory($sessionId, 5);
-                    
-                    // Generate AI response
-                    $response = $this->aiService->generateResponse($userMessage, $conversationHistory);
-                    $responseType = 'ai';
-                    
-                    Log::info('ChatBot: AI response generated', [
-                        'session_id' => $sessionId,
-                        'user_message' => $userMessage
-                    ]);
-                } catch (\Exception $e) {
-                    Log::warning('ChatBot: AI service failed, falling back to rule-based', [
-                        'error' => $e->getMessage()
-                    ]);
-                    $response = null;
-                }
-            }
-
-            // Fallback to rule-based response if AI fails or is unavailable
-            if (!$response) {
-                $response = $this->generateRuleBasedResponse($userMessage);
-                $responseType = 'rule-based';
-                
-                Log::info('ChatBot: Rule-based response generated', [
-                    'session_id' => $sessionId,
-                    'user_message' => $userMessage
-                ]);
-            }
-
+            // Generate rule-based response
+            $response = $this->generateResponse($userMessage);
+            
             // Calculate response time
             $responseTime = (int)((microtime(true) - $startTime) * 1000);
 
@@ -92,21 +48,28 @@ class ChatbotController extends Controller
                 'ip_address' => $request->ip(),
                 'user_message' => $userMessage,
                 'bot_response' => $response,
-                'response_type' => $responseType,
+                'response_type' => 'rule-based',
                 'response_time_ms' => $responseTime,
-                'tokens_used' => $tokensUsed
+                'tokens_used' => null
+            ]);
+            
+            // Log the interaction
+            Log::info('Chatbot interaction', [
+                'session_id' => $sessionId,
+                'user_message' => $userMessage,
+                'response_time_ms' => $responseTime
             ]);
             
             return response()->json([
                 'success' => true,
                 'response' => $response,
                 'session_id' => $sessionId,
-                'response_type' => $responseType,
+                'response_type' => 'rule-based',
                 'response_time_ms' => $responseTime
             ]);
             
         } catch (\Exception $e) {
-            Log::error('ChatBot error', [
+            Log::error('Chatbot error', [
                 'message' => $e->getMessage(),
                 'user_message' => $userMessage,
                 'session_id' => $sessionId
@@ -120,12 +83,12 @@ class ChatbotController extends Controller
     }
 
     /**
-     * Generate a rule-based response (fallback when AI is unavailable)
+     * Generate a response based on the user message
      * 
      * @param string $userMessage
      * @return string
      */
-    private function generateRuleBasedResponse($userMessage)
+    private function generateResponse($userMessage)
     {
         $message = strtolower($userMessage);
         
@@ -289,17 +252,85 @@ class ChatbotController extends Controller
         
         // Milestones
         if (str_contains($message, 'milestone') || str_contains($message, 'progress') || str_contains($message, 'achievement')) {
-            return 'DigiMarkt tracks project progress through key milestones. These include curriculum development, laboratory setup, teacher training sessions, student enrollment, resource creation, and dissemination activities. You can view detailed milestone information and progress updates on the Milestones page of this website. Each milestone has specific deliverables and timelines to ensure the project stays on track.';
+            $milestones = Milestone::query()
+                ->orderBy('display_order')
+                ->orderBy('created_at', 'desc')
+                ->get(['title', 'date', 'status', 'completion_percentage', 'description']);
+
+            if ($milestones->isEmpty()) {
+                return 'There are currently no milestones available.';
+            }
+
+            $lines = [];
+            foreach ($milestones as $idx => $milestone) {
+                $n = $idx + 1;
+                $title = $milestone->title;
+                $date = $milestone->date;
+                $status = $milestone->status;
+                $pct = (int) $milestone->completion_percentage;
+                // Truncate description to first 80 chars
+                $desc = strlen($milestone->description) > 80 
+                    ? substr($milestone->description, 0, 80) . '...' 
+                    : $milestone->description;
+                $lines[] = "$n) $title — $date — $status ($pct%)\n   $desc";
+            }
+
+            $intro = 'Here are the project milestones:';
+            return $intro . "\n\n" . implode("\n\n", $lines);
         }
         
         // Deliverables
         if (str_contains($message, 'deliverable') || str_contains($message, 'output') || str_contains($message, 'result')) {
-            return 'DigiMarkt produces several key deliverables including: digital marketing curricula, training materials, laboratory equipment and setup, teacher training programs, student learning resources, online micro-learning units, case studies, and evaluation reports. All deliverables are designed to ensure sustainable impact on TVET education in Ghana. Visit the Deliverables page to see detailed information about project outputs.';
+            $deliverables = Document::query()
+                ->where('is_published', true)
+                ->latest()
+                ->get(['title', 'category', 'file_name', 'description']);
+
+            if ($deliverables->isEmpty()) {
+                return 'There are currently no published deliverables available.';
+            }
+
+            $lines = [];
+            foreach ($deliverables as $idx => $deliverable) {
+                $n = $idx + 1;
+                $title = $deliverable->title;
+                $category = $deliverable->category ?? 'General';
+                // Truncate description to first 80 chars
+                $desc = strlen($deliverable->description) > 80 
+                    ? substr($deliverable->description, 0, 80) . '...' 
+                    : $deliverable->description;
+                $lines[] = "$n) $title — $category\n   $desc";
+            }
+
+            $intro = 'Here are the published deliverables:';
+            return $intro . "\n\n" . implode("\n\n", $lines);
         }
         
         // Activities and Events
         if (str_contains($message, 'activit') || str_contains($message, 'event') || str_contains($message, 'workshop') || str_contains($message, 'training session')) {
-            return 'DigiMarkt organizes various activities including teacher training workshops, student capacity building sessions, curriculum development meetings, laboratory setup activities, dissemination events, and stakeholder engagement sessions. These activities involve both Ghanaian and European partners working together. Check the Project Activities page for upcoming and past events, workshops, and training sessions.';
+            $activities = ProjectActivity::query()
+                ->orderBy('created_at', 'desc')
+                ->get(['title', 'date', 'status', 'description']);
+
+            if ($activities->isEmpty()) {
+                return 'There are currently no project activities available.';
+            }
+
+            $lines = [];
+            foreach ($activities as $idx => $activity) {
+                $n = $idx + 1;
+                $title = $activity->title;
+                $date = $activity->date;
+                $status = $activity->status;
+                // Truncate description to first 100 chars
+                $desc = strlen($activity->description) > 100 
+                    ? substr($activity->description, 0, 100) . '...' 
+                    : $activity->description;
+                $lines[] = "$n) $title — $date — $status\n   $desc";
+            }
+
+            $intro = 'Here are the project activities:';
+            return $intro . "\n\n" . implode("\n\n", $lines);
         }
         
         // News and Blog
@@ -317,6 +348,31 @@ class ChatbotController extends Controller
             return 'DigiMarkt produces educational videos and documentation of project activities. These videos include training sessions, testimonials, laboratory tours, partner interviews, and instructional content on digital marketing topics. Visit the Videos page to watch content that brings the project to life and provides insights into digital marketing education in TVET.';
         }
         
+        // Work Packages (WPs)
+        if (str_contains($message, 'work package') || preg_match('/\bwp\b|\bwork\s*packages\b/', $message)) {
+            $wps = WorkPackage::query()
+                ->where('is_published', true)
+                ->orderBy('display_order')
+                ->get(['title', 'category', 'status', 'completion_percentage']);
+
+            if ($wps->isEmpty()) {
+                return 'There are currently no published Work Packages available.';
+            }
+
+            $lines = [];
+            foreach ($wps as $idx => $wp) {
+                $n = $idx + 1;
+                $title = $wp->title;
+                $cat = $wp->category;
+                $status = $wp->status;
+                $pct = (int) $wp->completion_percentage;
+                $lines[] = "$n) $title — $cat — $status ($pct%)";
+            }
+
+            $intro = 'Here are the published Work Packages:';
+            return $intro.'\n'.implode("\n", $lines);
+        }
+
         // Resources and Downloads
         if (str_contains($message, 'resource') || str_contains($message, 'material') || str_contains($message, 'download') || str_contains($message, 'document')) {
             return 'DigiMarkt provides comprehensive resources including curricula, teaching guides, practical exercises, case studies, digital tools, and learning materials. Many resources are available for download on the Resources page. These materials are designed to be practical and applicable to the Ghanaian TVET context. Registered users can access additional exclusive resources.';
