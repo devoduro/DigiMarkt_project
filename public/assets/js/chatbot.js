@@ -21,7 +21,8 @@ class AccessibleChatbot {
             isOpen: false,
             isLoading: false,
             messages: [],
-            awaitingResponse: false
+            awaitingResponse: false,
+            isReading: false
         };
 
         // Initialize 
@@ -225,6 +226,7 @@ class AccessibleChatbot {
             this.chatInterface.setAttribute('aria-hidden', 'false');
             this.toggleBtn.setAttribute('aria-expanded', 'true');
             this.toggleBtn.setAttribute('aria-label', 'Close chat assistant');
+            
             setTimeout(() => this.messageInput.focus(), 100);
         } else {
             this.chatInterface.classList.remove('chatbot-open');
@@ -462,24 +464,94 @@ class AccessibleChatbot {
     readMessages() {
         if (!('speechSynthesis' in window)) {
             this.announceForScreenReader('Text-to-speech is not supported in your browser');
+            alert('Text-to-speech is not supported in your browser');
+            return;
+        }
+        
+        // Get the read button
+        const readButton = this.accessibilityControls.querySelectorAll('.chatbot-accessibility-btn')[3];
+        
+        // If already reading, stop it
+        if (this.state.isReading) {
+            window.speechSynthesis.cancel();
+            this.state.isReading = false;
+            if (readButton) {
+                readButton.style.backgroundColor = '';
+                readButton.style.color = '';
+                readButton.setAttribute('title', 'Read messages aloud');
+            }
+            this.announceForScreenReader('Stopped reading');
             return;
         }
         
         // Get the last few messages to read
         const messagesToRead = this.state.messages.slice(-3);
         
-        // Cancel any ongoing speech
-        window.speechSynthesis.cancel();
+        if (messagesToRead.length === 0) {
+            this.announceForScreenReader('No messages to read');
+            return;
+        }
         
-        // Read each message
-        messagesToRead.forEach(message => {
-            const utterance = new SpeechSynthesisUtterance(
-                `${message.sender === 'bot' ? 'Assistant says' : 'You said'}: ${message.content}`
-            );
-            window.speechSynthesis.speak(utterance);
-        });
+        // Set reading state
+        this.state.isReading = true;
+        
+        // Add active state to button
+        if (readButton) {
+            readButton.style.backgroundColor = 'var(--chatbot-primary)';
+            readButton.style.color = 'white';
+            readButton.setAttribute('title', 'Stop reading');
+        }
+        
+        // Read each message sequentially
+        let currentIndex = 0;
+        const readNext = () => {
+            if (currentIndex < messagesToRead.length && this.state.isReading) {
+                const message = messagesToRead[currentIndex];
+                const utterance = new SpeechSynthesisUtterance(
+                    `${message.sender === 'bot' ? 'Assistant says' : 'You said'}: ${message.content}`
+                );
+                
+                // Set voice properties for better clarity
+                utterance.rate = 0.9; // Slightly slower for clarity
+                utterance.pitch = 1.0;
+                utterance.volume = 1.0;
+                
+                // When this message finishes, read the next one
+                utterance.onend = () => {
+                    currentIndex++;
+                    if (currentIndex >= messagesToRead.length) {
+                        // Reset state and button style when done
+                        this.state.isReading = false;
+                        if (readButton) {
+                            readButton.style.backgroundColor = '';
+                            readButton.style.color = '';
+                            readButton.setAttribute('title', 'Read messages aloud');
+                        }
+                    }
+                    readNext();
+                };
+                
+                utterance.onerror = (event) => {
+                    console.error('Speech synthesis error:', event);
+                    currentIndex++;
+                    if (currentIndex >= messagesToRead.length) {
+                        // Reset state and button style on error
+                        this.state.isReading = false;
+                        if (readButton) {
+                            readButton.style.backgroundColor = '';
+                            readButton.style.color = '';
+                            readButton.setAttribute('title', 'Read messages aloud');
+                        }
+                    }
+                    readNext();
+                };
+                
+                window.speechSynthesis.speak(utterance);
+            }
+        };
         
         this.announceForScreenReader('Reading messages aloud');
+        readNext();
     }
 }
 
