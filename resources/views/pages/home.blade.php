@@ -107,7 +107,7 @@
                             <div class="announcement-slide px-4 py-2">
                                 <span class="font-semibold">{{ $announcement->title }}</span> - 
                                 <span>{{ Str::limit($announcement->content, 100) }}</span>
-                                <a href="#announcement-{{ $announcement->id }}" class="text-white underline ml-2" data-bs-toggle="modal" data-bs-target="#announcementModal-{{ $announcement->id }}">Read more</a>
+                                <a href="{{ route('news.show', $announcement->id) }}" class="text-white underline ml-2">Read more</a>
                             </div>
                         @endforeach
                     </div>
@@ -819,7 +819,7 @@
                                     <span>{{ $post->creator->name }}</span>
                                 </div>
                                 
-                                <a href="#" class="text-blue-600 font-medium inline-flex items-center group-hover:text-blue-800 transition-colors duration-300">
+                                <a href="{{ route('news.show', $post->id) }}" class="text-blue-600 font-medium inline-flex items-center group-hover:text-blue-800 transition-colors duration-300">
                                     Read more
                                     <svg class="w-4 h-4 ml-2 group-hover:ml-3 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
@@ -833,7 +833,7 @@
             
             @if($latestBlogPosts->count() >= 3)
                 <div class="text-center mt-12">
-                    <a href="#" class="inline-block px-8 py-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold rounded-xl hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl">
+                    <a href="{{ route('news.index') }}" class="inline-block px-8 py-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold rounded-xl hover:from-blue-600 hover:to-indigo-700 transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl">
                         <span class="flex items-center justify-center">
                             <span>View All News & Updates</span>
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
