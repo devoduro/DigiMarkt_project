@@ -92,11 +92,69 @@ class ChatbotController extends Controller
     {
         $message = strtolower($userMessage);
         
+        // Leadership and Governance - Highest Priority (must be first)
+        if (str_contains($message, 'who leads') || str_contains($message, 'who is leading') || str_contains($message, 'leadership')) {
+            return '**DigiMarkt Project Leadership**\n\n' .
+                   'The DigiMarkt project is led by a collaborative Management Board with representatives from all six partner institutions.\n\n' .
+                   '**Project Coordinator:**\n' .
+                   'The project coordinator leads overall project coordination, institutional management, and ensures smooth collaboration between European and Ghanaian partners.\n\n' .
+                   '**Partner Representatives:**\n' .
+                   '• European partners: Slovak University of Agriculture, Steinbeis (Germany), and INT@E (Germany)\n' .
+                   '• Ghanaian partners: AAMUSTED, Bolgatanga Technical University, and Cape Coast Technical University\n\n' .
+                   'Each partner institution has a designated representative on the Management Board who contributes to strategic decisions and project implementation. Visit the Management Board page for detailed information about each leader!';
+        }
+        
+        // Governance Structure - Highest Priority (must be before employment handler)
+        if (str_contains($message, 'governance') || str_contains($message, 'steering') || str_contains($message, 'working group')) {
+            return '**DigiMarkt Governance Structure**\n\n' .
+                   'The project operates through a well-defined governance framework ensuring effective implementation and quality outcomes.\n\n' .
+                   '**Steering Committee:**\n' .
+                   'The Steering Committee provides strategic oversight and is responsible for:\n' .
+                   '• Strategic decision making\n' .
+                   '• Project oversight and governance\n' .
+                   '• Quality assurance\n' .
+                   '• Risk management\n' .
+                   '• Ensuring alignment with EU funding requirements\n\n' .
+                   '**Working Groups:**\n' .
+                   'Specialized working groups handle operational aspects:\n' .
+                   '• Technical implementation\n' .
+                   '• Curriculum development\n' .
+                   '• Training coordination\n' .
+                   '• Dissemination activities\n\n' .
+                   '**Decision-Making Process:**\n' .
+                   'The governance structure ensures collaborative decision-making with input from all partner institutions, maintaining transparency and accountability throughout the project lifecycle.\n\n' .
+                   'Visit the Management Board page to learn more about the governance framework!';
+        }
+        
+        // Welcome and Help - For new visitors
+        if (str_contains($message, 'help') || str_contains($message, 'what can you do') || str_contains($message, 'how can you help') || str_contains($message, 'guide me') || str_contains($message, 'show me around')) {
+            return '**Welcome to DigiMarkt! I\'m your project guide.**\n\n' .
+                   'I can help you learn about:\n' .
+                   '• **Project Overview**: What DigiMarkt is, objectives, and funding\n' .
+                   '• **Partners**: Our 6 partner institutions from Ghana and Europe\n' .
+                   '• **Work Packages**: 5 work packages (WP1-WP5) and their tasks\n' .
+                   '• **Activities**: Project events, workshops, and training sessions\n' .
+                   '• **Milestones & Deliverables**: Project progress and outputs\n' .
+                   '• **Digital Marketing Labs**: Laboratory setup and equipment\n' .
+                   '• **Resources**: Training materials and educational content\n' .
+                   '• **Gallery & Videos**: Photos and videos from project activities\n' .
+                   '• **News & Updates**: Latest announcements and blog posts\n' .
+                   '• **Contact & Participation**: How to get involved\n\n' .
+                   'Just ask me anything! For example: "Tell me about the project", "Who are the partners?", "What are work packages?", or "How can I get involved?"';
+        }
+        
         // Greetings
         if (str_contains($message, 'hello') || str_contains($message, 'hi') || str_contains($message, 'hey') || 
             str_contains($message, 'welcome') || str_contains($message, 'greetings')) {
-            return 'Hello! I\'m your DigiMarkt Project Assistant. I can help you explore our project, partners, activities, and resources. ' . 
-                   'Would you like to know more about the project objectives, partners, or how to get involved?';
+            return 'Hello! I\'m your DigiMarkt Project Assistant. 👋\n\n' .
+                   'I can help you explore our project, partners, activities, work packages, and resources. ' .
+                   'Whether you\'re new to the website or looking for specific information, I\'m here to guide you!\n\n' .
+                   'Would you like to:\n' .
+                   '• Learn about the DigiMarkt project and its objectives?\n' .
+                   '• Discover our partner institutions?\n' .
+                   '• Explore work packages and activities?\n' .
+                   '• Find out how to get involved?\n\n' .
+                   'Type "help" to see everything I can assist you with!';
         }
         
         // About the project
@@ -128,37 +186,52 @@ class ChatbotController extends Controller
         }
         
         // Project activities
-        if (str_contains($message, 'activity') || str_contains($message, 'what are the project activities')) {
-            return 'The DigiMarkt Project includes various activities such as:\n\n' .
+        if (str_contains($message, 'activity') || str_contains($message, 'activities') || str_contains($message, 'what are the project activities')) {
+            return '**DigiMarkt Project Activities**\n\n' .
+                   'The project includes various activities such as:\n\n' .
                    '• Development of digital marketing curriculum and training materials\n' .
                    '• Training of TVET teachers and trainers in digital marketing\n' .
                    '• Establishment of digital marketing laboratories in partner institutions\n' .
-                   '• Student exchange programs between European and Ghanaian institutions\n' .
+                   '• Workshops and training sessions for students and educators\n' .
+                   '• Knowledge transfer between European and Ghanaian institutions\n' .
                    '• Industry partnerships for internships and practical experience\n' .
-                   '• Research on digital marketing skills needs in Ghana\n\n' .
+                   '• Research on digital marketing skills needs in Ghana\n' .
+                   '• Conferences and dissemination events\n\n' .
+                   '**Stay Updated:**\n' .
+                   'Visit the Activities page to see upcoming events, past activities, and photo galleries from our workshops and training sessions.\n\n' .
                    'Would you like more information about any specific activity or how to participate?';
         }
         
         // Get involved
-        if (str_contains($message, 'how can i get involved') || str_contains($message, 'participate') || 
-            str_contains($message, 'join') || str_contains($message, 'contribute')) {
-            return 'There are several ways to get involved with the DigiMarkt Project:\n\n' .
+        if (str_contains($message, 'how can i get involved') || str_contains($message, 'how to get involved') || str_contains($message, 'get involved')) {
+            return '**Get Involved with DigiMarkt**\n\n' .
+                   'There are several ways to engage with the project:\n\n' .
                    '1. **For TVET Institutions**: Partner with us to implement the digital marketing curriculum\n' .
                    '2. **For Educators**: Participate in our train-the-trainer programs\n' .
-                   '3. **For Students**: Enroll in our digital marketing courses and workshops\n' .
+                   '3. **For Students**: Enroll in digital marketing courses at partner institutions\n' .
                    '4. **For Industry Partners**: Offer internships or collaborate on curriculum development\n' .
-                   '5. **For Researchers**: Contribute to our studies on digital skills in Ghana\n\n' .
+                   '5. **For Researchers**: Contribute to our studies on digital skills in Ghana\n' .
+                   '6. **For Organizations**: Access our training materials and resources\n\n' .
+                   '**Next Steps:**\n' .
+                   'Visit the Contact page to reach out to the project team with your specific interests and inquiries. We welcome collaboration and knowledge sharing!\n\n' .
                    'Would you like more specific information about any of these opportunities?';
         }
         
         // Contact information
         if (str_contains($message, 'contact') || str_contains($message, 'how to reach') || 
-            str_contains($message, 'get in touch')) {
-            return 'You can reach the DigiMarkt Project team through the following channels:\n\n' .
-                   '• **Email**: info@digimarkt-ghana.org\n' .
-                   '• **Phone**: +233 XX XXX XXXX\n' .
-                   '• **Address**: [Main Office Address]\n\n' .
-                   'You can also visit our website or follow us on social media for updates and announcements.';
+            str_contains($message, 'get in touch') || str_contains($message, 'email') || str_contains($message, 'phone')) {
+            return '**Contact DigiMarkt**\n\n' .
+                   'You can reach the project team through:\n\n' .
+                   '• **Contact Form**: Visit the Contact page on this website\n' .
+                   '• **Email**: Available on the Contact page\n' .
+                   '• **Social Media**: Follow us for updates and announcements\n\n' .
+                   '**For Specific Inquiries:**\n' .
+                   '• Partnership opportunities\n' .
+                   '• Training program enrollment\n' .
+                   '• Resource access\n' .
+                   '• Collaboration proposals\n' .
+                   '• General project information\n\n' .
+                   'The project welcomes inquiries from TVET institutions, students, educators, and stakeholders interested in digital marketing education in Ghana.';
         }
         
         if (str_contains($message, 'bye') || str_contains($message, 'goodbye') || 
@@ -255,9 +328,19 @@ class ChatbotController extends Controller
             return 'Analytics and metrics are fundamental to the DigiMarkt curriculum. Students learn to use tools like Google Analytics to measure marketing performance. Key metrics covered include website traffic, conversion rates, bounce rates, ROI, engagement rates, and customer acquisition costs. Data-driven decision making is emphasized throughout the training.';
         }
         
-        // Laboratory
-        if (str_contains($message, 'lab') || str_contains($message, 'laboratory') || str_contains($message, 'equipment')) {
-            return 'One of DigiMarkt\'s key objectives is to set up digital marketing laboratories at partner institutions in Ghana. These labs will be equipped with modern computers, software, and internet connectivity to enable students to gain hands-on experience with digital marketing tools and platforms. The laboratories will serve as practical learning environments where students can apply theoretical knowledge.';
+        // Laboratory (must check for 'resource' first to avoid false matches)
+        if ((str_contains($message, 'lab') && !str_contains($message, 'available') && !str_contains($message, 'collab')) || str_contains($message, 'laboratory') || str_contains($message, 'equipment')) {
+            return '**Digital Marketing Laboratories**\n\n' .
+                   'One of DigiMarkt\'s key objectives is to set up state-of-the-art digital marketing laboratories at partner institutions in Ghana.\n\n' .
+                   '**Lab Features:**\n' .
+                   '• Modern computers and hardware\n' .
+                   '• Professional digital marketing software\n' .
+                   '• High-speed internet connectivity\n' .
+                   '• Industry-standard tools and platforms\n' .
+                   '• Collaborative workspaces\n\n' .
+                   '**Purpose:**\n' .
+                   'These labs serve as practical learning environments where TVET students can gain hands-on experience with digital marketing tools, practice real-world campaigns, and apply theoretical knowledge. Students learn SEO, social media marketing, content creation, analytics, and more in a professional setting.\n\n' .
+                   'Visit the Gallery to see photos of our labs, or check Activities to learn about lab-based training sessions!';
         }
         
         // Teachers and Training
@@ -370,7 +453,19 @@ class ChatbotController extends Controller
         
         // Resources and Materials
         if (str_contains($message, 'resource') || str_contains($message, 'material') || str_contains($message, 'download')) {
-            return 'DigiMarkt develops comprehensive training materials and resources for digital marketing education. These include curricula, teaching guides, practical exercises, case studies, and digital tools. Many resources are available through the project website for registered users. The materials are designed to be practical and applicable to the Ghanaian context.';
+            return '**DigiMarkt Resources & Materials**\n\n' .
+                   'We provide comprehensive training materials and resources for digital marketing education:\n\n' .
+                   '**Available Resources:**\n' .
+                   '• Digital marketing curricula and syllabi\n' .
+                   '• Teaching guides for instructors\n' .
+                   '• Practical exercises and assignments\n' .
+                   '• Case studies from Ghanaian context\n' .
+                   '• Digital marketing tools and templates\n' .
+                   '• Video tutorials and presentations\n' .
+                   '• Research papers and reports\n\n' .
+                   '**Access:**\n' .
+                   'Many resources are available for download on the Resources page. Some materials require registration for access. All materials are designed to be practical and applicable to the Ghanaian TVET context.\n\n' .
+                   'Visit the Resources section to browse and download materials!';
         }
         
         // Participation and Involvement (check specific phrases first)
@@ -449,6 +544,21 @@ class ChatbotController extends Controller
             return $intro . "\n\n" . implode("\n\n", $lines);
         }
         
+        // News and Blog
+        if (str_contains($message, 'news') || str_contains($message, 'blog') || str_contains($message, 'update') || str_contains($message, 'announcement') || str_contains($message, 'latest')) {
+            return 'Stay updated with the latest DigiMarkt news, announcements, and blog posts! The website features regular updates about project activities, success stories, partner highlights, training sessions, and important announcements. Visit the News section to read the latest articles and stay informed about project developments and achievements.';
+        }
+        
+        // Gallery and Photos
+        if (str_contains($message, 'gallery') || str_contains($message, 'photo') || str_contains($message, 'image') || str_contains($message, 'picture')) {
+            return 'The DigiMarkt Gallery showcases photos from project activities, training sessions, laboratory setups, partner meetings, and events. Visual documentation helps tell the story of the project\'s impact on TVET education in Ghana. Browse the Gallery page to see images from various project activities and milestones.';
+        }
+        
+        // Videos
+        if (str_contains($message, 'video') || str_contains($message, 'watch') || str_contains($message, 'recording')) {
+            return 'DigiMarkt produces educational videos and documentation of project activities. These videos include training sessions, testimonials, laboratory tours, partner interviews, and instructional content on digital marketing topics. Visit the Videos page to watch content that brings the project to life and provides insights into digital marketing education in TVET.';
+        }
+        
         // Activities and Events
         if (str_contains($message, 'activit') || str_contains($message, 'event') || str_contains($message, 'workshop') || str_contains($message, 'training session')) {
             $activities = ProjectActivity::query()
@@ -498,17 +608,69 @@ class ChatbotController extends Controller
         
         // Management Board and Leadership
         if (str_contains($message, 'management') || str_contains($message, 'board') || str_contains($message, 'leader') || str_contains($message, 'coordinator') || str_contains($message, 'team')) {
-            return 'The DigiMarkt project is led by a Management Board comprising representatives from all six partner institutions. The board oversees project implementation, ensures quality standards, manages resources, and coordinates activities across Ghana and Europe. Visit the Management Board page to learn about the project leadership team, their roles, and responsibilities in driving the project\'s success.';
+            return '**DigiMarkt Management Board**\n\n' .
+                   'The project is led by a Management Board comprising representatives from all six partner institutions, ensuring collaborative governance and effective project implementation.\n\n' .
+                   '**Leadership Structure:**\n\n' .
+                   '**Project Coordinator:**\n' .
+                   'Leads overall project coordination and institutional management\n\n' .
+                   '**Partner Institution Leaders:**\n' .
+                   '• **European Partners:**\n' .
+                   '  - Slovak University of Agriculture (Slovakia)\n' .
+                   '  - Steinbeis Beratungszentren GmbH (Germany)\n' .
+                   '  - INT@E - Innovative Technologies and Education (Germany)\n\n' .
+                   '• **Ghanaian Partners:**\n' .
+                   '  - AAMUSTED (Akenten Appiah-Menka University)\n' .
+                   '  - Bolgatanga Technical University (BTU)\n' .
+                   '  - Cape Coast Technical University (CCTU)\n\n' .
+                   '**Governance Structure:**\n\n' .
+                   '**Steering Committee:**\n' .
+                   '• Strategic decision making\n' .
+                   '• Project oversight and governance\n' .
+                   '• Quality assurance\n' .
+                   '• Risk management\n\n' .
+                   '**Working Groups:**\n' .
+                   '• Technical implementation\n' .
+                   '• Curriculum development\n' .
+                   '• Training coordination\n' .
+                   '• Dissemination activities\n\n' .
+                   '**Responsibilities:**\n' .
+                   'The Management Board oversees project implementation, ensures quality standards, manages resources, coordinates activities across Ghana and Europe, and maintains alignment with EU funding requirements.\n\n' .
+                   'For inquiries about project governance or partnership opportunities, you can contact the Management Board through the Contact page.\n\n' .
+                   'Visit the Management Board page to learn more about the leadership team and their roles in driving the project\'s success!';
+        }
+        
+        // Website Navigation and Pages
+        if (str_contains($message, 'navigate') || str_contains($message, 'website') || str_contains($message, 'pages') || str_contains($message, 'sections') || str_contains($message, 'where can i find')) {
+            return '**DigiMarkt Website Navigation**\n\n' .
+                   'The website is organized into the following main sections:\n\n' .
+                   '**About:**\n' .
+                   '• Project Objectives\n' .
+                   '• Partners\n' .
+                   '• Management Board\n\n' .
+                   '**Project Content:**\n' .
+                   '• Activities (events, workshops, training)\n' .
+                   '• Work Packages (WP1-WP5)\n' .
+                   '• Milestones & Deliverables\n\n' .
+                   '**Resources:**\n' .
+                   '• Training Materials\n' .
+                   '• Documents & Downloads\n\n' .
+                   '**Media:**\n' .
+                   '• Gallery (photos)\n' .
+                   '• Videos\n' .
+                   '• News & Blog\n\n' .
+                   '**Labs:**\n' .
+                   '• About Labs\n' .
+                   '• Lab Photos\n' .
+                   '• Lab Activities\n\n' .
+                   '**Contact:**\n' .
+                   '• Contact Form\n' .
+                   '• Get Involved\n\n' .
+                   'What section would you like to explore?';
         }
         
         // About Page
         if (str_contains($message, 'about') || str_contains($message, 'who are you') || str_contains($message, 'tell me more')) {
             return 'DigiMarkt (Digital Marketing in Technical and Vocational Education and Training) is an EU-funded project empowering TVET institutions in Ghana with digital marketing education. The project brings together six partner institutions from Ghana, Germany, and Slovakia to develop curricula, establish laboratories, train teachers, and equip students with in-demand digital skills. Visit the About page for comprehensive information about the project\'s background, vision, and impact.';
-        }
-        
-        // Website Navigation
-        if (str_contains($message, 'page') || str_contains($message, 'section') || str_contains($message, 'navigate') || str_contains($message, 'find')) {
-            return 'The DigiMarkt website includes several sections: Home, About, Partners, Milestones, Deliverables, Project Activities, News, Gallery, Videos, Resources, Management Board, and Contact. Each section provides detailed information about different aspects of the project. Use the navigation menu to explore all sections and learn more about digital marketing education in TVET.';
         }
         
         // Help and Support
