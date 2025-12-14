@@ -45,7 +45,7 @@ window.addEventListener('load', function() {
                 chatInterface.className = 'chatbot-interface chatbot-open';
                 chatInterface.innerHTML = `
                     <div class="chatbot-header">
-                        <div class="chatbot-title">DigiBot Assistant</div>
+                        <div class="chatbot-title">DigiMarkt Project Assistant</div>
                         <button class="chatbot-close" aria-label="Close chat assistant">✕</button>
                     </div>
                     <div class="chatbot-messages">

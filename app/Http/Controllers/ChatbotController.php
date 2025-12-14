@@ -93,11 +93,76 @@ class ChatbotController extends Controller
         $message = strtolower($userMessage);
         
         // Greetings
-        if (str_contains($message, 'hello') || str_contains($message, 'hi') || str_contains($message, 'hey')) {
-            return 'Hello! Welcome to DigiMarkt - the Digital Marketing in Technical and Vocational Education and Training project in Ghana. How can I assist you today?';
+        if (str_contains($message, 'hello') || str_contains($message, 'hi') || str_contains($message, 'hey') || 
+            str_contains($message, 'welcome') || str_contains($message, 'greetings')) {
+            return 'Hello! I\'m your DigiMarkt Project Assistant. I can help you explore our project, partners, activities, and resources. ' . 
+                   'Would you like to know more about the project objectives, partners, or how to get involved?';
         }
         
-        if (str_contains($message, 'bye') || str_contains($message, 'goodbye')) {
+        // About the project
+        if (str_contains($message, 'about digimarkt') || 
+            str_contains($message, 'what is digimarkt') || 
+            str_contains($message, 'tell me about the digimarkt project')) {
+            return 'The DigiMarkt Project (Digital Marketing in Technical and Vocational Education and Training in Ghana) is an initiative ' .
+                   'co-funded by the European Union with a total funding of €394,185.00. Our goal is to enhance digital marketing skills in TVET institutions across Ghana. ' .
+                   'The project focuses on building capacity, developing digital marketing curricula, and establishing digital marketing labs in partner institutions.\n\n' .
+                   'Key objectives include:\n' .
+                   '• Supporting teachers and trainers with new digital skills\n' .
+                   '• Improving employability of TVET learners through innovative education programs\n' .
+                   '• Setting up digital marketing laboratories for hands-on experience\n' .
+                   '• Empowering TVET providers to enhance digital readiness of graduates\n\n' .
+                   'Would you like to know more about our partners, activities, or how to get involved?';
+        }
+        
+        // Project partners
+        if (str_contains($message, 'partner') || str_contains($message, 'who are the project partners')) {
+            return 'The DigiMarkt Project is a collaborative effort between several institutions:\n\n' .
+                   '1. **Steinbeis Mediation (Germany)** - Project Coordinator\n' .
+                   '2. **INT@E (Germany)** - International Network for Educational Exchange\n' .
+                   '3. **Slovak University of Agriculture (SUA, Slovakia)** - Academic Partner\n' .
+                   '4. **AAMUSTED (Ghana)** - African Academy for Mathematical Sciences and Technology Education\n' .
+                   '5. **Bolgatanga Technical University (Ghana)** - TVET Partner\n' .
+                   '6. **Cape Coast Technical University (Ghana)** - TVET Partner\n\n' .
+                   'This partnership brings together expertise in digital marketing, education, and vocational training from Europe and Ghana. ' .
+                   'Would you like more details about any specific partner or their roles in the project?';
+        }
+        
+        // Project activities
+        if (str_contains($message, 'activity') || str_contains($message, 'what are the project activities')) {
+            return 'The DigiMarkt Project includes various activities such as:\n\n' .
+                   '• Development of digital marketing curriculum and training materials\n' .
+                   '• Training of TVET teachers and trainers in digital marketing\n' .
+                   '• Establishment of digital marketing laboratories in partner institutions\n' .
+                   '• Student exchange programs between European and Ghanaian institutions\n' .
+                   '• Industry partnerships for internships and practical experience\n' .
+                   '• Research on digital marketing skills needs in Ghana\n\n' .
+                   'Would you like more information about any specific activity or how to participate?';
+        }
+        
+        // Get involved
+        if (str_contains($message, 'how can i get involved') || str_contains($message, 'participate') || 
+            str_contains($message, 'join') || str_contains($message, 'contribute')) {
+            return 'There are several ways to get involved with the DigiMarkt Project:\n\n' .
+                   '1. **For TVET Institutions**: Partner with us to implement the digital marketing curriculum\n' .
+                   '2. **For Educators**: Participate in our train-the-trainer programs\n' .
+                   '3. **For Students**: Enroll in our digital marketing courses and workshops\n' .
+                   '4. **For Industry Partners**: Offer internships or collaborate on curriculum development\n' .
+                   '5. **For Researchers**: Contribute to our studies on digital skills in Ghana\n\n' .
+                   'Would you like more specific information about any of these opportunities?';
+        }
+        
+        // Contact information
+        if (str_contains($message, 'contact') || str_contains($message, 'how to reach') || 
+            str_contains($message, 'get in touch')) {
+            return 'You can reach the DigiMarkt Project team through the following channels:\n\n' .
+                   '• **Email**: info@digimarkt-ghana.org\n' .
+                   '• **Phone**: +233 XX XXX XXXX\n' .
+                   '• **Address**: [Main Office Address]\n\n' .
+                   'You can also visit our website or follow us on social media for updates and announcements.';
+        }
+        
+        if (str_contains($message, 'bye') || str_contains($message, 'goodbye') || 
+            str_contains($message, 'thank you') || str_contains($message, 'thanks')) {
             return 'Goodbye! Thank you for learning about DigiMarkt. Feel free to return if you have more questions about our project.';
         }
         
@@ -213,6 +278,84 @@ class ChatbotController extends Controller
         // Curriculum and Course
         if (str_contains($message, 'curriculum') || str_contains($message, 'course') || str_contains($message, 'program')) {
             return 'DigiMarkt develops innovative TVET education programmes focused on digital marketing. The curriculum covers essential topics including SEO, social media marketing, content marketing, email marketing, PPC advertising, analytics, digital strategy, and emerging technologies. The courses are designed to be practical, hands-on, and aligned with industry needs to ensure graduates are job-ready.';
+        }
+        
+        // Work Package 1 - Specific (MUST be before employment check)
+        if (preg_match('/\bwp\s*1\b|\bwork\s*package\s*1\b/i', $message) || str_contains($message, 'administration') && str_contains($message, 'coordination')) {
+            return '**WP1: Project Administration and Coordination**\n\n' .
+                   'This work package focuses on the overall management and coordination of the DigiMarkt project.\n\n' .
+                   '**Key Tasks:**\n' .
+                   '• T1.1 Initial Meeting to kick off the project\n' .
+                   '• T1.2 Management and monitoring meetings\n' .
+                   '• T1.3 Project report, midterm and final reports\n\n' .
+                   '**Objectives:**\n' .
+                   'WP1 ensures smooth project implementation through regular coordination meetings, progress monitoring, financial management, and timely reporting to the European Union. This work package is led by the project coordinator and involves all partner institutions in governance and decision-making processes.';
+        }
+        
+        // Work Package 2 - Specific (MUST be before employment check)
+        if (preg_match('/\bwp\s*2\b|\bwork\s*package\s*2\b/i', $message) || str_contains($message, 'needs analysis') || str_contains($message, 'entrepreneurship')) {
+            return '**WP2: Social Digital Entrepreneurship and Needs Analysis**\n\n' .
+                   'This work package conducts comprehensive research to understand the digital marketing skills needs in Ghana\'s TVET sector.\n\n' .
+                   '**Key Tasks:**\n' .
+                   '• T2.1 Field research and data collection\n' .
+                   '• T2.2 Project questionnaire analysis and definition\n' .
+                   '• T2.3 Road map for project implementation and reports delivery\n\n' .
+                   '**Objectives:**\n' .
+                   'WP2 ensures the project is grounded in real market needs through systematic data collection, stakeholder consultations, and analysis of digital marketing skill gaps. The findings inform curriculum development and training priorities, ensuring DigiMarkt delivers relevant and impactful education programs.';
+        }
+        
+        // Work Package 3 - Specific (MUST be before employment check)
+        if (preg_match('/\bwp\s*3\b|\bwork\s*package\s*3\b/i', $message) || str_contains($message, 'training material') || str_contains($message, 'mentorship')) {
+            return '**WP3: Training Materials and Mentorship**\n\n' .
+                   'This is the core implementation work package focused on building capacity and developing educational resources.\n\n' .
+                   '**Key Tasks:**\n' .
+                   '• T3.1 Purchase equipment, design and establish training labs\n' .
+                   '• T3.2 Transfer of EU experience and staff training\n' .
+                   '• T3.3 Design training courses and learning materials\n' .
+                   '• T3.4 Develop an innovation model for academia-industry collaboration\n\n' .
+                   '**Objectives:**\n' .
+                   'WP3 establishes digital marketing laboratories at partner institutions, develops comprehensive curricula and training materials, trains TVET teachers and trainers, and creates sustainable partnerships between academia and industry. This work package directly impacts the quality of digital marketing education delivered to students.';
+        }
+        
+        // Work Package 4 - Specific (MUST be before employment check)
+        if (preg_match('/\bwp\s*4\b|\bwork\s*package\s*4\b/i', $message) || str_contains($message, 'quality') && (str_contains($message, 'evaluation') || str_contains($message, 'assurance'))) {
+            return '**WP4: Quality Evaluation and Assurance**\n\n' .
+                   'This work package ensures the project maintains high standards and achieves its intended impact.\n\n' .
+                   '**Key Tasks:**\n' .
+                   '• T4.1 Develop a quality plan\n' .
+                   '• T4.2 Evaluate and monitor project activities\n' .
+                   '• T4.3 Evaluate impact and external reports\n\n' .
+                   '**Objectives:**\n' .
+                   'WP4 establishes quality benchmarks, monitors project implementation, evaluates the effectiveness of training programs, assesses student learning outcomes, and measures the overall impact of DigiMarkt on TVET education in Ghana. Regular quality assessments ensure continuous improvement and accountability.';
+        }
+        
+        // Work Package 5 - Specific (MUST be before employment check)
+        if (preg_match('/\bwp\s*5\b|\bwork\s*package\s*5\b/i', $message) || str_contains($message, 'dissemination') || str_contains($message, 'impact') && str_contains($message, 'project')) {
+            return '**WP5: Project Impact and Dissemination**\n\n' .
+                   'This work package focuses on sharing project results and ensuring long-term sustainability.\n\n' .
+                   '**Key Tasks:**\n' .
+                   '• T5.1 Develop project website\n' .
+                   '• T5.2 Dissemination planning\n' .
+                   '• T5.3 Organize workshops and conferences\n' .
+                   '• T5.4 Sustainable planning\n\n' .
+                   '**Objectives:**\n' .
+                   'WP5 maximizes project visibility and impact through strategic communication, knowledge sharing, and stakeholder engagement. Activities include developing and maintaining the project website, organizing dissemination events, publishing research findings, and creating a sustainability plan to ensure project benefits continue beyond the funding period.';
+        }
+        
+        // Work Packages - General (MUST be before employment check)
+        if (str_contains($message, 'work package') || preg_match('/\bwp\b|\bwork\s*packages\b/', $message)) {
+            return 'The DigiMarkt project is organized into five key work packages, each with specific objectives and deliverables:\n\n' .
+                   '**WP1: Project Administration and Coordination**\n' .
+                   'Focuses on initial meetings, management and monitoring meetings, project reports, midterm and final reports. Key tasks include the initial meeting to kick off the project, management and monitoring meetings, and project reporting.\n\n' .
+                   '**WP2: Social Digital Entrepreneurship and Needs Analysis**\n' .
+                   'Involves field research, data collection, questionnaire analysis, and roadmap for project implementation. This work package ensures the project is grounded in real needs and market analysis.\n\n' .
+                   '**WP3: Training Materials and Mentorship**\n' .
+                   'Covers equipment purchase, lab setup, EU experience transfer, staff training, and curriculum development. Tasks include establishing training labs, transferring EU experience and staff training, designing training courses and learning materials, and developing an innovation model for academia-industry collaboration.\n\n' .
+                   '**WP4: Quality Evaluation and Assurance**\n' .
+                   'Ensures quality plan development, project activity monitoring, and impact evaluation. This work package maintains high standards throughout the project lifecycle.\n\n' .
+                   '**WP5: Project Impact and Dissemination**\n' .
+                   'Focuses on dissemination of project results and sustainability planning. Tasks include developing the project website, dissemination planning, organizing workshops and conferences, and sustainable planning for long-term impact.\n\n' .
+                   'Each work package contributes to the overall success of DigiMarkt in enhancing digital marketing education in TVET institutions across Ghana. Ask me about a specific work package (WP1-WP5) for more details!';
         }
         
         // Employment and Career
@@ -346,31 +489,6 @@ class ChatbotController extends Controller
         // Videos
         if (str_contains($message, 'video') || str_contains($message, 'watch') || str_contains($message, 'recording')) {
             return 'DigiMarkt produces educational videos and documentation of project activities. These videos include training sessions, testimonials, laboratory tours, partner interviews, and instructional content on digital marketing topics. Visit the Videos page to watch content that brings the project to life and provides insights into digital marketing education in TVET.';
-        }
-        
-        // Work Packages (WPs)
-        if (str_contains($message, 'work package') || preg_match('/\bwp\b|\bwork\s*packages\b/', $message)) {
-            $wps = WorkPackage::query()
-                ->where('is_published', true)
-                ->orderBy('display_order')
-                ->get(['title', 'category', 'status', 'completion_percentage']);
-
-            if ($wps->isEmpty()) {
-                return 'There are currently no published Work Packages available.';
-            }
-
-            $lines = [];
-            foreach ($wps as $idx => $wp) {
-                $n = $idx + 1;
-                $title = $wp->title;
-                $cat = $wp->category;
-                $status = $wp->status;
-                $pct = (int) $wp->completion_percentage;
-                $lines[] = "$n) $title — $cat — $status ($pct%)";
-            }
-
-            $intro = 'Here are the published Work Packages:';
-            return $intro.'\n'.implode("\n", $lines);
         }
 
         // Resources and Downloads

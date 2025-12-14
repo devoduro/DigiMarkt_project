@@ -190,7 +190,7 @@
             if (typeof AccessibleChatbot !== 'undefined') {
                 window.accessibleChatbot = new AccessibleChatbot({
                     apiEndpoint: '/api/chatbot/message',
-                    welcomeMessage: 'Hello! I\'m DigiBot, your digital marketing assistant. How can I help you today?',
+                    welcomeMessage: 'Welcome to the DigiMarkt Project! I\'m your DigiMarkt Project Assistant. How can I help you today?',
                     position: 'bottom-right',
                     theme: 'light'
                 });

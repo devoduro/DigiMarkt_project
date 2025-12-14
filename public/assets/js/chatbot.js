@@ -9,7 +9,7 @@ class AccessibleChatbot {
         this.options = {
             apiKey: null,
             apiEndpoint: '/api/chatbot',
-            welcomeMessage: 'Hi! I\'m DigiBot, your digital marketing assistant. How can I help you today?',
+            welcomeMessage: 'Welcome to the DigiMarkt Project! I\'m your DigiMarkt Project Assistant. How can I help you today?',
             placeholderText: 'Type your question here...',
             position: 'bottom-right',
             theme: 'light',
@@ -67,7 +67,7 @@ class AccessibleChatbot {
         this.chatHeader = document.createElement('div');
         this.chatHeader.className = 'chatbot-header';
         this.chatHeader.innerHTML = `
-            <div class="chatbot-title" id="chatbot-title">DigiBot Assistant</div>
+            <div class="chatbot-title" id="chatbot-title">DigiMarkt Project Assistant</div>
             <button class="chatbot-close" aria-label="Close chat assistant">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="18" y1="6" x2="6" y2="18"></line>

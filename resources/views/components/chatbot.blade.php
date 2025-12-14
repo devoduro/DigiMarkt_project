@@ -25,7 +25,13 @@
         <div id="chat-messages" style="height: 330px; overflow-y: auto; padding: 15px; display: flex; flex-direction: column; gap: 10px;">
             <!-- Bot welcome message -->
             <div style="align-self: flex-start; background-color: #4f46e5; color: white; padding: 10px 15px; border-radius: 18px; border-bottom-left-radius: 4px; max-width: 80%;">
-                Hello! I'm DigiMarktBot, your digital marketing assistant. How can I help you today?
+                Welcome to the DigiMarkt Project! I'm your DigiMarkt Project Assistant. I can help you explore our project, partners, activities, and resources. Where would you like to start?
+                <div style="margin-top: 10px; font-size: 0.9em;">
+                    <div>• <a href="#" onclick="sendSuggestedQuestion('Tell me about the DigiMarkt project')" style="color: #93c5fd; text-decoration: underline;">About DigiMarkt</a></div>
+                    <div>• <a href="#" onclick="sendSuggestedQuestion('Who are the project partners?')" style="color: #93c5fd; text-decoration: underline;">Our Partners</a></div>
+                    <div>• <a href="#" onclick="sendSuggestedQuestion('What are the project activities?')" style="color: #93c5fd; text-decoration: underline;">Project Activities</a></div>
+                    <div>• <a href="#" onclick="sendSuggestedQuestion('How can I get involved?')" style="color: #93c5fd; text-decoration: underline;">Get Involved</a></div>
+                </div>
             </div>
         </div>
         
@@ -56,6 +62,12 @@ function toggleChatbox() {
         chatbox.style.display = 'none';
         button.setAttribute('aria-expanded', 'false');
     }
+}
+
+function sendSuggestedQuestion(question) {
+    const input = document.getElementById('chat-input');
+    input.value = question;
+    sendMessage();
 }
 
 function sendMessage() {
