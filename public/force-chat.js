@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
         chatHeader.style.display = 'flex';
         chatHeader.style.justifyContent = 'space-between';
         chatHeader.style.alignItems = 'center';
-        chatHeader.innerHTML = '<strong>DigiMarkt Project Assistant</strong>';
+        chatHeader.innerHTML = '<strong>DigiBot Assistant</strong>';
         
         // Close button
         var closeButton = document.createElement('button');
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
         messageArea.style.flex = '1';
         messageArea.style.padding = '15px';
         messageArea.style.overflowY = 'auto';
-        messageArea.innerHTML = '<div style="background-color: #4f46e5; color: white; padding: 10px; border-radius: 10px; margin-bottom: 10px; align-self: flex-start; max-width: 80%;">Welcome to the DigiMarkt Project! I\'m your DigiMarkt Project Assistant. How can I help you today?</div>';
+        messageArea.innerHTML = '<div style="background-color: #4f46e5; color: white; padding: 10px; border-radius: 10px; margin-bottom: 10px; align-self: flex-start; max-width: 80%;">Hello! I\'m DigiBot, your marketing assistant. How can I help you today?</div>';
         
         // Input area
         var inputArea = document.createElement('div');

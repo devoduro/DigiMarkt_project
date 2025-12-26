@@ -132,17 +132,17 @@
                     </button>
 
                     <div x-show="open" @click.away="close" class="absolute left-0 mt-2 w-64 bg-white rounded-md shadow-lg py-1 z-50" x-transition:enter="transition ease-out duration-100" x-transition:enter-start="transform opacity-0 scale-95" x-transition:enter-end="transform opacity-100 scale-100" x-transition:leave="transition ease-in duration-75" x-transition:leave-start="transform opacity-100 scale-100" x-transition:leave-end="transform opacity-0 scale-95">
-                        <a href="{{ asset('storage/docs/Newsletter_First_Issue_March_31_2025.pdf') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" target="_blank">1st Issue - March 31, 2025</a>
+                        <a href="{{ asset('storage/docs/Newsletter_First_Issue_March_31_2025.pdf') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" target="_blank">1st Issue - Newsletter #1</a>
                         <div class="border-t border-gray-100"></div>
-                        <a href="{{ asset('storage/docs/Newsletter_Second_Issue_August_31_2025.pdf') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" target="_blank">2nd Issue - August 31, 2025</a>
+                        <a href="{{ asset('storage/docs/Newsletter_Second_Issue_August_31_2025.pdf') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" target="_blank">2nd Issue - Newsletter #2</a>
                         <div class="border-t border-gray-100"></div>
-                        <a href="{{ asset('storage/docs/Newsletter_Third_Issue_December_31_2025.pdf') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" target="_blank">3rd Issue - December 31, 2025</a>
+                        <a href="{{ asset('storage/docs/Newsletter_Third_Issue_December_31_2025.pdf') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" target="_blank">3rd Issue - Newsletter #3</a>
                         <div class="border-t border-gray-100"></div>
-                        <a href="{{ asset('storage/docs/Newsletter_Fourth_Issue_April_30_2026.pdf') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" target="_blank">4th Issue - April 30, 2026</a>
+                        <a href="{{ asset('storage/docs/Newsletter_Fourth_Issue_April_30_2026.pdf') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" target="_blank">4th Issue - Newsletter #4</a>
                         <div class="border-t border-gray-100"></div>
-                        <a href="{{ asset('storage/docs/Newsletter_Fifth_Issue_August_31_2026.pdf') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" target="_blank">5th Issue - August 31, 2026</a>
+                        <a href="{{ asset('storage/docs/Newsletter_Fifth_Issue_August_31_2026.pdf') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" target="_blank">5th Issue - Newsletter #5</a>
                         <div class="border-t border-gray-100"></div>
-                        <a href="{{ asset('storage/docs/Newsletter_Sixth_Issue_December_31_2026.pdf') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" target="_blank">6th Issue - December 31, 2026</a>
+                        <a href="{{ asset('storage/docs/Newsletter_Sixth_Issue_December_31_2026.pdf') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" target="_blank">6th Issue - Newsletter #6</a>
                     </div>
                 </div>
                 
@@ -284,12 +284,12 @@
                         </button>
                         
                         <div x-show="isDropdownOpen('newsletter')" class="pl-4 mt-1 space-y-1">
-                            <a href="{{ asset('storage/docs/Newsletter_First_Issue_March_31_2025.pdf') }}" class="block text-gray-700 hover:text-primary-dark hover:bg-gray-50 rounded px-3 py-2">1st Issue - March 31, 2025</a>
-                            <a href="{{ asset('storage/docs/Newsletter_Second_Issue_August_31_2025.pdf') }}" class="block text-gray-700 hover:text-primary-dark hover:bg-gray-50 rounded px-3 py-2">2nd Issue - August 31, 2025</a>
-                            <a href="{{ asset('storage/docs/Newsletter_Third_Issue_December_31_2025.pdf') }}" class="block text-gray-700 hover:text-primary-dark hover:bg-gray-50 rounded px-3 py-2">3rd Issue - December 31, 2025</a>
-                            <a href="{{ asset('storage/docs/Newsletter_Fourth_Issue_April_30_2026.pdf') }}" class="block text-gray-700 hover:text-primary-dark hover:bg-gray-50 rounded px-3 py-2">4th Issue - April 30, 2026</a>
-                            <a href="{{ asset('storage/docs/Newsletter_Fifth_Issue_August_31_2026.pdf') }}" class="block text-gray-700 hover:text-primary-dark hover:bg-gray-50 rounded px-3 py-2">5th Issue - August 31, 2026</a>
-                            <a href="{{ asset('storage/docs/Newsletter_Sixth_Issue_December_31_2026.pdf') }}" class="block text-gray-700 hover:text-primary-dark hover:bg-gray-50 rounded px-3 py-2">6th Issue - December 31, 2026</a>
+                            <a href="{{ asset('storage/docs/Newsletter_First_Issue_March_31_2025.pdf') }}" class="block text-gray-700 hover:text-primary-dark hover:bg-gray-50 rounded px-3 py-2">1st Issue - Newsletter #1</a>
+                            <a href="{{ asset('storage/docs/Newsletter_Second_Issue_August_31_2025.pdf') }}" class="block text-gray-700 hover:text-primary-dark hover:bg-gray-50 rounded px-3 py-2">2nd Issue - Newsletter #2</a>
+                            <a href="{{ asset('storage/docs/Newsletter_Third_Issue_December_31_2025.pdf') }}" class="block text-gray-700 hover:text-primary-dark hover:bg-gray-50 rounded px-3 py-2">3rd Issue - Newsletter #3</a>
+                            <a href="{{ asset('storage/docs/Newsletter_Fourth_Issue_April_30_2026.pdf') }}" class="block text-gray-700 hover:text-primary-dark hover:bg-gray-50 rounded px-3 py-2">4th Issue - Newsletter #4</a>
+                            <a href="{{ asset('storage/docs/Newsletter_Fifth_Issue_August_31_2026.pdf') }}" class="block text-gray-700 hover:text-primary-dark hover:bg-gray-50 rounded px-3 py-2">5th Issue - Newsletter #5</a>
+                            <a href="{{ asset('storage/docs/Newsletter_Sixth_Issue_December_31_2026.pdf') }}" class="block text-gray-700 hover:text-primary-dark hover:bg-gray-50 rounded px-3 py-2">6th Issue - Newsletter #6</a>
                         </div>
                     </div>
                     

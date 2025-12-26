@@ -25,9 +25,9 @@
                         <div class="w-32 h-32 bg-gray-300 rounded-full mx-auto mb-6 flex items-center justify-center">
                             <i class="fas fa-user text-4xl text-gray-600"></i>
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Prof. Dr. Project Coordinator</h3>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Jonathan Barth</h3>
                         <p class="text-blue-600 font-semibold mb-4">Project Coordinator</p>
-                        <p class="text-gray-600 mb-4">Leading institution coordination and overall project management</p>
+                        <p class="text-gray-600 mb-4">Steinbeis Beratungszentren GmbH</p>
                         <div class="flex justify-center space-x-4">
                             <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Project Management</span>
                             <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Coordination</span>
@@ -46,7 +46,7 @@
                             <div class="w-24 h-24 bg-gray-300 rounded-full mx-auto mb-4 flex items-center justify-center">
                                 <i class="fas fa-user text-2xl text-gray-600"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-2">Dr. Slovak Representative</h3>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Dr. Jana Gálová</h3>
                             <p class="text-blue-600 font-semibold mb-2">Slovak University of Agriculture</p>
                             <p class="text-gray-600 text-sm mb-4">Slovakia</p>
                             <div class="flex justify-center">
@@ -60,7 +60,7 @@
                             <div class="w-24 h-24 bg-gray-300 rounded-full mx-auto mb-4 flex items-center justify-center">
                                 <i class="fas fa-user text-2xl text-gray-600"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-2">Dr. German Representative</h3>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Jonathan Barth</h3>
                             <p class="text-blue-600 font-semibold mb-2">Steinbeis Beratungszentren GmbH</p>
                             <p class="text-gray-600 text-sm mb-4">Germany</p>
                             <div class="flex justify-center">
@@ -74,7 +74,7 @@
                             <div class="w-24 h-24 bg-gray-300 rounded-full mx-auto mb-4 flex items-center justify-center">
                                 <i class="fas fa-user text-2xl text-gray-600"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-2">Dr. Int@E Representative</h3>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Dr. Riyadh Qashi</h3>
                             <p class="text-blue-600 font-semibold mb-2">Innovative Technologies and Education</p>
                             <p class="text-gray-600 text-sm mb-4">Germany</p>
                             <div class="flex justify-center">
@@ -89,7 +89,7 @@
                             <div class="w-24 h-24 bg-gray-300 rounded-full mx-auto mb-4 flex items-center justify-center">
                                 <i class="fas fa-user text-2xl text-gray-600"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-2">Prof. AAMUSTED Representative</h3>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Prof. Yarhands Dissou Arthur</h3>
                             <p class="text-green-600 font-semibold mb-2">Akenten Appiah-Menka University</p>
                             <p class="text-gray-600 text-sm mb-4">Ghana</p>
                             <div class="flex justify-center">
@@ -103,7 +103,7 @@
                             <div class="w-24 h-24 bg-gray-300 rounded-full mx-auto mb-4 flex items-center justify-center">
                                 <i class="fas fa-user text-2xl text-gray-600"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-2">Dr. BTU Representative</h3>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Dr. Benjamin Asunka</h3>
                             <p class="text-green-600 font-semibold mb-2">Bolgatanga Technical University</p>
                             <p class="text-gray-600 text-sm mb-4">Ghana</p>
                             <div class="flex justify-center">
@@ -117,7 +117,7 @@
                             <div class="w-24 h-24 bg-gray-300 rounded-full mx-auto mb-4 flex items-center justify-center">
                                 <i class="fas fa-user text-2xl text-gray-600"></i>
                             </div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-2">Prof. CCTU Representative</h3>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Dr. Wisdom W.K. Pomegbe</h3>
                             <p class="text-green-600 font-semibold mb-2">Cape Coast Technical University</p>
                             <p class="text-gray-600 text-sm mb-4">Ghana</p>
                             <div class="flex justify-center">
