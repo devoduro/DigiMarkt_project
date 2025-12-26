@@ -18,8 +18,15 @@ class AppConfig
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $system = $this->settingsService->getSetting(['type' => 'system'])['fields'];
-        $storage = $this->settingsService->getSetting(['type' => 'storage'])['fields'];
+        $systemSetting = $this->settingsService->getSetting(['type' => 'system']);
+        $storageSetting = $this->settingsService->getSetting(['type' => 'storage']);
+
+        if (!$systemSetting || !$storageSetting) {
+            return $next($request);
+        }
+
+        $system = $systemSetting['fields'];
+        $storage = $storageSetting['fields'];
 
         // App configuration
         config(['app.name' => $system['name']]);

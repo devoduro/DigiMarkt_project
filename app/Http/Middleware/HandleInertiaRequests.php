@@ -77,7 +77,7 @@ class HandleInertiaRequests extends Middleware
         }
 
         $direction = Cookie::get('direction', 'ltr');
-        if (array_key_exists('direction', $system->fields)) {
+        if ($system && array_key_exists('direction', $system->fields)) {
             $systemDirection = $system->fields['direction'];
             if ($systemDirection !== 'none') {
                 $direction = $systemDirection;
