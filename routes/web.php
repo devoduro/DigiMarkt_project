@@ -58,30 +58,16 @@ Route::get('/gallery/{id}', [\App\Http\Controllers\GalleryController::class, 'sh
 Route::get('/videos', [\App\Http\Controllers\VideoController::class, 'index'])->name('videos');
 Route::get('/videos/{id}', [\App\Http\Controllers\VideoController::class, 'show'])->name('videos.show');
 
-// Authentication routes (Laravel's built-in auth)
-Auth::routes(['verify' => true]); // Enable email verification
-
-// Two-factor authentication routes
-Route::get('/two-factor-challenge', [\App\Http\Controllers\Auth\TwoFactorChallengeController::class, 'show'])->name('two-factor.challenge');
-Route::post('/two-factor-challenge', [\App\Http\Controllers\Auth\TwoFactorChallengeController::class, 'store']);
-
-// Two-factor authentication API routes (for AJAX)
-Route::middleware(['auth'])->group(function () {
-    Route::get('/user/two-factor-authentication-status', [\App\Http\Controllers\Auth\TwoFactorAuthController::class, 'status']);
-    Route::post('/user/two-factor-authentication', [\App\Http\Controllers\Auth\TwoFactorAuthController::class, 'enable']);
-    Route::get('/user/two-factor-qr-code', [\App\Http\Controllers\Auth\TwoFactorAuthController::class, 'qrCode']);
-    Route::post('/user/confirmed-two-factor-authentication', [\App\Http\Controllers\Auth\TwoFactorAuthController::class, 'confirm']);
-    Route::delete('/user/two-factor-authentication', [\App\Http\Controllers\Auth\TwoFactorAuthController::class, 'disable']);
-});
-
 // Deliverables downloads (require auth and verification, but not 2FA)
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/deliverables/{id}/download', [HomeController::class, 'documentDownload'])->name('deliverables.download');
 });
 
-// Dashboard route (require authentication only)
+// Dashboard route (require authentication only) - redirects to admin dashboard
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', function() {
+        return redirect()->route('admin.dashboard');
+    })->name('dashboard');
 });
 
 // Protected routes (require authentication and 2FA)
@@ -102,12 +88,12 @@ Route::middleware(['auth', 'verified', \App\Http\Middleware\EnsureTwoFactorAuthe
 });
 
 // Admin routes (require admin role)
-Route::prefix('admin')->name('admin.')->group(function () {
+Route::prefix('admin')->group(function () {
     // Apply auth and verified middleware to all routes in this group
     Route::middleware(['auth', 'verified'])->group(function () {
         // Check for admin role manually in a controller
-        // Admin dashboard
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        // Admin dashboard - use Inertia DashboardController, not Admin\DashboardController
+        Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('admin.dashboard');
         
         // User management
         Route::resource('users', UserController::class);

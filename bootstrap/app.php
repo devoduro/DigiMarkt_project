@@ -16,8 +16,10 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__ . '/../routes/console.php',
         health: '/up',
         then: function () {
-            Route::middleware('web')
-                ->group(base_path('routes/test.php'));
+            // Auth routes - load separately with minimal middleware
+            Route::middleware('web')->group(base_path('routes/auth.php'));
+            
+            Route::middleware('web')->group(base_path('routes/test.php'));
         },
         using: function () {
             // Web Routes
@@ -26,19 +28,29 @@ return Application::configure(basePath: dirname(__DIR__))
                 require base_path('routes/web.php');
 
                 // Auth routes
-                Route::middleware(['smtpConfig'])->group(base_path('routes/auth.php'));
+                Route::middleware(['smtpConfig'])->group(function() {
+                    require base_path('routes/auth.php');
+                });
 
                 // Admin routes
-                Route::middleware(['auth', 'role:admin'])->group(base_path('routes/admin.php'));
+                Route::middleware(['auth', 'role:admin'])->group(function() {
+                    require base_path('routes/admin.php');
+                });
 
                 // Instructor routes
-                Route::middleware(['auth', 'verified', 'role:admin,instructor'])->group(base_path('routes/instructor.php'));
+                Route::middleware(['auth', 'verified', 'role:admin,instructor'])->group(function() {
+                    require base_path('routes/instructor.php');
+                });
 
                 // Student routes
-                Route::middleware(['auth', 'role:student,instructor,admin'])->group(base_path('routes/student.php'));
+                Route::middleware(['auth', 'role:student,instructor,admin'])->group(function() {
+                    require base_path('routes/student.php');
+                });
 
                 // Payout routes
-                Route::middleware(['auth', 'role:admin'])->group(base_path('routes/payout.php'));
+                Route::middleware(['auth', 'role:admin'])->group(function() {
+                    require base_path('routes/payout.php');
+                });
 
                 Route::get('/{slug}', [HomeController::class, 'inner_page'])->name('inner.page');
             });

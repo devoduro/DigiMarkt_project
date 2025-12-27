@@ -73,7 +73,7 @@ class HandleInertiaRequests extends Middleware
                     'direction' => 'ltr',
                     'language_selector' => false,
                 ],
-                'sub_type' => 'administrative',
+                'sub_type' => 'collaborative',
             ];
         }
         

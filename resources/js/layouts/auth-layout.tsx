@@ -1,3 +1,4 @@
+import AppLogo from '@/components/app-logo';
 import { Link } from '@inertiajs/react';
 import Main from './main';
 
@@ -12,7 +13,7 @@ const AuthLayout = ({ children, title, description }: Props) => {
       <Main>
          <div className="bg-background flex min-h-svh flex-col items-center justify-center gap-10 p-6 md:p-10">
             <Link href="/">
-               <div className="text-2xl font-bold">Logo</div>
+               <AppLogo className="h-9" />
             </Link>
 
             <div className="w-full max-w-sm">
