@@ -61,16 +61,35 @@ class HandleInertiaRequests extends Middleware
 
         $user = Auth::user();
         $system = app('system_settings');
+        
+        // Provide default system settings if none exist
+        if (!$system) {
+            $system = (object) [
+                'fields' => [
+                    'name' => config('app.name', 'DigiMarkt'),
+                    'description' => 'Digital Marketing Project',
+                    'keywords' => 'digital marketing, education',
+                    'author' => 'DigiMarkt Team',
+                    'direction' => 'ltr',
+                    'language_selector' => false,
+                ],
+                'sub_type' => 'administrative',
+            ];
+        }
+        
         $cartCount = $user ? $this->studentService->getCartCount() : 0;
 
         if (Schema::hasTable('languages')) {
             $langs = Language::where('is_active', true)->orderBy('is_default', 'desc')->get();
-            $default = $langs->where('is_default', true)->first()->code;
+            $defaultLang = $langs->where('is_default', true)->first();
+            $default = $defaultLang ? $defaultLang->code : 'en';
             config(['app.locale' => $default]);
             $locale = Cookie::get('locale', $default);
             App::setLocale($locale);
 
-            $this->languageService->setLanguageProperties($locale);
+            if ($defaultLang) {
+                $this->languageService->setLanguageProperties($locale);
+            }
         } else {
             $langs = [];
             $locale = Cookie::get('locale', 'en');

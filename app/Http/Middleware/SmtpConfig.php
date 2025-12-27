@@ -18,7 +18,13 @@ class SmtpConfig
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $smtp = $this->settingsService->getSetting(['type' => 'smtp'])['fields'];
+        $smtpSetting = $this->settingsService->getSetting(['type' => 'smtp']);
+
+        if (!$smtpSetting) {
+            return $next($request);
+        }
+
+        $smtp = $smtpSetting['fields'];
 
         // SMTP configuration
         config([

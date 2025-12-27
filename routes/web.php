@@ -41,7 +41,6 @@ Route::get('/resources/{id}/download', [HomeController::class, 'resourceDownload
 Route::get('/deliverables', [HomeController::class, 'deliverables'])->name('deliverables');
 Route::get('/documents/{id}/download', [HomeController::class, 'documentDownload'])->name('documents.download');
 Route::get('/project-activities', [HomeController::class, 'projectActivities'])->name('project.activities');
-Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard')->middleware('auth');
 
 // Public milestones and work packages routes
 Route::get('/milestones', [\App\Http\Controllers\MilestoneController::class, 'index'])->name('milestones');
@@ -80,10 +79,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/deliverables/{id}/download', [HomeController::class, 'documentDownload'])->name('deliverables.download');
 });
 
+// Dashboard route (require authentication only)
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard');
+});
+
 // Protected routes (require authentication and 2FA)
 Route::middleware(['auth', 'verified', \App\Http\Middleware\EnsureTwoFactorAuthenticated::class])->group(function () {
-    // Dashboard
-    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     
     // User profile
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile');

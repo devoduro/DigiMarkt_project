@@ -63,4 +63,28 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     {
         $this->notify(new VerifyEmailNotification);
     }
+
+    /**
+     * Check if user is an admin
+     */
+    public function isAdmin(): bool
+    {
+        return $this->role === \App\Enums\UserType::ADMIN->value;
+    }
+
+    /**
+     * Check if user is an instructor
+     */
+    public function isInstructor(): bool
+    {
+        return $this->role === \App\Enums\UserType::INSTRUCTOR->value;
+    }
+
+    /**
+     * Check if user is a student
+     */
+    public function isStudent(): bool
+    {
+        return $this->role === \App\Enums\UserType::STUDENT->value;
+    }
 }

@@ -12,12 +12,20 @@ use App\Models\Milestone;
 use App\Models\Visitor;
 use App\Models\Announcement;
 use App\Models\BlogPost;
+use App\Models\Page;
+use App\Services\PageService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Inertia\Inertia;
 
 class HomeController extends Controller
 {
+    public function __construct(
+        protected ?PageService $pageService = null
+    ) {
+        // PageService is optional for backward compatibility
+    }
     /**
      * Track visitor for analytics.
      *
@@ -834,5 +842,37 @@ class HomeController extends Controller
         ];
         
         return view('pages.dashboard', compact('user', 'recentDocuments', 'stats'));
+    }
+
+    /**
+     * Display inner pages dynamically based on slug.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Inertia\Response
+     */
+    public function inner_page(Request $request)
+    {
+        if (!$this->pageService) {
+            abort(404);
+        }
+
+        $innerPages = Page::where('type', 'inner_page')
+            ->where('active', true)
+            ->select(['slug'])
+            ->get();
+        $validSlugs = $innerPages->pluck('slug')->toArray();
+
+        // Check if the requested slug exists in inner pages
+        if (!in_array($request->slug, $validSlugs)) {
+            return Inertia::render('404');
+        }
+
+        $innerPage = $this->pageService->getCustomPageBySlug($request->slug);
+        $sections = $this->pageService->getPageSections($request->all(), $innerPage);
+
+        return Inertia::render('inner/index', [
+            'innerPage' => $innerPage,
+            ...$sections
+        ]);
     }
 }

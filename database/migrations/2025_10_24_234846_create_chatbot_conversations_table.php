@@ -11,23 +11,25 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('chatbot_conversations', function (Blueprint $table) {
-            $table->id();
-            $table->string('session_id')->index();
-            $table->string('ip_address')->nullable();
-            $table->text('user_message');
-            $table->text('bot_response');
-            $table->string('response_type')->default('ai'); // 'ai' or 'rule-based'
-            $table->integer('response_time_ms')->nullable();
-            $table->integer('tokens_used')->nullable();
-            $table->boolean('was_helpful')->nullable();
-            $table->text('feedback')->nullable();
-            $table->timestamps();
-            
-            // Indexes for analytics
-            $table->index('created_at');
-            $table->index('response_type');
-        });
+        if (!Schema::hasTable('chatbot_conversations')) {
+            Schema::create('chatbot_conversations', function (Blueprint $table) {
+                $table->id();
+                $table->string('session_id')->index();
+                $table->string('ip_address')->nullable();
+                $table->text('user_message');
+                $table->text('bot_response');
+                $table->string('response_type')->default('ai'); // 'ai' or 'rule-based'
+                $table->integer('response_time_ms')->nullable();
+                $table->integer('tokens_used')->nullable();
+                $table->boolean('was_helpful')->nullable();
+                $table->text('feedback')->nullable();
+                $table->timestamps();
+                
+                // Indexes for analytics
+                $table->index('created_at');
+                $table->index('response_type');
+            });
+        }
     }
 
     /**
