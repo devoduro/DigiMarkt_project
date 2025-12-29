@@ -26,16 +26,15 @@ use App\Http\Controllers\UsersController;
 |
  */
 
-Route::prefix('dashboard')->group(function () {
-    // users
-    Route::resource('users', UsersController::class)->only(['index', 'update']);
+// users
+Route::resource('users', UsersController::class)->only(['index', 'update']);
 
-    // Category
-    Route::resource('courses/categories', CourseCategoryController::class)->only(['index', 'store', 'destroy'])->names('categories');
-    Route::post('courses/categories/update/{category}', [CourseCategoryController::class, 'update'])->name('categories.update');
-    Route::post('courses/categories/sort', [CourseCategoryController::class, 'sort'])->name('categories.sort');
-    Route::resource('courses/category-child', CategoryChildController::class)->only(['store', 'update', 'destroy'])->names('category-child');
-    Route::post('courses/category-child/sort', [CategoryChildController::class, 'sort'])->name('category-child.sort');
+// Category
+Route::resource('courses/categories', CourseCategoryController::class)->only(['index', 'store', 'destroy'])->names('categories');
+Route::post('courses/categories/update/{category}', [CourseCategoryController::class, 'update'])->name('categories.update');
+Route::post('courses/categories/sort', [CourseCategoryController::class, 'sort'])->name('categories.sort');
+Route::resource('courses/category-child', CategoryChildController::class)->only(['store', 'update', 'destroy'])->names('category-child');
+Route::post('courses/category-child/sort', [CategoryChildController::class, 'sort'])->name('category-child.sort');
 
     // course
     Route::delete('courses/{id}', [CourseController::class, 'destroy'])->name('courses.destroy');
@@ -119,11 +118,10 @@ Route::prefix('dashboard')->group(function () {
         Route::post('settings/footer-items/reorder', 'footer_items_reorder')->name('settings.footer.items.reorder');
     });
 
-    // customize home page sections
-    Route::controller(HomeController::class)->prefix('page/section')->group(function () {
-        Route::post('sort', 'sort_section')->name('page.section.sort');
-        Route::post('update/{id}', 'update_section')->name('page.section.update');
-    });
+// customize home page sections
+Route::controller(HomeController::class)->prefix('page/section')->group(function () {
+    Route::post('sort', 'sort_section')->name('page.section.sort');
+    Route::post('update/{id}', 'update_section')->name('page.section.update');
 });
 
 Route::get('/demo/{slug}', [HomeController::class, 'demo'])->name('home.demo');
