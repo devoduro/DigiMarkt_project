@@ -83,7 +83,7 @@ Route::middleware(['auth', 'verified', \App\Http\Middleware\EnsureTwoFactorAuthe
     // Protected deliverable routes
     Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/deliverables/manage', [DeliverableController::class, 'index'])->name('deliverables.manage');
-        Route::get('/deliverables/detail/{deliverable}', [DeliverableController::class, 'show'])->name('deliverables.show');
+        Route::get('/deliverables/detail/{deliverable}', [DeliverableController::class, 'show'])->name('deliverables.detail');
     });
 });
 
@@ -101,15 +101,31 @@ Route::prefix('admin')->group(function () {
         Route::put('/users/{user}/deactivate', [UserController::class, 'deactivate'])->name('users.deactivate');
         
         // Deliverable management
-        Route::resource('deliverables', DeliverableManagementController::class);
-        Route::post('/deliverables/{deliverable}/publish', [DeliverableManagementController::class, 'publish'])->name('deliverables.publish');
-        Route::post('/deliverables/{deliverable}/unpublish', [DeliverableManagementController::class, 'unpublish'])->name('deliverables.unpublish');
+        Route::resource('deliverables', DeliverableManagementController::class)->names([
+            'index' => 'admin.deliverables.index',
+            'create' => 'admin.deliverables.create',
+            'store' => 'admin.deliverables.store',
+            'show' => 'admin.deliverables.show',
+            'edit' => 'admin.deliverables.edit',
+            'update' => 'admin.deliverables.update',
+            'destroy' => 'admin.deliverables.destroy',
+        ]);
+        Route::post('/deliverables/{deliverable}/publish', [DeliverableManagementController::class, 'publish'])->name('admin.deliverables.publish');
+        Route::post('/deliverables/{deliverable}/unpublish', [DeliverableManagementController::class, 'unpublish'])->name('admin.deliverables.unpublish');
         
         // Digital Marketing Resource management
-        Route::resource('resources', \App\Http\Controllers\Admin\ResourceController::class);
-        Route::post('/resources/{resource}/toggle-featured', [\App\Http\Controllers\Admin\ResourceController::class, 'toggleFeatured'])->name('resources.toggle-featured');
-        Route::post('/resources/{resource}/toggle-published', [\App\Http\Controllers\Admin\ResourceController::class, 'togglePublished'])->name('resources.toggle-published');
-        Route::get('/resources/{resource}/download', [\App\Http\Controllers\Admin\ResourceController::class, 'download'])->name('resources.download');
+        Route::resource('resources', \App\Http\Controllers\Admin\ResourceController::class)->names([
+            'index' => 'admin.resources.index',
+            'create' => 'admin.resources.create',
+            'store' => 'admin.resources.store',
+            'show' => 'admin.resources.show',
+            'edit' => 'admin.resources.edit',
+            'update' => 'admin.resources.update',
+            'destroy' => 'admin.resources.destroy',
+        ]);
+        Route::post('/resources/{resource}/toggle-featured', [\App\Http\Controllers\Admin\ResourceController::class, 'toggleFeatured'])->name('admin.resources.toggle-featured');
+        Route::post('/resources/{resource}/toggle-published', [\App\Http\Controllers\Admin\ResourceController::class, 'togglePublished'])->name('admin.resources.toggle-published');
+        Route::get('/resources/{resource}/download', [\App\Http\Controllers\Admin\ResourceController::class, 'download'])->name('admin.resources.download');
         
         // Project Milestone management
         Route::resource('milestones', \App\Http\Controllers\Admin\MilestoneController::class);
