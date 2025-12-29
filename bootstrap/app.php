@@ -33,7 +33,7 @@ return Application::configure(basePath: dirname(__DIR__))
                 });
 
                 // Admin routes
-                Route::middleware(['auth', 'role:admin'])->group(function() {
+                Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function() {
                     require base_path('routes/admin.php');
                 });
 
