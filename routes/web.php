@@ -13,12 +13,6 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\DeliverableManagementController;
 use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\GalleryController;
-
-use App\Http\Controllers\Course\CourseController;
- 
-use App\Http\Controllers\InstructorController;
-use App\Http\Controllers\JobCircularController;
-use App\Http\Controllers\SubscribeController;
  
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +35,7 @@ Route::get('/resources/{id}/download', [HomeController::class, 'resourceDownload
 Route::get('/deliverables', [HomeController::class, 'deliverables'])->name('deliverables');
 Route::get('/documents/{id}/download', [HomeController::class, 'documentDownload'])->name('documents.download');
 Route::get('/project-activities', [HomeController::class, 'projectActivities'])->name('project.activities');
+Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard')->middleware('auth');
 
 // Public milestones and work packages routes
 Route::get('/milestones', [\App\Http\Controllers\MilestoneController::class, 'index'])->name('milestones');
@@ -58,20 +53,31 @@ Route::get('/gallery/{id}', [\App\Http\Controllers\GalleryController::class, 'sh
 Route::get('/videos', [\App\Http\Controllers\VideoController::class, 'index'])->name('videos');
 Route::get('/videos/{id}', [\App\Http\Controllers\VideoController::class, 'show'])->name('videos.show');
 
+// Authentication routes (Laravel's built-in auth)
+Auth::routes(['verify' => true]); // Enable email verification
+
+// Two-factor authentication routes
+Route::get('/two-factor-challenge', [\App\Http\Controllers\Auth\TwoFactorChallengeController::class, 'show'])->name('two-factor.challenge');
+Route::post('/two-factor-challenge', [\App\Http\Controllers\Auth\TwoFactorChallengeController::class, 'store']);
+
+// Two-factor authentication API routes (for AJAX)
+Route::middleware(['auth'])->group(function () {
+    Route::get('/user/two-factor-authentication-status', [\App\Http\Controllers\Auth\TwoFactorAuthController::class, 'status']);
+    Route::post('/user/two-factor-authentication', [\App\Http\Controllers\Auth\TwoFactorAuthController::class, 'enable']);
+    Route::get('/user/two-factor-qr-code', [\App\Http\Controllers\Auth\TwoFactorAuthController::class, 'qrCode']);
+    Route::post('/user/confirmed-two-factor-authentication', [\App\Http\Controllers\Auth\TwoFactorAuthController::class, 'confirm']);
+    Route::delete('/user/two-factor-authentication', [\App\Http\Controllers\Auth\TwoFactorAuthController::class, 'disable']);
+});
+
 // Deliverables downloads (require auth and verification, but not 2FA)
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/deliverables/{id}/download', [HomeController::class, 'documentDownload'])->name('deliverables.download');
 });
 
-// Dashboard route (require authentication only) - redirects to admin dashboard
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', function() {
-        return redirect()->route('admin.dashboard');
-    })->name('dashboard');
-});
-
 // Protected routes (require authentication and 2FA)
 Route::middleware(['auth', 'verified', \App\Http\Middleware\EnsureTwoFactorAuthenticated::class])->group(function () {
+    // Dashboard
+    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
     
     // User profile
     Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
@@ -83,17 +89,17 @@ Route::middleware(['auth', 'verified', \App\Http\Middleware\EnsureTwoFactorAuthe
     // Protected deliverable routes
     Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/deliverables/manage', [DeliverableController::class, 'index'])->name('deliverables.manage');
-        Route::get('/deliverables/detail/{deliverable}', [DeliverableController::class, 'show'])->name('deliverables.detail');
+        Route::get('/deliverables/detail/{deliverable}', [DeliverableController::class, 'show'])->name('deliverables.show');
     });
 });
 
 // Admin routes (require admin role)
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')->name('admin.')->group(function () {
     // Apply auth and verified middleware to all routes in this group
     Route::middleware(['auth', 'verified'])->group(function () {
         // Check for admin role manually in a controller
-        // Admin dashboard - use Inertia DashboardController, not Admin\DashboardController
-        Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index'])->name('admin.dashboard');
+        // Admin dashboard
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         
         // User management
         Route::resource('users', UserController::class);
@@ -101,31 +107,15 @@ Route::prefix('admin')->group(function () {
         Route::put('/users/{user}/deactivate', [UserController::class, 'deactivate'])->name('users.deactivate');
         
         // Deliverable management
-        Route::resource('deliverables', DeliverableManagementController::class)->names([
-            'index' => 'admin.deliverables.index',
-            'create' => 'admin.deliverables.create',
-            'store' => 'admin.deliverables.store',
-            'show' => 'admin.deliverables.show',
-            'edit' => 'admin.deliverables.edit',
-            'update' => 'admin.deliverables.update',
-            'destroy' => 'admin.deliverables.destroy',
-        ]);
-        Route::post('/deliverables/{deliverable}/publish', [DeliverableManagementController::class, 'publish'])->name('admin.deliverables.publish');
-        Route::post('/deliverables/{deliverable}/unpublish', [DeliverableManagementController::class, 'unpublish'])->name('admin.deliverables.unpublish');
+        Route::resource('deliverables', DeliverableManagementController::class);
+        Route::post('/deliverables/{deliverable}/publish', [DeliverableManagementController::class, 'publish'])->name('deliverables.publish');
+        Route::post('/deliverables/{deliverable}/unpublish', [DeliverableManagementController::class, 'unpublish'])->name('deliverables.unpublish');
         
         // Digital Marketing Resource management
-        Route::resource('resources', \App\Http\Controllers\Admin\ResourceController::class)->names([
-            'index' => 'admin.resources.index',
-            'create' => 'admin.resources.create',
-            'store' => 'admin.resources.store',
-            'show' => 'admin.resources.show',
-            'edit' => 'admin.resources.edit',
-            'update' => 'admin.resources.update',
-            'destroy' => 'admin.resources.destroy',
-        ]);
-        Route::post('/resources/{resource}/toggle-featured', [\App\Http\Controllers\Admin\ResourceController::class, 'toggleFeatured'])->name('admin.resources.toggle-featured');
-        Route::post('/resources/{resource}/toggle-published', [\App\Http\Controllers\Admin\ResourceController::class, 'togglePublished'])->name('admin.resources.toggle-published');
-        Route::get('/resources/{resource}/download', [\App\Http\Controllers\Admin\ResourceController::class, 'download'])->name('admin.resources.download');
+        Route::resource('resources', \App\Http\Controllers\Admin\ResourceController::class);
+        Route::post('/resources/{resource}/toggle-featured', [\App\Http\Controllers\Admin\ResourceController::class, 'toggleFeatured'])->name('resources.toggle-featured');
+        Route::post('/resources/{resource}/toggle-published', [\App\Http\Controllers\Admin\ResourceController::class, 'togglePublished'])->name('resources.toggle-published');
+        Route::get('/resources/{resource}/download', [\App\Http\Controllers\Admin\ResourceController::class, 'download'])->name('resources.download');
         
         // Project Milestone management
         Route::resource('milestones', \App\Http\Controllers\Admin\MilestoneController::class);
@@ -178,18 +168,3 @@ Route::prefix('admin')->group(function () {
         Route::patch('/blog-posts/{blogPost}/toggle-featured', [\App\Http\Controllers\Admin\BlogPostController::class, 'toggleFeatured'])->name('blog-posts.toggle-featured');
     });
 });
-
-
-
-Route::get('/', [HomeController::class, 'index'])->name('home')->middleware('customize');
-Route::get('demo/{slug}', [HomeController::class, 'demo'])->name('home.demo')->middleware('customize');
-Route::get('job-circulars/{job_circular}', [JobCircularController::class, 'show'])->name('job-circulars.show');
-
-// course page
-Route::controller(CourseController::class)->group(function () {
-    Route::get('courses/{category}/{category_child?}', 'category_courses')->name('category.courses');
-    Route::get('courses/details/{slug}/{id}', 'show')->name('course.details');
-});
-
-Route::get('instructors/{instructor}', [InstructorController::class, 'show'])->name('instructors.show');
-Route::resource('subscribes', SubscribeController::class)->only(['index', 'store']);

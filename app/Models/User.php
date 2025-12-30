@@ -2,42 +2,45 @@
 
 namespace App\Models;
 
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Laravel\Sanctum\HasApiTokens;
-use App\Notifications\VerifyEmailNotification;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class User extends Authenticatable implements HasMedia, MustVerifyEmail
+class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, InteractsWithMedia;
+    /** @use HasFactory<\Database\Factories\UserFactory> */
+    use HasFactory, Notifiable;
+
+    /**
+     * The user roles
+     */
+    const ROLE_ADMIN = 'admin';
+    const ROLE_USER = 'user';
 
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $fillable = [
         'name',
         'email',
         'password',
         'role',
-        'status',
-        'photo',
-        'google_id',
-        'social_links',
-        'email_verified_at',
-        'instructor_id',
+        'last_login_at',
+        'is_active',
+        'two_factor_secret',
+        'two_factor_secret_temp',
+        'two_factor_recovery_codes',
+        'two_factor_confirmed_at',
     ];
 
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var array<int, string>
+     * @var list<string>
      */
     protected $hidden = [
         'password',
@@ -45,46 +48,116 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     ];
 
     /**
-     * The attributes that should be cast.
+     * Get the attributes that should be cast.
      *
-     * @var array<string, string>
+     * @return array<string, string>
      */
-    protected $casts = [
-        'social_links' => 'array',
-        'status' => 'integer',
-    ];
-
-    public function instructor(): BelongsTo
+    protected function casts(): array
     {
-        return $this->belongsTo(Instructor::class);
-    }
-
-    public function sendEmailVerificationNotification()
-    {
-        $this->notify(new VerifyEmailNotification);
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+            'last_login_at' => 'datetime',
+            'is_active' => 'boolean',
+            'two_factor_secret' => 'encrypted',
+            'two_factor_secret_temp' => 'encrypted',
+            'two_factor_recovery_codes' => 'encrypted',
+            'two_factor_confirmed_at' => 'datetime',
+        ];
     }
 
     /**
      * Check if user is an admin
+     *
+     * @return bool
      */
     public function isAdmin(): bool
     {
-        return $this->role === \App\Enums\UserType::ADMIN->value;
+        return $this->role === self::ROLE_ADMIN;
     }
 
     /**
-     * Check if user is an instructor
+     * Get the documents that belong to the user.
      */
-    public function isInstructor(): bool
+    public function documents()
     {
-        return $this->role === \App\Enums\UserType::INSTRUCTOR->value;
+        return $this->hasMany(Document::class);
     }
-
+    
     /**
-     * Check if user is a student
+     * Get the downloads that belong to the user.
      */
-    public function isStudent(): bool
+    public function downloads()
     {
-        return $this->role === \App\Enums\UserType::STUDENT->value;
+        return $this->hasMany(Download::class);
+    }
+    
+    /**
+     * Determine if two-factor authentication is enabled.
+     *
+     * @return bool
+     */
+    public function hasTwoFactorEnabled(): bool
+    {
+        return !is_null($this->two_factor_secret) && !is_null($this->two_factor_confirmed_at);
+    }
+    
+    /**
+     * Validate a two-factor authentication code.
+     *
+     * @param  string  $code
+     * @return bool
+     */
+    public function validateTwoFactorAuthenticationCode(string $code): bool
+    {
+        if (!$this->hasTwoFactorEnabled()) {
+            return false;
+        }
+        
+        $google2fa = app('pragmarx.google2fa');
+        
+        try {
+            return $google2fa->verifyKey(
+                decrypt($this->two_factor_secret),
+                $code
+            );
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+    
+    /**
+     * Verify a recovery code.
+     *
+     * @param  string  $code
+     * @return bool
+     */
+    public function verifyTwoFactorRecoveryCode(string $code): bool
+    {
+        if (!$this->hasTwoFactorEnabled() || is_null($this->two_factor_recovery_codes)) {
+            return false;
+        }
+        
+        try {
+            $recoveryCodes = json_decode(decrypt($this->two_factor_recovery_codes), true) ?? [];
+            
+            if (in_array($code, $recoveryCodes)) {
+                // Remove the used recovery code
+                $recoveryCodes = array_values(array_filter(
+                    $recoveryCodes,
+                    fn ($c) => $c !== $code
+                ));
+                
+                // Update the user's recovery codes
+                $this->two_factor_recovery_codes = encrypt(json_encode($recoveryCodes));
+                $this->save();
+                
+                return true;
+            }
+        } catch (\Exception $e) {
+            return false;
+        }
+        
+        return false;
     }
 }

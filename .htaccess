@@ -1,0 +1,13 @@
+RewriteEngine on
+# Force HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Max Added Line 9 on August 17
+RewriteEngine On
+# Allow access to the storage symlink
+RewriteRule ^storage/(.*)$ storage/$1 [L]
+RewriteRule ^storage/(.*)$ ../storage/app/public/$1 [L]
+RewriteCond %{REQUEST_URI} !^public
+RewriteRule ^(.*)$ public/$1 [L]
+

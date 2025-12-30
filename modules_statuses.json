@@ -1,9 +1,0 @@
-{
-    "Blog": true,
-    "Certificate": true,
-    "Exam": true,
-    "Installer": true,
-    "Language": true,
-    "PaymentGateways": true,
-    "Updater": true
-}

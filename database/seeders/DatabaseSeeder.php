@@ -2,11 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Modules\Blog\Database\Seeders\BlogDatabaseSeeder;
-use Modules\Certificate\Database\Seeders\CertificateDatabaseSeeder;
-use Modules\Exam\Database\Seeders\ExamDatabaseSeeder;
-use Modules\Language\Database\Seeders\LanguageDatabaseSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,16 +13,22 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // User::factory(10)->create();
+
+        User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'test@example.com',
+        ]);
+        
+        // Create admin user for testing
+        User::factory()->create([
+            'name' => 'Admin User',
+            'email' => 'admin@example.com',
+        ]);
+        
+        // Run the demo data seeder
         $this->call([
-            SettingsSeeder::class,
-            NavbarSeeder::class,
-            FooterSeeder::class,
-            CategorySeeder::class,
-            PageSeeder::class,
-            BlogDatabaseSeeder::class,
-            LanguageDatabaseSeeder::class,
-            CertificateDatabaseSeeder::class,
-            ExamDatabaseSeeder::class,
+            DemoDataSeeder::class,
         ]);
     }
 }
